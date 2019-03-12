@@ -9,10 +9,11 @@ function User() {
   </>
 }
 
-function Line({ user, line }) {
+function Line({ user, line, done }) {
   return <li>
     {user ? <User /> : ''}
-    {line ? <LineWithUrls line={line} />: <>&nbsp;</> }
+    {line ? <LineWithUrls line={line} />: '' }
+    {user && !done ? <span className='blink'>_</span> : <>&nbsp;</>}
   </li>
 }
 
@@ -57,7 +58,13 @@ function App() {
           str = line.value.line
           line.value.line = ''
         }
-        setList([...list, line.value])
+        const oldLine = list.pop()
+        if(oldLine) {
+          oldLine.done = true
+          setList([...list, oldLine, line.value])
+        } else {
+          setList([...list, line.value])
+        }
       }, line.value.time)
     } else {
       const line = list.pop()
