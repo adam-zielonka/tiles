@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
-import { lines } from './store'
+import { getLine } from './store'
 
 function User() {
   return <>
@@ -15,7 +15,6 @@ function Line({ user, line }) {
     {line ? <LineWithUrls line={line} />: <>&nbsp;</> }
   </li>
 }
-
 
 function slice(line) {
   let m = line.match(/\[(.*?)\]\((.*?)\)/)
@@ -42,13 +41,23 @@ function LineWithUrls({ line }) {
   </>
 }
 
-function App() {
-  let count = 0
+const iterator = getLine()
 
+function App() {
+  const [list, setList] = useState([])
+
+  useEffect(() => {
+    const line = iterator.next()
+    if(!line.done) setTimeout(() => {
+      setList([...list, line.value])
+    }, line.value.time)
+  })
+
+  let count = 0
   return (
     <div className="App">
       <ul>
-        {lines.map(line => <Line key={count++} {...line} />)}
+        {list.map(line => <Line key={count++} {...line} />)}
       </ul>
     </div>
   )
