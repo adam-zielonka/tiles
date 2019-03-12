@@ -38,3 +38,5 @@ rules:
   eol-last:
     - error
     - always
+  react/prop-types:
+    - 0
