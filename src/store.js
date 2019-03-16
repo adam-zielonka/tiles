@@ -15,6 +15,8 @@ export const lines = [
   { time: 0, line: 'paintAZ: [Source](https://bitbucket.org/adam-zielonka-pro/programowanie-wieloplatformowe-paint-qt/src)' },
   { time: 0, line: '' },
   { time: 0, line: '[GAMES]' },
+  { time: 0, line: 'Deska: [Source](https://gitlab.com/adam-zielonka-pro/pascal-games/deska), [Play](https://deska-pascal-game.adamzielonka.pro/)' },
+  { time: 0, line: 'Saper: [Source](https://gitlab.com/adam-zielonka-pro/pascal-games/saper), [Play](https://saper-pascal-game.adamzielonka.pro/)' },
   { time: 0, line: 'Ships: [Source](https://bitbucket.org/adam-zielonka-pro/jezyki-interpretowane/src), [Play](https://adamzielonka.pro/statki.html)' },
   { time: 0, line: 'GameOfLife: [Source](https://bitbucket.org/adam-zielonka-pro/jezyki-interpretowane/src/75a6444ff620f4c213af981301b585d872d70008/gameOfLife.html), [Play](https://adamzielonka.pro/gameOfLife.html)' },
   { time: 0, line: 'Pan: [Source](https://gitlab.com/adam-zielonka-pro/pan), [Play](https://pan-game.adamzielonka.pro/)' },
