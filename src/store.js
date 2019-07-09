@@ -13,7 +13,7 @@ export const lines = [
   { time: 0, line: 'Questions: [Source](https://gitlab.com/adam-zielonka-pro/questions), [Demo](https://questions.adamzielonka.pro/)' },
   { time: 0, line: 'Server Status: [Source](https://bitbucket.org/adam-zielonka-pro/server-status/src), [Demo](https://fake-status.adamzielonka.pro/)' },
   { time: 0, line: 'Unit Converter: [Source](https://gitlab.com/adam-zielonka-pro/unit-converter), [Google Play](https://play.google.com/store/apps/details?id=pro.adamzielonka.converter)' },
-  { time: 0, line: 'paintAZ: [Source](https://bitbucket.org/adam-zielonka-pro/programowanie-wieloplatformowe-paint-qt/src)' },
+  { time: 0, line: 'paintAZ: [Source](https://gitlab.com/adam-zielonka-pro/paintaz)' },
   { time: 0, line: '' },
   { time: 0, line: '[GAMES]' },
   { time: 0, line: 'Deska: [Source](https://gitlab.com/adam-zielonka-pro/pascal-games/deska), [Play](https://deska-pascal-game.adamzielonka.pro/)' },
