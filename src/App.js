@@ -42,6 +42,10 @@ function LineWithUrls({ line }) {
   </>
 }
 
+function extendLine(line) {
+  return line + str.slice(line.length, line.length + 1)
+}
+
 const iterator = getLine()
 let str = ''
 let done = true
@@ -50,7 +54,21 @@ function App() {
   const [list, setList] = useState([])
 
   useEffect(() => {
-    if(done) {
+    switch (true) {
+    case !done: {
+      const line = list.pop()
+      if(line) {
+        const newLine = extendLine(line.line)
+        if(newLine !== line.line) {
+          line.line = newLine
+        } else {
+          done = true
+        }
+        setTimeout(() => setList([...list, line]), 50)
+      }
+      break
+    }
+    default: {
       const line = iterator.next()
       if(!line.done) setTimeout(() => {
         if(line.value.user) {
@@ -66,18 +84,8 @@ function App() {
           setList([...list, line.value])
         }
       }, line.value.time)
-    } else {
-      const line = list.pop()
-      if(line) {
-        const newLine = line.line + str.slice(line.line.length, line.line.length + 1)
-        if(newLine !== line.line) {
-          line.line = newLine
-          setTimeout(() => setList([...list, line]), 50)
-        } else {
-          done = true
-          setTimeout(() => setList([...list, line]))
-        }
-      }
+      break
+    }
     }
   })
 
