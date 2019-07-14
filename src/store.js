@@ -20,7 +20,7 @@ export const lines = [
   { time: 0, line: 'Saper: [Source](https://gitlab.com/adam-zielonka-pro/pascal-games/saper), [Play](https://saper-pascal-game.adamzielonka.pro/)' },
   { time: 0, line: 'Ships (Vanilla JS): [Source](https://gitlab.com/adam-zielonka-pro/statki-vanilla-js), [Play](https://statki-vanilla-js.adamzielonka.pro/)' },
   { time: 0, line: 'Ships (React JS): [Source](https://gitlab.com/adam-zielonka-pro/statki), [Play](https://statki.adamzielonka.pro/)' },
-  { time: 0, line: 'GameOfLife: [Source](https://bitbucket.org/adam-zielonka-pro/jezyki-interpretowane/src/75a6444ff620f4c213af981301b585d872d70008/gameOfLife.html), [Play](https://adamzielonka.pro/gameOfLife.html)' },
+  { time: 0, line: 'GameOfLife: [Source](https://gitlab.com/adam-zielonka-pro/game-of-life), [Play](https://game-of-life.adamzielonka.pro/)' },
   { time: 0, line: 'Pan: [Source](https://gitlab.com/adam-zielonka-pro/pan), [Play](https://pan-game.adamzielonka.pro/)' },
   { time: 0, line: 'Chińczyk: [Source](https://gitlab.com/adam-zielonka-pro/chinczyk), [Play](https://chinczyk-game.adamzielonka.pro/)' },
   { time: 0, line: '' },
