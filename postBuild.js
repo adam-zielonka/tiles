@@ -1,5 +1,5 @@
-const links = require('./src/links.json')
-const replace = require('replace-in-file')
+import links from './src/links.json'
+import replace from 'replace-in-file'
 
 function slice(line) {
   let match = line.match(/\[(.*?)\]\((.*?)\)/)
