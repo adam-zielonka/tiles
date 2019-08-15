@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.styl'
-import App from './App'
 import * as serviceWorker from './serviceWorker'
+import Terminal from './Terminal'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<Terminal />, document.getElementById('root'))
 
 serviceWorker.unregister()

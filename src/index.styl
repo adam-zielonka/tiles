@@ -3,7 +3,7 @@ linkColor = deepskyblue
 typeColor = #aaa
 bgColor = #111
 
-body
+body, .input
   background bgColor
   font 16px/18px "Courier New", Courier, monospace
   color typeColor
@@ -41,3 +41,10 @@ ul
 .blink
   color bgColor
   animation blink 0.5s linear infinite
+
+.input
+  width 0
+  border none
+  padding 0
+  &:focus
+    outline none
