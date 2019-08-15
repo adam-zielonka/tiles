@@ -26,10 +26,15 @@ class Store {
     this.startCommand = ['whoami', 'description']
   }
 
+  pushLine(line) {
+    this.lines.push(line)
+    window.scrollTo(0,document.body.scrollHeight)
+  }
+
   async start() {
     this.isStart = false
     for (const command of this.startCommand) {
-      this.lines.push({command:'', blink:true})
+      this.pushLine({command:'', blink:true})
       const commandLine = this.lines[this.lines.length -1]
       for (const c of command) {
         await sleep(50)
@@ -40,17 +45,19 @@ class Store {
   
       for (const line of commands[command]) {
         await sleep(line.time)
-        this.lines.push(line)
+        this.pushLine(line)
       } 
     }
     this.isProcessing = false
+    window.scrollTo(0,document.body.scrollHeight)
   }
 
   addCommand(command) {
     this.isProcessing = true
-    this.lines.push({command})
+    this.pushLine({command})
     if(!command) {
       this.isProcessing = false
+      setTimeout(() => window.scrollTo(0,document.body.scrollHeight))
     } else {
       setTimeout(() => this.process(command))
     }
@@ -62,7 +69,7 @@ class Store {
     case 'description':
       for (const line of commands[command]) {
         await sleep(line.time)
-        this.lines.push(line)
+        this.pushLine(line)
       }
       break
     case 'clear':
@@ -72,10 +79,11 @@ class Store {
       break
     default:
       await sleep(400)
-      this.lines.push({text: `Command '${command}' not found.`})
+      this.pushLine({text: `Command '${command}' not found.`})
       break
     }
     this.isProcessing = false
+    window.scrollTo(0,document.body.scrollHeight)
   }
 }
 

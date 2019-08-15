@@ -30,7 +30,7 @@ const Input = observer(({inputRef}) => {
     setValue(e.target.value)
   }
 
-  const onKeyUpHandler = (e) => {
+  const onKeyDownHandler = (e) => {
     if(e.key === 'Enter') {
       addCommand(value)
       setValue('')
@@ -46,7 +46,7 @@ const Input = observer(({inputRef}) => {
       onFocus={() => setFocus(true)}
       onBlur={() => setFocus(false)}
       onChange={onChangeHandler}
-      onKeyUp={onKeyUpHandler}
+      onKeyDown={onKeyDownHandler}
       value={value}
     />
   </>
