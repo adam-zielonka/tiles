@@ -65,6 +65,11 @@ class Store {
         this.lines.push(line)
       }
       break
+    case 'clear':
+    case 'cls':
+      await sleep(50)
+      this.lines.clear()
+      break
     default:
       await sleep(400)
       this.lines.push({text: `Command '${command}' not found.`})
