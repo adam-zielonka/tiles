@@ -1,0 +1,43 @@
+userColor = lawngreen
+linkColor = deepskyblue
+typeColor = #aaa
+bgColor = #111
+
+body
+  background bgColor
+  font 16px/18px "Courier New", Courier, monospace
+  color typeColor
+
+a
+  text-decoration none
+  color linkColor
+
+a:hover
+  text-decoration-line underline
+
+ul
+  list-style none
+
+.user
+  color userColor
+
+.user-end
+  color typeColor
+
+@keyframes blink
+  0% {
+    color typeColor
+  }
+  50% {
+    color typeColor
+  }
+  50.01% {
+    color bgColor
+  }
+  100% {
+    color bgColor
+  }
+
+.blink
+  color bgColor
+  animation blink 0.5s linear infinite
