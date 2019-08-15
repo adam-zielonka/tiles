@@ -88,13 +88,9 @@ function Line(line) {
 }
 
 function Terminal() {
-  const { lines, isStart, start } = useStore()
+  const { lines } = useStore()
   let counter = 0
-
-  if(isStart) {
-    start()
-  }
-
+  
   return <div>
     <ul>
       {lines.map(line => <Line key={counter++} {...line} />)}

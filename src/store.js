@@ -22,8 +22,9 @@ class Store {
     this.lines = []
     this.toProcess = []
     this.isProcessing = true
-    this.isStart = true
     this.startCommand = ['whoami', 'description']
+
+    setTimeout(this.start)
   }
 
   pushLine(line) {
@@ -32,7 +33,6 @@ class Store {
   }
 
   async start() {
-    this.isStart = false
     for (const command of this.startCommand) {
       this.pushLine({command:'', blink:true})
       const commandLine = this.lines[this.lines.length -1]
@@ -88,7 +88,6 @@ class Store {
 }
 
 decorate(Store, {
-  isStart: observable,
   start: action.bound,
   lines: observable,
   toProcess: observable,
