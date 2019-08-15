@@ -21,7 +21,7 @@ class Store {
   constructor() {
     this.lines = []
     this.toProcess = []
-    this.isProcessing = true
+    this.isProcessing = false
     this.startCommand = ['whoami', 'description']
 
     setTimeout(this.start)
@@ -33,6 +33,7 @@ class Store {
   }
 
   async start() {
+    this.isProcessing = true
     for (const command of this.startCommand) {
       this.pushLine({command:'', blink:true})
       const commandLine = this.lines[this.lines.length -1]
@@ -59,11 +60,12 @@ class Store {
       this.isProcessing = false
       setTimeout(() => window.scrollTo(0,document.body.scrollHeight))
     } else {
-      setTimeout(() => this.process(command))
+      setTimeout(() => this.process(command.split(/\s+/).filter(c => !!c)))
     }
   }
 
-  async process(command) {
+  async process(args) {
+    const command = args.length ? args[0] : ''
     switch (command) {
     case 'whoami':
     case 'description':
