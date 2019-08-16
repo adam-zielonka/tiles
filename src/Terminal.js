@@ -45,10 +45,11 @@ function CaretText({text, selection, focus}) {
 }
 
 const Input = observer(({inputRef}) => {
-  const { addCommand } = useStore()
+  const { addCommand, history } = useStore()
   const [value, setValue] = useState('')
   const [focus, setFocus] = useState(false)
   const [selection, setSelection] = useState({start:0,end:0})
+  const [historyPosition, setHistoryPosition] = useState(history.length)
 
   const onChangeHandler = (e) => {
     setValue(e.target.value)
@@ -58,6 +59,19 @@ const Input = observer(({inputRef}) => {
     if(e.key === 'Enter') {
       addCommand(value)
       setValue('')
+    } else if(e.key === 'ArrowUp') {
+      if(historyPosition - 1 >= 0) {
+        setHistoryPosition(historyPosition-1)
+        setValue(history[historyPosition-1])
+      }
+
+    } else if(e.key === 'ArrowDown') {
+      if(historyPosition + 1 <= history.length) {
+        setHistoryPosition(historyPosition+1)
+        if(historyPosition + 1 !== history.length) setValue(history[historyPosition+1])
+        else setValue('')
+      }
+
     }
   }
 

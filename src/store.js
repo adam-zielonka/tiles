@@ -23,12 +23,14 @@ class Store {
     this.toProcess = []
     this.isProcessing = false
     this.startCommand = ['whoami', 'description']
+    this.history = ['whoami', 'description']
 
     setTimeout(this.start)
   }
 
   pushLine(line) {
     this.lines.push(line)
+    if(line.command && (!this.history.length || this.history[this.history.length-1] !== line.command)) this.history.push(line.command)
     window.scrollTo(0,document.body.scrollHeight)
   }
 
@@ -97,6 +99,7 @@ class Store {
 decorate(Store, {
   start: action.bound,
   lines: observable,
+  history: observable,
   toProcess: observable,
   isProcessing: observable,
   addCommand: action.bound,
