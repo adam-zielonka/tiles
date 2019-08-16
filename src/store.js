@@ -14,7 +14,7 @@ const commands = {
     { time: 1000, text: '[PL] Człowiek programista. Informatyk' },
     { time: 10, text: '[EN] Programmerman. Computer scientist' },
     { time: 400, text: '' },
-  ],
+  ]
 }
 
 class Store {
@@ -26,8 +26,9 @@ class Store {
     this.history = ['whoami', 'description']
     this.lastCommand = ''
     this.historyPosition = this.history.length
+    this.shutdown = false
 
-    setTimeout(this.start)
+    // setTimeout(this.start)
   }
 
   arrowUp(lastCommand) {
@@ -108,6 +109,15 @@ class Store {
       await sleep(50)
       this.lines.push({text: args.join(' ')})
       break
+    case 'shutdown':
+    case 'exit':
+      await sleep(50)
+      this.pushLine({text: 'Wait ...'})
+      await sleep(1000)
+      this.lines.clear()
+      await sleep(1000)
+      this.shutdown = true
+      break
     default:
       await sleep(400)
       this.pushLine({text: `Command '${command}' not found.`})
@@ -127,6 +137,7 @@ decorate(Store, {
   process: action.bound,
   arrowUp: action.bound,
   arrowDown: action.bound,
+  shutdown: observable,
 })
 
 const store = createContext(new Store())

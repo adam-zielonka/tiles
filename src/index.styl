@@ -8,6 +8,8 @@ body, .input
   font 16px/18px "Courier New", Courier, monospace
   color typeColor
   word-break: break-all
+  margin 0
+  padding 0
 
 a
   text-decoration none
@@ -74,3 +76,20 @@ ul
 ::selection
   background-color typeColor
   color bgColor
+
+.shutdown { 
+  position: absolute; 
+  width 100%
+  height 100%
+  display: table; 
+}
+
+.shutdown p
+  font-family 'MS PGothic' ,'MS Sans Serif', monospace
+  font-weight bold
+  font-size 5em
+  line-height 100%
+  color orange
+  display: table-cell; 
+  vertical-align: middle; 
+  text-align: center; 

@@ -135,8 +135,17 @@ function Line(line) {
   }
 }
 
+function Shutdown() {
+  return <div className='shutdown'>
+    <p>It{'\''}s now safe to turn off<br/>your computer.</p>
+  </div>
+}
+
 function Terminal() {
-  const { lines } = useStore()
+  const { lines, shutdown } = useStore()
+
+  if(shutdown) return <Shutdown />
+
   let counter = 0
   
   return <div>
