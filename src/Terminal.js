@@ -45,14 +45,14 @@ function CaretText({text, selection, focus}) {
 }
 
 const Input = observer(({inputRef}) => {
-  const { addCommand, history } = useStore()
+  const { addCommand, arrowUp, arrowDown } = useStore()
   const [value, setValue] = useState('')
   const [focus, setFocus] = useState(false)
   const [selection, setSelection] = useState({start:0,end:0})
-  const [historyPosition, setHistoryPosition] = useState(history.length)
 
   const onChangeHandler = (e) => {
     setValue(e.target.value)
+    onSelectHandler(e)
   }
 
   const onKeyDownHandler = (e) => {
@@ -60,18 +60,19 @@ const Input = observer(({inputRef}) => {
       addCommand(value)
       setValue('')
     } else if(e.key === 'ArrowUp') {
-      if(historyPosition - 1 >= 0) {
-        setHistoryPosition(historyPosition-1)
-        setValue(history[historyPosition-1])
-      }
-
+      const valueUp = arrowUp(value)
+      setValue(valueUp)
+      setSelection({
+        start: valueUp.length,
+        end: valueUp.length,
+      })
     } else if(e.key === 'ArrowDown') {
-      if(historyPosition + 1 <= history.length) {
-        setHistoryPosition(historyPosition+1)
-        if(historyPosition + 1 !== history.length) setValue(history[historyPosition+1])
-        else setValue('')
-      }
-
+      const valueDown = arrowDown()
+      setValue(valueDown)
+      setSelection({
+        start: valueDown.length,
+        end: valueDown.length,
+      })
     }
   }
 
@@ -84,7 +85,7 @@ const Input = observer(({inputRef}) => {
   }
 
   return <>
-    <CaretText focus={focus} text={value.replace(/ /g, '\u00a0')} selection={selection} />
+    <CaretText focus={focus} text={value.replace(/ /g, '\u00a0')}  selection={selection} />
     <input
       ref={inputRef}
       className='input'

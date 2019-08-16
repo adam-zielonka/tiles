@@ -24,13 +24,34 @@ class Store {
     this.isProcessing = false
     this.startCommand = ['whoami', 'description']
     this.history = ['whoami', 'description']
+    this.lastCommand = ''
+    this.historyPosition = this.history.length
 
     setTimeout(this.start)
   }
 
+  arrowUp(lastCommand) {
+    if(this.historyPosition === this.history.length) this.lastCommand = lastCommand
+    if(this.historyPosition - 1 >= 0) {
+      this.historyPosition -= 1
+    }
+    return this.history[this.historyPosition]
+  }
+
+  arrowDown() {
+    if(this.historyPosition + 1 <= this.history.length) {
+      this.historyPosition += 1
+    }
+    if(this.historyPosition === this.history.length) return this.lastCommand
+    return this.history[this.historyPosition]
+  }
+
   pushLine(line) {
     this.lines.push(line)
-    if(line.command && (!this.history.length || this.history[this.history.length-1] !== line.command)) this.history.push(line.command)
+    if(line.command && (!this.history.length || this.history[this.history.length-1] !== line.command)) {
+      this.history.push(line.command)
+      this.historyPosition = this.history.length
+    }
     window.scrollTo(0,document.body.scrollHeight)
   }
 
@@ -57,6 +78,7 @@ class Store {
 
   addCommand(command) {
     this.isProcessing = true
+    this.lastCommand = ''
     this.pushLine({command})
     if(!command) {
       this.isProcessing = false
@@ -99,11 +121,12 @@ class Store {
 decorate(Store, {
   start: action.bound,
   lines: observable,
-  history: observable,
   toProcess: observable,
   isProcessing: observable,
   addCommand: action.bound,
   process: action.bound,
+  arrowUp: action.bound,
+  arrowDown: action.bound,
 })
 
 const store = createContext(new Store())
