@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import cx from 'classnames'
 import { useStore } from './store'
 import { observer } from 'mobx-react-lite'
 import { slice } from './utils'
@@ -13,7 +14,7 @@ function User({user = 'root', domain = 'adamzielonka.pro', path = '~'}) {
 function CommandLine({command, blink}) {
   return <li>
     <User/>
-    {command}{blink ? <Caret/> : ''}
+    {command.replace(/ /g, '\u00a0')}{blink ? <Caret/> : ''}
   </li>
 }
 
@@ -21,10 +22,33 @@ function Caret() {
   return <span className='blink'>_</span>
 }
 
+function CaretText({text, selection, focus}) {
+  if(!focus) return text
+
+  const isSelection = selection.start !== selection.end 
+
+  const end = isSelection ? selection.end : selection.end + 1
+
+  const result = [
+    text.slice(0, selection.start),
+    text.slice(selection.start, end),
+    text.slice(end),
+  ]
+   
+  return <>
+    {result[0]}
+    <span className={cx({selection: isSelection, caret: !isSelection})}>
+      {result[1] ? result[1] : <>&nbsp;</>}
+    </span>
+    {result[2]}
+  </>
+}
+
 const Input = observer(({inputRef}) => {
   const { addCommand } = useStore()
   const [value, setValue] = useState('')
   const [focus, setFocus] = useState(false)
+  const [selection, setSelection] = useState({start:0,end:0})
 
   const onChangeHandler = (e) => {
     setValue(e.target.value)
@@ -37,8 +61,16 @@ const Input = observer(({inputRef}) => {
     }
   }
 
+  const onSelectHandler = (e) => {
+    setSelection({
+      direction: e.target.selectionDirection,
+      start: e.target.selectionStart,
+      end: e.target.selectionEnd,
+    })
+  }
+
   return <>
-    {value}{focus ? <Caret/> : ''}
+    <CaretText focus={focus} text={value.replace(/ /g, '\u00a0')} selection={selection} />
     <input
       ref={inputRef}
       className='input'
@@ -47,6 +79,7 @@ const Input = observer(({inputRef}) => {
       onBlur={() => setFocus(false)}
       onChange={onChangeHandler}
       onKeyDown={onKeyDownHandler}
+      onSelect={onSelectHandler}
       value={value}
     />
   </>

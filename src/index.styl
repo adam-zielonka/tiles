@@ -49,3 +49,28 @@ ul
   padding 0
   &:focus
     outline none
+
+@keyframes blink-caret
+  0% {
+    text-decoration: underline;
+  }
+  50% {
+    text-decoration: underline;
+  }
+  50.01% {
+    text-decoration: none;
+  }
+  100% {
+    text-decoration: none;
+  }
+
+.caret
+  animation blink-caret 0.5s linear infinite
+
+.selection
+  background-color typeColor
+  color bgColor
+
+::selection
+  background-color typeColor
+  color bgColor
