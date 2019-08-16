@@ -66,6 +66,7 @@ class Store {
 
   async process(args) {
     const command = args.length ? args[0] : ''
+    args.shift()
     switch (command) {
     case 'whoami':
     case 'description':
@@ -78,6 +79,10 @@ class Store {
     case 'cls':
       await sleep(50)
       this.lines.clear()
+      break
+    case 'echo':
+      await sleep(50)
+      this.lines.push({text: args.join(' ')})
       break
     default:
       await sleep(400)
