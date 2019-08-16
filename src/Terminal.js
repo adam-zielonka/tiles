@@ -6,7 +6,7 @@ import { slice } from './utils'
 function User({user = 'root', domain = 'adamzielonka.pro', path = '~'}) {
   return <>
     <span className="user">{user}@{domain}</span>
-    <span className="user-end">:{path}# </span>
+    <span className="path">:{path}# </span>
   </>
 }
 
@@ -70,18 +70,18 @@ const InputCommandLine = observer(() => {
 
 function TextLine({ text }) {
   let count = 0
-  return <>
+  return <li>
     {slice(text).map(l => <span key={count++} >
       {l.url ? <a href={l.url}>{l.text}</a> : l.text}
     </span>)}
-  </>
+  </li>
 }
 
 function Line(line) {
   if(line.command || line.command === '') {
     return <CommandLine command={line.command} blink={line.blink}/>
   } else if(line.text) {
-    return <li><TextLine text={line.text}/></li>
+    return <TextLine text={line.text}/>
   } else {
     return <li>&nbsp;</li>
   }
