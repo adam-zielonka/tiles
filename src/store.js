@@ -28,7 +28,7 @@ class Store {
     this.historyPosition = this.history.length
     this.shutdown = false
 
-    // setTimeout(this.start)
+    setTimeout(this.start)
   }
 
   arrowUp(lastCommand) {
