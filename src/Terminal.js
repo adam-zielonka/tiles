@@ -83,7 +83,7 @@ const Input = observer(({inputRef}) => {
 
   useEffect(() => {
     const onDocumentKeyDownHandler = (e) => {
-      if(!focus) {
+      if(!focus && !['Control', 'Shift', 'Alt', 'AltGraph', 'CapsLock', 'Tab'].find(f => f === e.key)) {
         inputRef.current && inputRef.current.focus()
         onKeyDownHandler(e)
       }
