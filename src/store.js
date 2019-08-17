@@ -118,6 +118,14 @@ class Store {
       await sleep(1000)
       this.shutdown = true
       break
+    case 'version':
+      await sleep(50)
+      // eslint-disable-next-line no-undef
+      this.pushLine({text: `Version: ${typeof VERSION !== 'undefined' ? VERSION : 'Development'}`})
+      await sleep(50)
+      // eslint-disable-next-line no-undef
+      this.pushLine({text: `Build time: ${typeof BUILD_TIME !== 'undefined' ? BUILD_TIME : 'Development'}`})
+      break
     default:
       await sleep(400)
       this.pushLine({text: `Command '${command}' not found.`})

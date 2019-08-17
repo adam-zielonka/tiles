@@ -1,21 +1,7 @@
 import links from './src/links.json'
+import packageJson from './package.json'
 import replace from 'replace-in-file'
-
-function slice(line) {
-  let match = line.match(/\[(.*?)\]\((.*?)\)/)
-
-  if(match) {
-    const index = line.indexOf(match[0])
-
-    return [
-      { text: line.slice(0, index) },
-      { text: match[1], url: match[2] },
-      ...slice(line.slice(match[0].length + index, line.length))
-    ]
-  }
-
-  return [{ text: line }]
-}
+import { slice } from '.src/utils.js'
 
 const html = links.map(line => {
   const sliced = slice(line).filter(s => s.text)
@@ -34,3 +20,20 @@ replace({
 }).catch(error => {
   console.error('Error occurred:', error)
 })
+
+replace({
+  files: './build/index.html',
+  from: /<version\/>/,
+  to: `<script>
+    const VERSION = ${packageJson.version};
+    const BUILD_TIME = ${Date()};
+  </script>`,
+}).then(results => {
+  if(results[0].hasChanged)
+    console.log('Added links to no-script section')
+  else
+    console.error('Not found <links/> tag')
+}).catch(error => {
+  console.error('Error occurred:', error)
+})
+
