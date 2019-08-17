@@ -25,8 +25,8 @@ replace({
   files: './build/index.html',
   from: /<version\/>/,
   to: `<script>
-    const VERSION = ${packageJson.version};
-    const BUILD_TIME = ${Date()};
+    const VERSION = '${packageJson.version}';
+    const BUILD_TIME = '${Date()}';
   </script>`,
 }).then(results => {
   if(results[0].hasChanged)
