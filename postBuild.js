@@ -1,7 +1,7 @@
 import links from './src/links.json'
 import packageJson from './package.json'
 import replace from 'replace-in-file'
-import { slice } from '.src/utils.js'
+import { slice } from './src/utils.js'
 
 const html = links.map(line => {
   const sliced = slice(line).filter(s => s.text)
