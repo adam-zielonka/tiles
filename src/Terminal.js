@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import cx from 'classnames'
 import { useStore } from './store'
 import { observer } from 'mobx-react-lite'
@@ -22,11 +22,8 @@ function Caret() {
   return <span className='blink'>_</span>
 }
 
-function CaretText({text, selection, focus}) {
-  if(!focus) return text
-
+function CaretText({text, selection}) {
   const isSelection = selection.start !== selection.end 
-
   const end = isSelection ? selection.end : selection.end + 1
 
   const result = [
@@ -84,8 +81,19 @@ const Input = observer(({inputRef}) => {
     })
   }
 
+  useEffect(() => {
+    const onDocumentKeyDownHandler = (e) => {
+      if(!focus) {
+        inputRef.current && inputRef.current.focus()
+        onKeyDownHandler(e)
+      }
+    }
+    document.addEventListener('keydown', onDocumentKeyDownHandler)
+    return () => document.removeEventListener('keydown', onDocumentKeyDownHandler)
+  })
+
   return <>
-    <CaretText focus={focus} text={value.replace(/ /g, '\u00a0')}  selection={selection} />
+    <CaretText text={value.replace(/ /g, '\u00a0')}  selection={selection} />
     <input
       ref={inputRef}
       className='input'
