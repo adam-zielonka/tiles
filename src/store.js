@@ -1,6 +1,7 @@
 import { createContext, useContext } from 'react'
 import { decorate, observable, action } from 'mobx'
 import links from './links.json'
+import help from './help.yml'
 import { sleep } from './utils.js'
 
 const commands = {
@@ -14,6 +15,9 @@ const commands = {
     { time: 1000, text: '[PL] Człowiek programista. Informatyk' },
     { time: 10, text: '[EN] Programmerman. Computer scientist' },
     { time: 400, text: '' },
+  ],
+  help: [
+    ...help.map(l => { return { time: 20, text: l }}),
   ]
 }
 
@@ -23,7 +27,7 @@ class Store {
     this.toProcess = []
     this.isProcessing = false
     this.startCommand = ['whoami', 'description']
-    this.history = ['whoami', 'description']
+    this.history = []
     this.lastCommand = ''
     this.historyPosition = this.history.length
     this.shutdown = false
@@ -47,12 +51,16 @@ class Store {
     return this.history[this.historyPosition]
   }
 
-  pushLine(line) {
-    this.lines.push(line)
+  pushHistory(line) {
     if(line.command && (!this.history.length || this.history[this.history.length-1] !== line.command)) {
       this.history.push(line.command)
-      this.historyPosition = this.history.length
     }
+    this.historyPosition = this.history.length
+  }
+
+  pushLine(line) {
+    this.lines.push(line)
+    this.pushHistory(line)
     window.scrollTo(0,document.body.scrollHeight)
   }
 
@@ -67,6 +75,7 @@ class Store {
       }
       await sleep(1000)
       commandLine.blink = false
+      this.pushHistory(commandLine)
   
       for (const line of commands[command]) {
         await sleep(line.time)
@@ -95,6 +104,7 @@ class Store {
     switch (command) {
     case 'whoami':
     case 'description':
+    case 'help':
       for (const line of commands[command]) {
         await sleep(line.time)
         this.pushLine(line)
@@ -121,6 +131,7 @@ class Store {
     default:
       await sleep(400)
       this.pushLine({text: `Command '${command}' not found.`})
+      this.pushLine({text: 'Type \'help\' to find available commands'})
       break
     }
     this.isProcessing = false
