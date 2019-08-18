@@ -1,0 +1,21 @@
+image: node:alpine
+
+cache:
+  paths:
+  - node_modules
+
+stages:
+- deploy
+
+pages:
+  stage: deploy
+  script:
+    - yarn
+    - yarn build
+    - mv public _public
+    - mv build public
+  artifacts:
+    paths:
+    - public
+  only:
+    - master
