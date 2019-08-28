@@ -3,6 +3,9 @@ image: node:alpine
 cache:
   paths:
   - node_modules
+  
+before_script:
+  - yarn
 
 stages:
 - deploy
@@ -10,11 +13,11 @@ stages:
 pages:
   stage: deploy
   script:
-    - yarn
     - yarn build
     - mv public _public
     - mv build public
   artifacts:
+    expire_in: 1 week
     paths:
     - public
   only:
