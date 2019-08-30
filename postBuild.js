@@ -33,7 +33,7 @@ function lines(command) {
   if(!body) return ''
   body = body.replace(/---[ \s\S]*---\n/,'')
 
-  return getMappedLines({ body }).map(line => {
+  return getMappedLines(body).map(line => {
     const sliced = slice(line.text).filter(s => s.text)
     return `<li style="animation: hidden ${updateTime(line.time)}ms;">${sliced.map(s => s.url ? `<a href="${s.url}">${s.text}</a>` : (s.text || '&nbsp;') ).join('') || '&nbsp;'}</li>`
   }).join('')

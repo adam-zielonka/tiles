@@ -1,19 +1,10 @@
 import { createContext, useContext } from 'react'
 import { decorate, observable, action } from 'mobx'
-import { sleep, getMappedLines } from './utils.js'
-
-import whoami from './commands/whoami.md'
-import description from './commands/description.md'
-import help from './commands/help.md'
-
-const commands = {
-  whoami: getMappedLines(whoami),
-  description: getMappedLines(description),
-  help: getMappedLines(help),
-}
+import { sleep, loadCommands } from './utils.js'
 
 class Store {
   constructor() {
+    this.commands = loadCommands()
     this.lines = []
     this.toProcess = []
     this.isProcessing = false
@@ -68,7 +59,7 @@ class Store {
       commandLine.blink = false
       this.pushHistory(commandLine)
   
-      for (const line of commands[command]) {
+      for (const line of this.commands[command]) {
         await sleep(line.time)
         this.pushLine(line)
       } 
@@ -93,14 +84,6 @@ class Store {
     const command = args.length ? args[0] : ''
     args.shift()
     switch (command) {
-    case 'whoami':
-    case 'description':
-    case 'help':
-      for (const line of commands[command]) {
-        await sleep(line.time)
-        this.pushLine(line)
-      }
-      break
     case 'clear':
     case 'cls':
       await sleep(50)
@@ -120,9 +103,16 @@ class Store {
       this.shutdown = true
       break
     default:
-      await sleep(400)
-      this.pushLine({text: `Command '${command}' not found.`})
-      this.pushLine({text: 'Type \'help\' to find available commands'})
+      if(this.commands[command]) {
+        for (const line of this.commands[command]) {
+          await sleep(line.time)
+          this.pushLine(line)
+        }
+      } else {
+        await sleep(400)
+        this.pushLine({text: `Command '${command}' not found.`})
+        this.pushLine({text: 'Type \'help\' to find available commands'})
+      }
       break
     }
     this.isProcessing = false

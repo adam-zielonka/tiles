@@ -1,4 +1,7 @@
-[sleep]: 500
+---
+command: description
+---
+[](sleep:500)
 [PL] Człowiek programista. Informatyk  
 [EN] Programmerman. Computer scientist
-[sleep]: 400
+[](sleep:400)

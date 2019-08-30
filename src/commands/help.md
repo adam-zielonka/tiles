@@ -1,3 +1,6 @@
+---
+command: help
+---
 Commands list:  
   
 help - display information about builtin commands  

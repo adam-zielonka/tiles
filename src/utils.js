@@ -17,14 +17,14 @@ export function slice(text) {
 
   return [{ text }]
 }
-function markdown(text) {
-  return text.body.split('\n').map(m => m.replace(/^ *$/,''))
+function markdown(body) {
+  return body.split('\n').map(m => m.replace(/^ *$/,''))
 }
 
 function map(array) {
   let sleep = 20
   return array.reduce((p, c) => {
-    const match = c.match(/^\[(.*)\]: *(.*)/)
+    const match = c.match(/^\[\]\((.*):(.*)\)$/)
     const result = { time: sleep, text: c }
     sleep = match && match[1] === 'sleep' ? +match[2] : 20
     if(!match) p.push(result)
@@ -32,4 +32,15 @@ function map(array) {
   },[])
 }
 
-export const getMappedLines = text => map(markdown(text))
+export const getMappedLines = body => map(markdown(body))
+
+export function loadCommands() {
+  const context = require.context('./commands', true, /\.md$/)
+  const files = context.keys().map(filename => context(filename))
+
+  return files.reduce((p,c) => {
+    const { attributes, body } = c
+    if(attributes.command) p[attributes.command] = getMappedLines(body)
+    return p
+  }, {})
+}

@@ -1,11 +1,10 @@
 ---
-  command: 
-    - whoami
+command: whoami
 ---
-[sleep]: 500
+[](sleep:500)
 Adam Zielonka
 
-[sleep]: 1000
+[](sleep:1000)
 [EMAIL]  
 [root@adamzielonka.pro](mailto:root@adamzielonka.pro)  
   
@@ -29,4 +28,4 @@ Ships (React JS): [Source](https://gitlab.com/adam-zielonka-pro/statki), [Play](
 GameOfLife: [Source](https://gitlab.com/adam-zielonka-pro/game-of-life), [Play](https://game-of-life.adamzielonka.pro/)  
 Pan: [Source](https://gitlab.com/adam-zielonka-pro/pan), [Play](https://pan-game.adamzielonka.pro/)  
 Chińczyk: [Source](https://gitlab.com/adam-zielonka-pro/chinczyk), [Play](https://chinczyk-game.adamzielonka.pro/)  
-[sleep]: 400
+[](sleep:400)
