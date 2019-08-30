@@ -1,5 +1,6 @@
 ---
 command: whoami
+help: information about me
 ---
 [](sleep:500)
 Adam Zielonka

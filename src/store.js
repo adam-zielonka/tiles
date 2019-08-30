@@ -4,7 +4,10 @@ import { sleep, loadCommands } from './utils.js'
 
 class Store {
   constructor() {
-    this.commands = loadCommands()
+    const { commands, sys, help } = loadCommands()
+    this.commands = commands
+    this.sys = sys
+    this.help = help
     this.lines = []
     this.toProcess = []
     this.isProcessing = false
@@ -80,41 +83,43 @@ class Store {
     }
   }
 
+  system(sysCommand,  {args}) {
+    switch (sysCommand) {
+    case 'clear': this.lines.clear()
+      break
+    case 'shutdown': this.shutdown = true
+      break
+    case 'echo': this.lines.push({text: args.join(' ')})
+      break
+    case 'help':
+      for (const line of this.help) {
+        const commands = line.alias ? [line.command, ...line.alias].join('|') : line.command
+        const text = `${commands} - ${line.help}`
+        this.pushLine({ time: 20, text })
+      }
+      break
+    default:
+      break
+    }
+  }
+
   async process(args) {
     const command = args.length ? args[0] : ''
     args.shift()
-    switch (command) {
-    case 'clear':
-    case 'cls':
-      await sleep(50)
-      this.lines.clear()
-      break
-    case 'echo':
-      await sleep(50)
-      this.lines.push({text: args.join(' ')})
-      break
-    case 'shutdown':
-    case 'exit':
-      await sleep(50)
-      this.pushLine({text: 'Wait ...'})
-      await sleep(1000)
-      this.lines.clear()
-      await sleep(1000)
-      this.shutdown = true
-      break
-    default:
-      if(this.commands[command]) {
-        for (const line of this.commands[command]) {
-          await sleep(line.time)
-          this.pushLine(line)
-        }
-      } else {
-        await sleep(400)
-        this.pushLine({text: `Command '${command}' not found.`})
-        this.pushLine({text: 'Type \'help\' to find available commands'})
+
+    if(this.commands[command]) {
+      for (const line of this.commands[command]) {
+        await sleep(line.time)
+        if(line.system) this.system(line.system, {args})
+        else this.pushLine(line)
       }
-      break
+    } else {
+      for (const line of this.sys['notFound']) {
+        await sleep(line.time)
+        this.pushLine({...line, text: line.text.replace(/`command`/, command) })
+      }
     }
+
     this.isProcessing = false
     window.scrollTo(0,document.body.scrollHeight)
   }

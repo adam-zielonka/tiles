@@ -22,12 +22,20 @@ function markdown(body) {
 }
 
 function map(array) {
-  let sleep = 20
-  return array.reduce((p, c) => {
-    const match = c.match(/^\[\]\((.*):(.*)\)$/)
-    const result = { time: sleep, text: c }
-    sleep = match && match[1] === 'sleep' ? +match[2] : 20
-    if(!match) p.push(result)
+  const base = { time: 20 }
+  let settings = {}
+  return array.reduce((p, text) => {
+    const match = text.match(/^\[\]\((.*):(.*)\)$/)
+    if(match) {
+      if(match[1] === 'sleep') {
+        settings.time = +match[2]
+      } else {
+        settings[match[1]] = match[2]
+      }
+    } else {
+      p.push({ ...base, ...settings, text })
+      settings = {}
+    }
     return p
   },[])
 }
@@ -37,10 +45,20 @@ export const getMappedLines = body => map(markdown(body))
 export function loadCommands() {
   const context = require.context('./commands', true, /\.md$/)
   const files = context.keys().map(filename => context(filename))
+  const sys = {}
+  const help = []
 
-  return files.reduce((p,c) => {
+  const commands = files.reduce((p,c) => {
     const { attributes, body } = c
-    if(attributes.command) p[attributes.command] = getMappedLines(body)
+    const lines = getMappedLines(body)
+    if(attributes.command) p[attributes.command] = lines
+    if(attributes.alias) for(const alias of attributes.alias) {
+      p[alias] = lines
+    }
+    if(attributes.system) sys[attributes.system] = lines
+    if(attributes.help) help.push(attributes)
     return p
   }, {})
+
+  return { commands, sys, help }
 }
