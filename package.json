@@ -1,12 +1,13 @@
 {
   "name": "adamzielonka.pro",
-  "homepage" : "https://adamzielonka.pro/",
+  "homepage": "https://adamzielonka.pro/",
   "version": "2.0.0",
   "private": true,
   "type": "module",
   "dependencies": {
     "@craco/craco": "^5.3.0",
     "classnames": "^2.2.6",
+    "front-matter-loader": "^0.2.0",
     "json-loader": "^0.5.7",
     "mobx": "^5.13.0",
     "mobx-react-lite": "^1.4.1",
@@ -14,15 +15,15 @@
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2",
-    "yaml-loader": "^0.5.0"
+    "stylus-loader": "^3.0.2"
   },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "postbuild": "node --experimental-modules postBuild.js"
+    "postbuild": "node --experimental-modules postBuild.js",
+    "noscript": "cp ./public/index.html ./build/index.html && yarn postbuild"
   },
   "eslintConfig": {
     "extends": "react-app"

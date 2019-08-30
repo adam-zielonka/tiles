@@ -17,3 +17,19 @@ export function slice(text) {
 
   return [{ text }]
 }
+function markdown(text) {
+  return text.body.split('\n').map(m => m.replace(/^ *$/,''))
+}
+
+function map(array) {
+  let sleep = 20
+  return array.reduce((p, c) => {
+    const match = c.match(/^\[(.*)\]: *(.*)/)
+    const result = { time: sleep, text: c }
+    sleep = match && match[1] === 'sleep' ? +match[2] : 20
+    if(!match) p.push(result)
+    return p
+  },[])
+}
+
+export const getMappedLines = text => map(markdown(text))

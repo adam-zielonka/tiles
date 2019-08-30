@@ -38,6 +38,10 @@
         color: #aaa;
       }
 
+      div {
+        float: left;
+      }
+
       a {
         text-decoration: none;
         color: deepskyblue;
@@ -51,12 +55,20 @@
         list-style: none;
       }
 
+      li {
+        clear: both;
+      }
+
       .user {
         color: lawngreen;
       }
 
       .user-end {
         color: #aaa;
+      }
+
+      .blink {
+        color: #111;
       }
 
       @keyframes blink {
@@ -78,141 +90,20 @@
       }
 
       @keyframes hidden {
-        0% {
-          visibility: hidden;
+        from {
+          width:0;
+          height:0;
+          overflow:hidden;
         }
 
-        100% {
-          visibility: hidden;
+        to {
+          width:0;
+          height:0;
+          overflow:hidden;
         }
-      }
-
-      .step-0 {
-        animation: hidden 0s;
-      }
-
-      .step-0-5 {
-        animation: hidden 0.5s;
-      }
-
-      .step-1 {
-        animation: hidden 1s;
-      }
-
-      .step-1-5 {
-        animation: hidden 1.5s;
-      }
-
-      .step-2 {
-        animation: hidden 2s;
-      }
-
-      .step-2-5 {
-        animation: hidden 2.5s;
-      }
-
-      .step-3 {
-        animation: hidden 3s;
-      }
-
-      .step-3-5 {
-        animation: hidden 3.5s;
-      }
-
-      .step-4 {
-        animation: hidden 4s;
-      }
-
-      .step-4-5 {
-        animation: hidden 4.5s;
-      }
-
-      .step-5 {
-        animation: hidden 5s;
-      }
-
-      .step-5-5 {
-        animation: hidden 5.5s;
-      }
-
-      .step-6 {
-        animation: hidden 6s;
-      }
-
-      .step-6-5 {
-        animation: hidden 6.5s;
-      }
-
-      .step-7 {
-        animation: hidden 7s;
-      }
-
-      .step-7-5 {
-        animation: hidden 7.5s;
-      }
-
-      .step-8 {
-        animation: hidden 8s;
-      }
-
-      .step-8-5 {
-        animation: hidden 8.5s;
-      }
-
-      .blink2 {
-        color: #111;
-        animation: blink .50s linear 0s 4;
-      }
-
-      .blink-2 {
-        color: #111;
-        animation: blink .50s linear 2s 2;
-      }
-
-      .blink-5 {
-        color: #111;
-        animation: blink .50s linear 5.5s 1;
-      }
-
-      .blink-6 {
-        color: #111;
-        animation: blink .50s linear 6.5s 2;
-      }
-
-      .blink {
-        color: #111;
-        animation: blink 0.5s linear 9s infinite;
       }
     </style>
-    <ul>
-      <li>
-        <span class="user">root@adamzielonka.pro</span><span class="user-end">:~#</span>
-        <span class="blink2">_</span><span class="user-end step-2">whoami</span>
-        <span class="blink-2">_</span>
-      </li>
-
-      <li class="step-3-5">Adam Zielonka</li>
-      <li>&nbsp;</li>
-
-      <links/>
-      <li class="step-4">&nbsp;</li>
-      
-      <li>
-        <span class="user step-5">root@adamzielonka.pro</span><span class="user-end step-5">:~#</span>
-        <span class="blink-5">_</span><span class="user-end step-6">description</span>
-        <span class="blink-6">_</span>
-      </li>
-      <li class="step-7">[PL] Człowiek programista. Informatyk</li>
-      <li class="step-7">[EN] Programmerman. Computer scientist</li>
-      <li>&nbsp;</li>
-
-      <li>
-        <span class="user step-8">root@adamzielonka.pro</span>
-        <span class="user-end step-8">:~#</span>
-        <span class="step-8">You need to enable JavaScript to run this app.</span>
-        <span class="blink">_</span>
-      </li>
-    </ul>
+    <links/>
   </noscript>
 </body>
 

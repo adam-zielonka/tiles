@@ -1,24 +1,15 @@
 import { createContext, useContext } from 'react'
 import { decorate, observable, action } from 'mobx'
-import links from './links.json'
-import help from './help.yml'
-import { sleep } from './utils.js'
+import { sleep, getMappedLines } from './utils.js'
+
+import whoami from './commands/whoami.md'
+import description from './commands/description.md'
+import help from './commands/help.md'
 
 const commands = {
-  whoami: [
-    { time: 1000, text: 'Adam Zielonka' },
-    { time: 1000, text: '' },
-    ...links.map(l => { return { time: 20, text: l }}),
-    { time: 400, text: '' },
-  ],
-  description: [
-    { time: 1000, text: '[PL] Człowiek programista. Informatyk' },
-    { time: 10, text: '[EN] Programmerman. Computer scientist' },
-    { time: 400, text: '' },
-  ],
-  help: [
-    ...help.map(l => { return { time: 20, text: l }}),
-  ]
+  whoami: getMappedLines(whoami),
+  description: getMappedLines(description),
+  help: getMappedLines(help),
 }
 
 class Store {

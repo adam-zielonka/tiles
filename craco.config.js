@@ -56,6 +56,6 @@ const getCracoLoaderPlugin = ({ extension, name, loaders }) => {
 module.exports = {
   plugins: [
     { plugin: getCracoLoaderPlugin({name: 'stylus', extension: /\.styl$/, loaders: ['style', 'css', 'stylus']}) },
-    { plugin: getCracoLoaderPlugin({name: 'yaml', extension: /\.ya?ml$/, loaders: ['json', 'yaml']}) },
+    { plugin: getCracoLoaderPlugin({name: 'markdown', extension: /\.md$/, loaders: ['json', 'front-matter']}) },
   ],
 }
