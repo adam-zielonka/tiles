@@ -2,16 +2,16 @@ import { createContext, useContext } from 'react'
 import { decorate, observable, action } from 'mobx'
 import { sleep, loadCommands } from './utils.js'
 
+
 class Store {
   constructor() {
-    const { commands, sys, help } = loadCommands()
+    const { commands, help } = loadCommands()
     this.commands = commands
-    this.sys = sys
     this.help = help
     this.lines = []
     this.toProcess = []
     this.isProcessing = false
-    this.startCommand = ['whoami', 'description']
+    this.startCommand = []//['whoami', 'description']
     this.history = []
     this.lastCommand = ''
     this.historyPosition = this.history.length
@@ -25,7 +25,7 @@ class Store {
     if(this.historyPosition - 1 >= 0) {
       this.historyPosition -= 1
     }
-    return this.history[this.historyPosition]
+    return this.history[this.historyPosition] ? this.history[this.historyPosition] : this.lastCommand
   }
 
   arrowDown() {
@@ -83,7 +83,7 @@ class Store {
     }
   }
 
-  system(sysCommand,  {args}) {
+  async system(sysCommand,  {args}) {
     switch (sysCommand) {
     case 'clear': this.lines.clear()
       break
@@ -93,9 +93,10 @@ class Store {
       break
     case 'help':
       for (const line of this.help) {
+        await sleep(20)
         const commands = line.alias ? [line.command, ...line.alias].join('|') : line.command
         const text = `${commands} - ${line.help}`
-        this.pushLine({ time: 20, text })
+        this.pushLine({ text })
       }
       break
     default:
@@ -107,17 +108,10 @@ class Store {
     const command = args.length ? args[0] : ''
     args.shift()
 
-    if(this.commands[command]) {
-      for (const line of this.commands[command]) {
-        await sleep(line.time)
-        if(line.system) this.system(line.system, {args})
-        else this.pushLine(line)
-      }
-    } else {
-      for (const line of this.sys['notFound']) {
-        await sleep(line.time)
-        this.pushLine({...line, text: line.text.replace(/`command`/, command) })
-      }
+    for (const line of this.commands[this.commands[command] ? command : 'notFound']) {
+      await sleep(line.time)
+      if(line.system) await this.system(line.system, {args})
+      else this.pushLine({...line, text: line.text.replace(/\[.*\]\(const:command\)/, command) })
     }
 
     this.isProcessing = false

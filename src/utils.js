@@ -45,7 +45,6 @@ export const getMappedLines = body => map(markdown(body))
 export function loadCommands() {
   const context = require.context('./commands', true, /\.md$/)
   const files = context.keys().map(filename => context(filename))
-  const sys = {}
   const help = []
 
   const commands = files.reduce((p,c) => {
@@ -55,10 +54,9 @@ export function loadCommands() {
     if(attributes.alias) for(const alias of attributes.alias) {
       p[alias] = lines
     }
-    if(attributes.system) sys[attributes.system] = lines
     if(attributes.help) help.push(attributes)
     return p
   }, {})
 
-  return { commands, sys, help }
+  return { commands, help }
 }

@@ -1,6 +1,6 @@
 ---
-system: notFound
+command: notFound
 ---
 [](sleep:400)
-Command '`command`' not found.  
+Command '[`name`](const:command)' not found.  
 Type 'help' to find available commands.  
