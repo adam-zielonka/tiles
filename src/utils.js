@@ -24,7 +24,7 @@ function markdown(body) {
 function map(array) {
   const base = { time: 20 }
   let settings = {}
-  return array.reduce((p, text) => {
+  const lines = array.reduce((p, text) => {
     const match = text.match(/^\[\]\((.*):(.*)\)$/)
     if(match) {
       if(match[1] === 'sleep') {
@@ -38,6 +38,11 @@ function map(array) {
     }
     return p
   },[])
+
+  const lastLine = lines[lines.length - 1]
+  if(lastLine.system) lines.push({ ...base })
+
+  return lines
 }
 
 export const getMappedLines = body => map(markdown(body))

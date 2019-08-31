@@ -108,11 +108,15 @@ class Store {
     const command = args.length ? args[0] : ''
     args.shift()
 
-    for (const line of this.commands[this.commands[command] ? command : 'notFound']) {
+    const lines = this.commands[this.commands[command] ? command : 'notFound']
+
+    for (let i = 0; i < lines.length - 1; i++) {
+      const line = lines[i]
       await sleep(line.time)
       if(line.system) await this.system(line.system, {args})
       else this.pushLine({...line, text: line.text.replace(/\[.*\]\(const:command\)/, command) })
     }
+    await sleep(lines[lines.length - 1].time)
 
     this.isProcessing = false
     window.scrollTo(0,document.body.scrollHeight)
