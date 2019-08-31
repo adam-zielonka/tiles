@@ -15,7 +15,8 @@ Adam Zielonka
 [bitbucket.org/adam-zielonka-pro](https://bitbucket.org/adam-zielonka-pro)  
   
 [APPS]  
-Questions: [Source](https://gitlab.com/adam-zielonka-pro/questions), [Demo](https://questions.adamzielonka.pro/)  
+adamzielonka.pro: [Source](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro), [Run](https://adamzielonka.pro/)
+Questions: [Source](https://gitlab.com/adam-zielonka-pro/questions), [Run](https://questions.adamzielonka.pro/)  
 Server Status: [Source](https://gitlab.com/adam-zielonka-pro/server-status), [Demo](https://fake-status.adamzielonka.pro/)  
 Unit Converter: [Source](https://gitlab.com/adam-zielonka-pro/unit-converter), [Google Play](https://play.google.com/store/apps/details?id=pro.adamzielonka.converter)  
 paintAZ: [Source](https://gitlab.com/adam-zielonka-pro/paintaz)  
