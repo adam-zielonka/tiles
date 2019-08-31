@@ -11,7 +11,7 @@ class Store {
     this.lines = []
     this.toProcess = []
     this.isProcessing = false
-    this.startCommand = []//['whoami', 'description']
+    this.startCommand = ['whoami', 'description']
     this.history = []
     this.lastCommand = ''
     this.historyPosition = this.history.length
