@@ -40,7 +40,7 @@ function map(array) {
   },[])
 
   const lastLine = lines[lines.length - 1]
-  if(lastLine.system) lines.push({ ...base })
+  if(lastLine.system) lines.push({ ...base, text: '' })
 
   return lines
 }
