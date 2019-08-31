@@ -16,6 +16,7 @@ class Store {
     this.lastCommand = ''
     this.historyPosition = this.history.length
     this.shutdown = false
+    this.freeze = false
 
     setTimeout(this.start)
   }
@@ -86,6 +87,8 @@ class Store {
       break
     case 'shutdown': this.shutdown = true
       break
+    case 'freeze': this.freeze = true
+      break
     case 'echo': this.lines.push({text: args.join(' ')})
       break
     case 'help':
@@ -130,6 +133,7 @@ decorate(Store, {
   arrowUp: action.bound,
   arrowDown: action.bound,
   shutdown: observable,
+  freeze: observable,
 })
 
 const store = createContext(new Store())

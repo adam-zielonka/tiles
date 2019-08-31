@@ -109,10 +109,10 @@ const Input = observer(({inputRef}) => {
 })
 
 const InputCommandLine = observer(() => {
-  const { isProcessing } = useStore()
+  const { isProcessing, freeze } = useStore()
   const inputRef = useRef(null)
 
-  if(isProcessing) return ''
+  if(isProcessing || freeze) return ''
 
   const onClickHandler = () => {
     if(inputRef.current) inputRef.current.focus()
