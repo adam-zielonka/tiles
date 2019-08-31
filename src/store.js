@@ -62,10 +62,7 @@ class Store {
       commandLine.blink = false
       this.pushHistory(commandLine)
   
-      for (const line of this.commands[command]) {
-        await sleep(line.time)
-        this.pushLine(line)
-      } 
+      await this.process([command], false)
     }
     this.isProcessing = false
     window.scrollTo(0,document.body.scrollHeight)
@@ -104,7 +101,7 @@ class Store {
     }
   }
 
-  async process(args) {
+  async process(args, stopProcess = true) {
     const command = args.length ? args[0] : ''
     args.shift()
 
@@ -118,7 +115,7 @@ class Store {
     }
     await sleep(lines[lines.length - 1].time)
 
-    this.isProcessing = false
+    if(stopProcess) this.isProcessing = false
     window.scrollTo(0,document.body.scrollHeight)
   }
 }
