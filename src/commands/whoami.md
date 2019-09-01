@@ -10,9 +10,7 @@ Adam Zielonka
 [root@adamzielonka.pro](mailto:root@adamzielonka.pro)  
   
 [REPO]  
-[gitlab.com/adam-zielonka-pro](https://gitlab.com/adam-zielonka-pro)  
-[github.com/adam-zielonka-pro](https://github.com/adam-zielonka-pro)  
-[bitbucket.org/adam-zielonka-pro](https://bitbucket.org/adam-zielonka-pro)  
+adam-zielonka-pro: [gitlab.com](https://gitlab.com/adam-zielonka-pro), [github.com](https://github.com/adam-zielonka-pro), [bitbucket.org](https://bitbucket.org/adam-zielonka-pro)  
   
 [APPS]  
 adamzielonka.pro: [Source](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro), [Run](https://adamzielonka.pro/)
