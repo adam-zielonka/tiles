@@ -153,12 +153,10 @@ function Terminal() {
   const { lines, shutdown } = useStore()
 
   if(shutdown) return <Shutdown />
-
-  let counter = 0
   
   return <div>
     <ul>
-      {lines.map(line => <Line key={counter++} {...line} />)}
+      {lines.map((line, index) => <Line key={index} {...line} />)}
       <InputCommandLine />
     </ul>
   </div>
