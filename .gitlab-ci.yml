@@ -44,14 +44,13 @@ pages:
   only:
     - master
 
-include:
-- template: Code-Quality.gitlab-ci.yml
-- template: Dependency-Scanning.gitlab-ci.yml
-- template: SAST.gitlab-ci.yml
-- template: DAST.gitlab-ci.yml
+# include:
+# - template: Code-Quality.gitlab-ci.yml
+# - template: Dependency-Scanning.gitlab-ci.yml
+# - template: SAST.gitlab-ci.yml
+# - template: DAST.gitlab-ci.yml
 
-dast:
-  stage: dast
-  variables:
-    DAST_WEBSITE: https://test.adamzielonka.pro
-
+# dast:
+#   stage: dast
+#   variables:
+#     DAST_WEBSITE: https://test.adamzielonka.pro
