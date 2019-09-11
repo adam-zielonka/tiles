@@ -1,20 +1,39 @@
-image: node:alpine
+include:
+- template: Dependency-Scanning.gitlab-ci.yml
+- template: SAST.gitlab-ci.yml
+- template: DAST.gitlab-ci.yml
 
-cache:
-  paths:
-  - node_modules
-  
-before_script:
-  - yarn
+variables:
+  DAST_WEBSITE: https://test.adamzielonka.pro
 
 stages:
+- build
 - deploy
+- test
+- dast
+
+build:
+  image: node:alpine
+  stage: build
+  script:
+    - yarn
+    - yarn build
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - build
+  cache:
+    paths:
+    - node_modules
 
 pages:
+  image: alpine
+  variables:
+    GIT_STRATEGY: none
+    GIT_CHECKOUT: "false"
   stage: deploy
+  dependencies: ["build"]
   script:
-    - yarn build
-    - mv public _public
     - mv build public
   artifacts:
     expire_in: 1 week
