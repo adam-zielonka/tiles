@@ -8,8 +8,8 @@ variables:
 
 stages:
 - build
-- deploy
 - test
+- deploy
 - dast
 
 test:
