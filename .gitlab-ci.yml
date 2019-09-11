@@ -12,6 +12,16 @@ stages:
 - test
 - dast
 
+test:
+  image: node:alpine
+  stage: test
+  script:
+    - yarn
+    - yarn test
+  cache:
+    paths:
+    - node_modules
+
 build:
   image: node:alpine
   stage: build
