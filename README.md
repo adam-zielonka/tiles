@@ -1,5 +1,8 @@
 # [adamzielonka.pro](https://adamzielonka.pro)
 
+[![pipeline status](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro/badges/master/pipeline.svg)](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro/commits/master)
+[![coverage report](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro/badges/master/coverage.svg)](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro/commits/master)
+
 ## How to use
 1. Go to website [adamzielonka.pro](https://adamzielonka.pro)
 2. Wait for start scripts ends. 
