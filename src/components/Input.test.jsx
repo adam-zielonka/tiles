@@ -6,7 +6,7 @@ describe('<Input/>', () => {
   describe('<InputText/>', () => {
     describe('show input text with:', () => {
       it('show input text with caret on end', () => {
-        const wrapper = shallow(<InputText start='4' end='4' >Text</InputText>)
+        const wrapper = shallow(<InputText start={4} end={4} >Text</InputText>)
         expect(wrapper.text()).toEqual('Text\u00a0')
       })
       it('show input text with caret on middle', () => {

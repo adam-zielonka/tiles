@@ -1,20 +1,16 @@
 import React from 'react'
+import cx from 'classnames'
+import { prepareText } from '../utils/input'
 
 export function InputText({ start, end, children }) {
-  const result = [
-    children.slice(0, start),
-    children.slice(start, end + 1),
-    children.slice(end + 1),
-  ]
+  const { isSelection, preparedText } = prepareText({ text: children, start, end })
   
-  console.log(children, result)
-
   return <>
-    {result[0]}
-    <span>
-      {result[1] ? result[1] : '\u00a0'}
+    {preparedText[0]}
+    <span className={cx({selection: isSelection, caret: !isSelection})}>
+      {preparedText[1]}
     </span>
-    {result[2]}
+    {preparedText[2]}
   </>
 }
 
