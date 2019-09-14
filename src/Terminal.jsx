@@ -1,45 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
-import cx from 'classnames'
 import { useStore } from './store'
 import { observer } from 'mobx-react-lite'
 import { slice } from './utils'
-
-function User({user = 'root', domain = 'adamzielonka.pro', path = '~'}) {
-  return <>
-    <span className="user">{user}@{domain}</span>
-    <span className="path">:{path}# </span>
-  </>
-}
-
-function CommandLine({command, blink}) {
-  return <li>
-    <User/>
-    {command.replace(/ /g, '\u00a0')}{blink ? <Caret/> : ''}
-  </li>
-}
-
-function Caret() {
-  return <span className='blink'>_</span>
-}
-
-function CaretText({text, selection}) {
-  const isSelection = selection.start !== selection.end 
-  const end = isSelection ? selection.end : selection.end + 1
-
-  const result = [
-    text.slice(0, selection.start),
-    text.slice(selection.start, end),
-    text.slice(end),
-  ]
-   
-  return <>
-    {result[0]}
-    <span className={cx({selection: isSelection, caret: !isSelection})}>
-      {result[1] ? result[1] : <>&nbsp;</>}
-    </span>
-    {result[2]}
-  </>
-}
+import { InputText } from './components/Input'
+import { CommandLine, UserDomain, Path } from './components/CommandLine'
 
 const Input = observer(({inputRef}) => {
   const { addCommand, arrowUp, arrowDown } = useStore()
@@ -93,7 +57,7 @@ const Input = observer(({inputRef}) => {
   })
 
   return <>
-    <CaretText text={value.replace(/ /g, '\u00a0')}  selection={selection} />
+    <InputText {...selection}>{value.replace(/ /g, '\u00a0')}</InputText>
     <input
       ref={inputRef}
       className='input'
@@ -119,7 +83,8 @@ const InputCommandLine = observer(() => {
   }
 
   return <li onClick={onClickHandler}>
-    <User/>
+    <UserDomain/>
+    <Path/>
     <Input inputRef={inputRef}/>
   </li>
 })
