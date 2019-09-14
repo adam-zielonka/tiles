@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useStore } from './store'
 import { observer } from 'mobx-react-lite'
-import { slice } from './utils'
 import { InputText } from './components/Input'
 import { CommandLine, UserDomain, Path } from './components/CommandLine'
+import { TextLine } from './components/Line'
 
 export const Input = observer(({inputRef}) => {
   const { addCommand, arrowUp, arrowDown } = useStore()
@@ -89,22 +89,11 @@ const InputCommandLine = observer(() => {
   </li>
 })
 
-function TextLine({ text }) {
-  let count = 0
-  return <li>
-    {slice(text).map(l => <span key={count++} >
-      {l.url ? <a href={l.url}>{l.text}</a> : l.text}
-    </span>)}
-  </li>
-}
-
 function Line(line) {
   if(line.command || line.command === '') {
     return <CommandLine command={line.command} blink={line.blink}/>
-  } else if(line.text) {
-    return <TextLine text={line.text}/>
   } else {
-    return <li>&nbsp;</li>
+    return <TextLine>{line.text}</TextLine>
   }
 }
 
