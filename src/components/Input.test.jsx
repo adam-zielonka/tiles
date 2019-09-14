@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { InputText } from './Input'
+import { InputText, InputLine, Input } from './Input'
+import { UserDomain, Path } from './CommandLine'
 
 describe('<Input/>', () => {
   describe('<InputText/>', () => {
@@ -13,6 +14,15 @@ describe('<Input/>', () => {
         const wrapper = shallow(<InputText start={2} end={2} >Text</InputText>)
         expect(wrapper.text()).toEqual('Text')
       })
+    })
+  })
+
+  describe('<InputLine/>', () => {
+    it('show line with Input, Path and UserDomain', () => {
+      const wrapper = shallow(<InputLine/>)
+      expect(wrapper.containsMatchingElement(<UserDomain/>)).toEqual(true)
+      expect(wrapper.containsMatchingElement(<Path/>)).toEqual(true)
+      expect(wrapper.containsMatchingElement(<Input/>)).toEqual(true)
     })
   })
   //TODO: Input

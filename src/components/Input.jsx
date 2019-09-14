@@ -1,6 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 import { prepareText } from '../utils/input'
+import { UserDomain, Path } from './CommandLine'
 
 export function InputText({ start, end, children }) {
   const { isSelection, preparedText } = prepareText({ text: children, start, end })
@@ -19,3 +20,11 @@ export function Input() {
     Input
   </div>
 } 
+
+export const InputLine = () => {
+  return <li>
+    <UserDomain/>
+    <Path/>
+    <Input/>
+  </li>
+}

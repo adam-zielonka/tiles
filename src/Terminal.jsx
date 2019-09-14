@@ -5,7 +5,7 @@ import { slice } from './utils'
 import { InputText } from './components/Input'
 import { CommandLine, UserDomain, Path } from './components/CommandLine'
 
-const Input = observer(({inputRef}) => {
+export const Input = observer(({inputRef}) => {
   const { addCommand, arrowUp, arrowDown } = useStore()
   const [value, setValue] = useState('')
   const [focus, setFocus] = useState(false)
