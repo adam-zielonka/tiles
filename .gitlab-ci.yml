@@ -2,7 +2,6 @@ stages:
 - build
 - test
 - deploy
-- dast
 
 test:
   image: node:alpine
@@ -10,6 +9,17 @@ test:
   script:
     - yarn
     - yarn test
+  cache:
+    paths:
+    - node_modules
+
+lint:
+  image: node:alpine
+  stage: test
+  allow_failure: true
+  script:
+    - yarn
+    - yarn lint
   cache:
     paths:
     - node_modules
@@ -43,14 +53,3 @@ pages:
     - public
   only:
     - master
-
-# include:
-# - template: Code-Quality.gitlab-ci.yml
-# - template: Dependency-Scanning.gitlab-ci.yml
-# - template: SAST.gitlab-ci.yml
-# - template: DAST.gitlab-ci.yml
-
-# dast:
-#   stage: dast
-#   variables:
-#     DAST_WEBSITE: https://test.adamzielonka.pro

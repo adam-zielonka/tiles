@@ -20,7 +20,9 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test --coverage",
-    "eject": "craco eject",
+    "test-only": "craco test",
+    "lint": "eslint --ext .jsx .",
+    "lint-fix": "eslint --ext .jsx . --fix",
     "postbuild": "node --experimental-modules postBuild.js",
     "noscript": "cp ./public/index.html ./build/index.html && yarn postbuild"
   },
