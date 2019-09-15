@@ -1,0 +1,4 @@
+---
+command: ping
+---
+pong
