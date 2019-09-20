@@ -13,10 +13,10 @@ export function Caret({ blink = false }) {
 }
 
 export function CommandLine({ command = '', blink }) {
-  return <>
+  return <li>
     <UserDomain/>
     <Path/>
     {command.replace(/ /g, '\u00a0')}
     <Caret blink={blink}/>
-  </>
+  </li>
 }
