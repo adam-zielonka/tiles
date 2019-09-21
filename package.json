@@ -19,8 +19,8 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test --coverage",
-    "test-only": "craco test",
+    "test-coverage": "craco test --coverage",
+    "test": "craco test",
     "lint": "eslint --ext .jsx .",
     "lint-fix": "eslint --ext .jsx . --fix",
     "postbuild": "node --experimental-modules postBuild.js",
