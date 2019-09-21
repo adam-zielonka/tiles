@@ -57,6 +57,7 @@ describe('<CommandLine/>', () => {
       expect(wrapper.containsMatchingElement(<UserDomain/>)).toEqual(true)
       expect(wrapper.containsMatchingElement(<Path/>)).toEqual(true)
       expect(wrapper.containsMatchingElement(<Caret/>)).toEqual(true)
+      expect(wrapper.find('li').length).toEqual(1)
     })
     it('show command line with command', () => {
       const wrapper = shallow(<CommandLine command='whoami'/>)
@@ -64,6 +65,7 @@ describe('<CommandLine/>', () => {
       expect(wrapper.containsMatchingElement(<Path/>)).toEqual(true)
       expect(wrapper.containsMatchingElement(<Caret/>)).toEqual(true)
       expect(wrapper.text()).toContain('whoami')
+      expect(wrapper.find('li').length).toEqual(1)
     })
     it('show command line with command and params', () => {
       const wrapper = shallow(<CommandLine command='whoami params'/>)
@@ -71,6 +73,7 @@ describe('<CommandLine/>', () => {
       expect(wrapper.containsMatchingElement(<Path/>)).toEqual(true)
       expect(wrapper.containsMatchingElement(<Caret/>)).toEqual(true)
       expect(wrapper.text()).toContain('whoami\u00a0params')
+      expect(wrapper.find('li').length).toEqual(1)
     })
   })
 })
