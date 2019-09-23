@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import fs from 'fs'
 import replace from 'replace-in-file'
-import { getMappedLines } from './src/utils.js'
-import { parseText } from './src/utils/line.js'
+import { getMappedLines } from './utils.js'
+import { parseText } from './utils/line.js'
 
 let time = 0
 
@@ -53,6 +53,8 @@ const html
   + userLine('')
   + lines('panic')
   + '</ul>'
+
+  console.log(html)
 
 replace({
   files: './build/index.html',

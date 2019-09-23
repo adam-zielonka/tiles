@@ -23,7 +23,7 @@
     "test": "craco test",
     "lint": "eslint --ext .jsx .",
     "lint-fix": "eslint --ext .jsx . --fix",
-    "postbuild": "node --experimental-modules postBuild.js",
+    "postbuild": "node --experimental-modules ./src/postBuild.js",
     "noscript": "cp ./public/index.html ./build/index.html && yarn postbuild"
   },
   "eslintConfig": {
