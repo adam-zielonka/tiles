@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react'
 import { decorate, observable, action } from 'mobx'
-import { sleep, loadCommands } from './utils.js'
+import { sleep, loadCommands, isFontExist } from './utils.js'
 
 
 class Store {
@@ -17,6 +17,7 @@ class Store {
     this.historyPosition = this.history.length
     this.shutdown = false
     this.freeze = false
+    this.font = ''
 
     setTimeout(this.start)
   }
@@ -77,7 +78,13 @@ class Store {
       this.isProcessing = false
       setTimeout(() => window.scrollTo(0,document.body.scrollHeight))
     } else {
-      setTimeout(() => this.process(command.split(/\s+/).filter(c => !!c)))
+      const args = [...command.matchAll(/["']([^"']*)["']| ?([^"' ]+) ?/g)].map(m => m[1] || m[2]).filter(c => !!c)
+      if(!args.length) {
+        this.isProcessing = false
+        setTimeout(() => window.scrollTo(0,document.body.scrollHeight))
+      } else {
+        setTimeout(() => this.process(args.filter(c => !!c)))
+      }
     }
   }
 
@@ -90,6 +97,10 @@ class Store {
     case 'freeze': this.freeze = true
       break
     case 'echo': this.lines.push({text: args.join(' ')})
+      break
+    case 'font':
+      if(!this.setFont(args && args.length ? args[0] : ''))
+        this.pushLine({ text: `Font family '${args}' is not installed` })
       break
     case 'help':
       for (const line of this.help) {
@@ -121,6 +132,14 @@ class Store {
     if(stopProcess) this.isProcessing = false
     window.scrollTo(0,document.body.scrollHeight)
   }
+
+  setFont(font) {
+    if(isFontExist(font) || !font) {
+      this.font = `${font ? font + ', ' : ''}"Courier New", Courier, monospace`
+      return true
+    }
+    return false
+  }
 }
 
 decorate(Store, {
@@ -134,6 +153,8 @@ decorate(Store, {
   arrowDown: action.bound,
   shutdown: observable,
   freeze: observable,
+  font: observable,
+  setFont: action.bound,
 })
 
 const store = createContext(new Store())

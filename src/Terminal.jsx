@@ -104,11 +104,11 @@ function Shutdown() {
 }
 
 function Terminal() {
-  const { lines, shutdown } = useStore()
+  const { lines, shutdown, font } = useStore()
 
   if(shutdown) return <Shutdown />
   
-  return <div>
+  return <div style={{ fontFamily: font }}>
     <ul>
       {lines.map((line, index) => <Line key={index} {...line} />)}
       <InputCommandLine />
