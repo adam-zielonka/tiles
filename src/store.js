@@ -115,9 +115,8 @@ class Store {
     }
   }
 
-  async process(args, stopProcess = true) {
-    const command = args.length ? args[0] : ''
-    args.shift()
+  async process(commandArgs, stopProcess = true) {
+    const [command, ...args] = commandArgs
 
     const lines = this.commands[this.commands[command] ? command : 'notFound']
 
