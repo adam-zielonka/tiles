@@ -1,15 +1,8 @@
-export function parseText(text) {
-  let match = text.match(/\[(.*?)\]\((.*?)\)/)
+export function parseText(text, result = []) {
+  const [match, leftText, title, url, rightText] 
+    = text.match(/^(.*)\[(.*?)\]\((.*?)\)(.*)$/) || []
+  
+  if(!match) return [{ text }, ...result]
 
-  if(match) {
-    const index = text.indexOf(match[0])
-
-    return [
-      { text: text.slice(0, index) },
-      { text: match[1], url: match[2] },
-      ...parseText(text.slice(match[0].length + index, text.length))
-    ]
-  }
-
-  return [{ text }]
+  return parseText(leftText, [{ text: title, url }, { text: rightText }, ...result])
 }
