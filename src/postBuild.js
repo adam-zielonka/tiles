@@ -4,15 +4,7 @@ import replace from 'replace-in-file'
 import { getMappedLines } from './utils.js'
 import { parseText } from './utils/line.js'
 
-class Time {
-  value = 0
-  update(delay) {
-    this.value += delay
-    return this.value
-  }
-}
-
-const time = new Time()
+const time = ((time = 0) => (delay = 0) => time += delay)()
 
 function userLine(command) {
   const splitted = command.split('')
@@ -22,13 +14,13 @@ function userLine(command) {
   }
 
   let result = ''
-  result += `<div class="user" style="animation: hidden ${time.update(0)}ms;">root@adamzielonka.pro</div>`
-  result += `<div class="user-end" style="animation: hidden ${time.update(0)}ms;">:~#&nbsp;</div>`
-  const startTime = time.value
-  time.update(1000)
-  result += splitted.map(l => `<div class="user-end" style="animation: hidden ${time.update(50)}ms;">${l}</div>`).join('')
-  result += `<div class="blink" style="animation: blink 500ms linear ${startTime}ms ${blinkTimes(startTime, time.value)};">_</div>`
-  time.update(1000)
+  result += `<div class="user" style="animation: hidden ${time()}ms;">root@adamzielonka.pro</div>`
+  result += `<div class="user-end" style="animation: hidden ${time()}ms;">:~#&nbsp;</div>`
+  const startTime = time()
+  time(1000)
+  result += splitted.map(l => `<div class="user-end" style="animation: hidden ${time(50)}ms;">${l}</div>`).join('')
+  result += `<div class="blink" style="animation: blink 500ms linear ${startTime}ms ${blinkTimes(startTime, time())};">_</div>`
+  time(1000)
   return `<li>${result}</li>`
 }
 
@@ -39,7 +31,7 @@ function lines(command) {
 
   const lines = getMappedLines(body).filter(f => !f.system).map(line => {
     const sliced = parseText(line.text).filter(s => s.text)
-    return `<li style="animation: hidden ${time.update(line.time)}ms;">${sliced.map(s => s.url ? `<a href="${s.url}">${s.text}</a>` : (s.text || '&nbsp;') ).join('') || '&nbsp;'}</li>`
+    return `<li style="animation: hidden ${time(line.time)}ms;">${sliced.map(s => s.url ? `<a href="${s.url}">${s.text}</a>` : (s.text || '&nbsp;') ).join('') || '&nbsp;'}</li>`
   })
   lines.pop()
   return lines.join('')
@@ -69,4 +61,3 @@ replace({
 }).catch(error => {
   console.error('Error occurred:', error)
 })
-
