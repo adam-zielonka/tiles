@@ -4,7 +4,7 @@ import replace from 'replace-in-file'
 import { getMappedLines } from './utils.js'
 import { parseText } from './utils/line.js'
 
-const time = ((time = 0) => (delay = 0) => time += delay)()
+const time = (time => delay => time += delay || 0)(0)
 
 function userLine(command) {
   const splitted = command.split('')
