@@ -10,12 +10,14 @@ Adam Zielonka
 [root@adamzielonka.pro](mailto:root@adamzielonka.pro)  
   
 [REPO]  
-adam-zielonka-pro: [gitlab.com](https://gitlab.com/adam-zielonka-pro), [github.com](https://github.com/adam-zielonka-pro), [bitbucket.org](https://bitbucket.org/adam-zielonka-pro)  
+[gitlab.com/adam-zielonka-pro](https://gitlab.com/adam-zielonka-pro)
+[gitlab.com/server-status](https://gitlab.com/server-status)
   
 [APPS]  
 adamzielonka.pro: [Source](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro), [Run](https://adamzielonka.pro/)
 Questions: [Source](https://gitlab.com/adam-zielonka-pro/questions), [Run](https://questions.adamzielonka.pro/)  
-Server Status: [Source](https://gitlab.com/adam-zielonka-pro/server-status), [Demo](https://fake-status.adamzielonka.pro/)  
+Server Status: [API Source](https://gitlab.com/server-status/server-status-api), [APP Source](https://gitlab.com/server-status/server-status-app)
+Server Status Legacy: [Source](https://gitlab.com/server-status/server-status-legacy), [Demo](https://fake-status.adamzielonka.pro/)
 Unit Converter: [Source](https://gitlab.com/adam-zielonka-pro/unit-converter), [Google Play](https://play.google.com/store/apps/details?id=pro.adamzielonka.converter)  
 paintAZ: [Source](https://gitlab.com/adam-zielonka-pro/paintaz)  
   
