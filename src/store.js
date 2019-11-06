@@ -99,8 +99,8 @@ class Store {
     case 'echo': this.lines.push({text: args.join(' ')})
       break
     case 'font':
-      if(!this.setFont(args && args.length ? args[0] : ''))
-        this.pushLine({ text: `Font family '${args}' is not installed` })
+      if(!this.setFont(args && args.length ? args.join(' ') : ''))
+        this.pushLine({ text: `Font family '${args.join(' ')}' is not installed` })
       break
     case 'help':
       for (const line of this.help) {
