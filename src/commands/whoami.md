@@ -22,8 +22,8 @@ Unit Converter: [Source](https://gitlab.com/adam-zielonka-pro/unit-converter), [
 paintAZ: [Source](https://gitlab.com/adam-zielonka-pro/paintaz)  
   
 [GAMES]  
-Deska: [Source](https://gitlab.com/adam-zielonka-pro/pascal-games/deska), [Play](https://deska-pascal-game.adamzielonka.pro/)  
-Saper: [Source](https://gitlab.com/adam-zielonka-pro/pascal-games/saper), [Play](https://saper-pascal-game.adamzielonka.pro/)  
+Deska: [Source](https://gitlab.com/adam-zielonka-pro/deska), [Play](https://deska-pascal-game.adamzielonka.pro/)  
+Saper: [Source](https://gitlab.com/adam-zielonka-pro/saper), [Play](https://saper-pascal-game.adamzielonka.pro/)  
 Tetris: [Source](https://gitlab.com/adam-zielonka-pro/tetris)  
 Ships (Vanilla JS): [Source](https://gitlab.com/adam-zielonka-pro/statki/tree/vanilla-js), [Play](https://statki-vanilla-js.adamzielonka.pro/)  
 Ships (React JS): [Source](https://gitlab.com/adam-zielonka-pro/statki), [Play](https://statki.adamzielonka.pro/)  
