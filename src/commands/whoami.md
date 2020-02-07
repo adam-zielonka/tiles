@@ -16,8 +16,7 @@ Adam Zielonka
 [APPS]  
 adamzielonka.pro: [Source](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro), [Run](https://adamzielonka.pro/)
 Questions: [Source](https://gitlab.com/adam-zielonka-pro/questions), [Run](https://questions.adamzielonka.pro/)  
-Server Status: [API Source](https://gitlab.com/server-status/server-status-api), [APP Source](https://gitlab.com/server-status/server-status-app)
-Server Status Legacy: [Source](https://gitlab.com/server-status/server-status-legacy), [Demo](https://fake-status.adamzielonka.pro/)
+Server Status: [API Source](https://gitlab.com/server-status/server-status-api), [APP Source](https://gitlab.com/server-status/server-status-app), [Legacy Source](https://gitlab.com/server-status/server-status-legacy)
 Unit Converter: [Source](https://gitlab.com/adam-zielonka-pro/unit-converter), [Google Play](https://play.google.com/store/apps/details?id=pro.adamzielonka.converter)  
 paintAZ: [Source](https://gitlab.com/adam-zielonka-pro/paintaz)  
   
