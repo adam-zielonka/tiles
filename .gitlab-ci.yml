@@ -12,6 +12,9 @@ test:
   cache:
     paths:
     - node_modules
+  except:
+    - schedules
+
 
 lint:
   image: node:alpine
@@ -23,6 +26,8 @@ lint:
   cache:
     paths:
     - node_modules
+  except:
+    - schedules
 
 build:
   image: node:alpine
@@ -37,6 +42,9 @@ build:
   cache:
     paths:
     - node_modules
+  except:
+    - schedules
+
 
 pages:
   image: alpine
@@ -53,3 +61,13 @@ pages:
     - public
   only:
     - master
+  except:
+    - schedules
+
+include:
+  - template: Dependency-Scanning.gitlab-ci.yml
+
+dependency_scanning:
+  only:
+    - schedules
+
