@@ -26,6 +26,6 @@ Saper: [Source](https://gitlab.com/adam-zielonka-pro/saper), [Play](https://sape
 Tetris: [Source](https://gitlab.com/adam-zielonka-pro/tetris)  
 Ships: [Source](https://gitlab.com/adam-zielonka-pro/statki), [Play](https://statki.adamzielonka.pro/)  
 GameOfLife: [Source](https://gitlab.com/adam-zielonka-pro/game-of-life), [Play](https://game-of-life.adamzielonka.pro/)  
-Pan: [Source](https://gitlab.com/adam-zielonka-pro/pan), [Play](https://pan-game.adamzielonka.pro/)  
-Chińczyk: [Source](https://gitlab.com/adam-zielonka-pro/chinczyk), [Play](https://chinczyk-game.adamzielonka.pro/)  
+Pan: [Source](https://gitlab.com/adam-zielonka-pro/pan), [Play](https://pan.adamzielonka.pro/)  
+Chińczyk: [Source](https://gitlab.com/adam-zielonka-pro/chinczyk), [Play](https://chinczyk.adamzielonka.pro/)  
 [](sleep:400)
