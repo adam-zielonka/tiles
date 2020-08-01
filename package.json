@@ -1,43 +1,45 @@
 {
   "name": "adamzielonka.pro",
   "homepage": "https://adamzielonka.pro/",
-  "version": "2.0.0",
   "dependencies": {
     "@craco/craco": "^5.6.4",
     "classnames": "^2.2.6",
-    "front-matter-loader": "^1.0.0",
+    "front-matter-loader": "^1.1.0",
     "json-loader": "^0.5.7",
     "mobx": "^5.15.4",
-    "mobx-react-lite": "^2.0.6",
+    "mobx-react-lite": "^2.0.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
-    "stylus": "^0.54.7",
+    "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2"
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "esm": "^3.2.25",
+    "replace-in-file": "^6.1.0"
   },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
     "test-coverage": "craco test --coverage",
     "test": "craco test",
-    "lint": "eslint --ext .js --ext .jsx .",
-    "lint-fix": "eslint --ext .js --ext .jsx . --fix",
+    "lint": "eslint --ext .js,.jsx .",
+    "lint-fix": "eslint --ext .js,.jsx . --fix",
     "postbuild": "node -r esm ./src/postBuild.js",
     "noscript": "cp ./public/index.html ./build/index.html && yarn postbuild"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
-    "esm": "^3.2.25",
-    "replace-in-file": "^6.0.0"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
