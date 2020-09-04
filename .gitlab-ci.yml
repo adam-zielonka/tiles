@@ -5,25 +5,6 @@ stages:
 - test
 - deploy
 
-test:
-  stage: test
-  script:
-    - yarn
-    - yarn test-coverage
-  cache:
-    paths:
-    - node_modules
-
-lint:
-  stage: test
-  allow_failure: true
-  script:
-    - yarn
-    - yarn lint
-  cache:
-    paths:
-    - node_modules
-
 build:
   stage: build
   script:
@@ -36,6 +17,29 @@ build:
   cache:
     paths:
     - node_modules
+
+test:
+  stage: test
+  script:
+    - yarn
+    - yarn test-coverage
+  cache:
+    paths:
+    - node_modules
+  needs:
+    - build
+
+lint:
+  stage: test
+  allow_failure: true
+  script:
+    - yarn
+    - yarn lint
+  cache:
+    paths:
+    - node_modules
+  needs:
+    - build
 
 pages:
   image: alpine
