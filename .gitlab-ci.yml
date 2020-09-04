@@ -1,10 +1,11 @@
+image: node:14.9.0-alpine
+
 stages:
 - build
 - test
 - deploy
 
 test:
-  image: node:alpine
   stage: test
   script:
     - yarn
@@ -14,7 +15,6 @@ test:
     - node_modules
 
 lint:
-  image: node:alpine
   stage: test
   allow_failure: true
   script:
@@ -25,7 +25,6 @@ lint:
     - node_modules
 
 build:
-  image: node:alpine
   stage: build
   script:
     - yarn
@@ -38,14 +37,16 @@ build:
     paths:
     - node_modules
 
-
 pages:
   image: alpine
   variables:
     GIT_STRATEGY: none
     GIT_CHECKOUT: "false"
   stage: deploy
-  dependencies: ["build"]
+  needs:
+    - job: build
+      artifacts: true
+    - test
   script:
     - mv build public
   artifacts:
