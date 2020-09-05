@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { InputText, InputLine, Input } from './Input'
-import { UserDomain, Path } from './CommandLine'
+import { UserDomain, Path } from './Line'
 
 describe('<Input/>', () => {
   describe('<InputText/>', () => {

@@ -2,8 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useStore } from './store'
 import { observer } from 'mobx-react-lite'
 import { InputText } from './components/Input'
-import { UserDomain, Path } from './components/CommandLine'
-import { Line } from './components/Line'
+import { Line, UserDomain, Path } from './components/Line'
 import { Shutdown } from './components/Shutdown'
 
 export const Input = observer(({inputRef}) => {

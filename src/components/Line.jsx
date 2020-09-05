@@ -1,6 +1,26 @@
 import React from 'react'
 import { parseText } from '../utils/line'
-import { CommandLine } from './CommandLine'
+
+export function UserDomain({ user = 'root', domain = 'adamzielonka.pro' }) {
+  return <span className="user">{user}@{domain}</span>
+}
+
+export function Path({ path = '~' }) {
+  return <span className="path">:{path}# </span>
+}
+
+export function Caret({ blink = false }) {
+  return blink ? <span className='blink'>_</span> : ''
+}
+
+export function CommandLine({ command = '', blink }) {
+  return <li>
+    <UserDomain/>
+    <Path/>
+    {command.replace(/ /g, '\u00a0')}
+    <Caret blink={blink}/>
+  </li>
+}
 
 export function TextLine({ children }) {
   return <li>
