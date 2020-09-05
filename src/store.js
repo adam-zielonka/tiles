@@ -156,8 +156,10 @@ decorate(Store, {
   setFont: action.bound,
 })
 
-const store = createContext(new Store())
+const store = new Store()
+const storeContext = createContext(store)
+window.store = store
 
 export function useStore() {
-  return useContext(store)
+  return useContext(storeContext)
 }
