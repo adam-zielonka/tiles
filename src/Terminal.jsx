@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useStore } from './store'
 import { observer } from 'mobx-react-lite'
 import { InputText } from './components/Input'
-import { CommandLine, UserDomain, Path } from './components/CommandLine'
-import { TextLine } from './components/Line'
+import { UserDomain, Path } from './components/CommandLine'
+import { Line } from './components/Line'
 import { Shutdown } from './components/Shutdown'
 
 export const Input = observer(({inputRef}) => {
@@ -89,14 +89,6 @@ const InputCommandLine = observer(() => {
     <Input inputRef={inputRef}/>
   </li>
 })
-
-function Line(line) {
-  if(line.command || line.command === '') {
-    return <CommandLine command={line.command} blink={line.blink}/>
-  } else {
-    return <TextLine>{line.text}</TextLine>
-  }
-}
 
 function Terminal() {
   const { lines, shutdown, font } = useStore()

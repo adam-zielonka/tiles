@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { TextLine } from './Line'
+import { Line, TextLine } from './Line'
+import { CommandLine } from './CommandLine'
 
 describe('<Line/>', () => {
   describe('<TextLine/>', () => {
@@ -21,4 +22,33 @@ describe('<Line/>', () => {
       expect(wrapper.find('li').length).toEqual(1)
     })
   })
+
+  describe('<Line/>', () => {
+    const textData = [
+      { text: 'test' },
+      { text: '' },
+      {},
+      { text: null },
+      { command: null },
+    ]
+    const commandsData = [
+      { command: '' },
+      { command: '', text: 'test' },
+      { command: 'test' },
+    ]
+
+    textData.forEach((props) => {
+      it(`show text line with value "${props.text}"`, () => {
+        const wrapper = shallow(<Line {...props} />)
+        expect(wrapper.containsMatchingElement(<TextLine>{props.text}</TextLine>)).toEqual(true)
+      })
+    })
+    commandsData.forEach((props) => {
+      it(`show command line with value "${props.command}"`, () => {
+        const wrapper = shallow(<Line {...props}/>)
+        expect(wrapper.containsMatchingElement(<CommandLine/>)).toEqual(true)
+      })
+    })
+  })
+  
 })
