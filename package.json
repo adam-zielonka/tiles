@@ -6,17 +6,17 @@
     "classnames": "^2.2.6",
     "front-matter-loader": "^1.1.0",
     "json-loader": "^0.5.7",
-    "mobx": "^5.15.4",
-    "mobx-react-lite": "^2.0.7",
+    "mobx": "^5.15.6",
+    "mobx-react-lite": "^2.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1",
+    "react-scripts": "^3.4.3",
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2"
   },
   "devDependencies": {
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-adapter-react-16": "^1.15.4",
     "esm": "^3.2.25",
     "replace-in-file": "^6.1.0"
   },
