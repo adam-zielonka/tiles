@@ -45,7 +45,7 @@ ul
   padding 0
   &:focus
     outline none
-  ::selection
+  &::selection
     background-color bgColor
     color bgColor
     caret-color bgColor
@@ -59,11 +59,7 @@ ul
 .caret
   animation blink-caret 0.5s linear infinite
 
-.selection
-  background-color typeColor
-  color bgColor
-
-::selection
+.selection, ::selection
   background-color typeColor
   color bgColor
 
