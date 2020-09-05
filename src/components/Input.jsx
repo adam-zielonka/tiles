@@ -1,6 +1,6 @@
 import React from 'react'
 import cx from 'classnames'
-import { prepareText } from '../utils/input'
+import { prepareText } from '../utils/utils'
 import { UserDomain, Path } from './Line'
 
 export function InputText({ start, end, children }) {

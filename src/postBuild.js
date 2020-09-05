@@ -2,7 +2,7 @@
 import fs from 'fs'
 import replace from 'replace-in-file'
 import { getMappedLines } from './utils.js'
-import { parseText } from './utils/line.js'
+import { parseText } from './utils/utils.js'
 
 const time = (time => delay => time += delay || 0)(0)
 
