@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite'
 import { InputText } from './components/Input'
 import { CommandLine, UserDomain, Path } from './components/CommandLine'
 import { TextLine } from './components/Line'
+import { Shutdown } from './components/Shutdown'
 
 export const Input = observer(({inputRef}) => {
   const { addCommand, arrowUp, arrowDown } = useStore()
@@ -95,12 +96,6 @@ function Line(line) {
   } else {
     return <TextLine>{line.text}</TextLine>
   }
-}
-
-function Shutdown() {
-  return <div className='shutdown'>
-    <p>It{'\''}s now safe to turn off<br/>your computer.</p>
-  </div>
 }
 
 function Terminal() {
