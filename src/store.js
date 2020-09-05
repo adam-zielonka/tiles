@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
 import { decorate, observable, action } from 'mobx'
-import { sleep, loadCommands, isFontExist } from './utils.js'
-
+import { isFontExist } from './utils/utils.js'
+import { sleep, loadCommands } from './utils.js'
 
 class Store {
   constructor() {

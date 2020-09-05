@@ -1,4 +1,4 @@
-import { parseText, prepareText } from './utils'
+import { parseText, prepareText, isFontExist } from './utils'
 
 describe('Utils', () => {
   describe('prepareText()', () => {
@@ -41,6 +41,15 @@ describe('Utils', () => {
         { text: 'title2', 'url': 'link2' },
         { text: ' this is it' }
       ])
+    })
+  })
+
+  describe('isFontExist()', () => {
+    it('font function no crash', () => {
+      expect(isFontExist('font name')).toBe(false)
+      expect(isFontExist('font')).toBe(false)
+      expect(isFontExist('')).toBe(false)
+      expect(isFontExist()).toBe(false)
     })
   })
 })
