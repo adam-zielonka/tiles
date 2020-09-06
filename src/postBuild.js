@@ -3,7 +3,11 @@ import fs from 'fs'
 import replace from 'replace-in-file'
 import { parseCommand, parseText } from './utils.js'
 
-const time = (time => delay => time += delay || 0)(0)
+function createClock() {
+  return (clock => delay => clock += delay || 0)(0)
+}
+
+const clock = createClock()
 
 function userLine(command) {
   const splitted = command.split('')
@@ -13,13 +17,13 @@ function userLine(command) {
   }
 
   let result = ''
-  result += `<div class="user" style="animation: hidden ${time()}ms;">root@adamzielonka.pro</div>`
-  result += `<div class="user-end" style="animation: hidden ${time()}ms;">:~#&nbsp;</div>`
-  const startTime = time()
-  time(1000)
-  result += splitted.map(l => `<div class="user-end" style="animation: hidden ${time(50)}ms;">${l}</div>`).join('')
-  result += `<div class="blink" style="animation: blink 500ms linear ${startTime}ms ${blinkTimes(startTime, time())};">_</div>`
-  time(1000)
+  result += `<div class="user" style="animation: hidden ${clock()}ms;">root@adamzielonka.pro</div>`
+  result += `<div class="user-end" style="animation: hidden ${clock()}ms;">:~#&nbsp;</div>`
+  const startTime = clock()
+  clock(1000)
+  result += splitted.map(l => `<div class="user-end" style="animation: hidden ${clock(50)}ms;">${l}</div>`).join('')
+  result += `<div class="blink" style="animation: blink 500ms linear ${startTime}ms ${blinkTimes(startTime, clock())};">_</div>`
+  clock(1000)
   return `<li>${result}</li>`
 }
 
@@ -30,7 +34,7 @@ function lines(command) {
 
   const lines = parseCommand(body).filter(f => !f.system).map(line => {
     const sliced = parseText(line.text).filter(s => s.text)
-    return `<li style="animation: hidden ${time(line.time)}ms;">${sliced.map(s => s.url ? `<a href="${s.url}">${s.text}</a>` : (s.text || '&nbsp;') ).join('') || '&nbsp;'}</li>`
+    return `<li style="animation: hidden ${clock(line.time)}ms;">${sliced.map(s => s.url ? `<a href="${s.url}">${s.text}</a>` : (s.text || '&nbsp;') ).join('') || '&nbsp;'}</li>`
   })
   lines.pop()
   return lines.join('')
