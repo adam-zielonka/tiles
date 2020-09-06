@@ -32,9 +32,16 @@ function map(array) {
 
 export const getMappedLines = body => map(markdown(body))
 
+export function requireFiles() {
+  if (typeof require.context !== 'undefined') {
+    const context = require.context('./commands', true, /\.md$/)
+    return context.keys().map(filename => context(filename))
+  }
+  return []
+}
+
 export function loadCommands() {
-  const context = require.context('./commands', true, /\.md$/)
-  const files = context.keys().map(filename => context(filename))
+  const files = requireFiles()
   const help = []
 
   const commands = files.reduce((p,c) => {
