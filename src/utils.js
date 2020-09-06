@@ -40,7 +40,7 @@ export function requireCommands() {
 
 export function installCommands(files = []) {
   const help = []
-  const commands = []
+  const commands = {}
 
   for (const { attributes, body } of files) {
     const lines = parseCommand(body)
