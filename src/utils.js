@@ -33,11 +33,12 @@ function map(array) {
 export const getMappedLines = body => map(markdown(body))
 
 export function requireFiles() {
-  if (typeof require.context !== 'undefined') {
+  try {
     const context = require.context('./commands', true, /\.md$/)
     return context.keys().map(filename => context(filename))
+  } catch (error) {
+    return []
   }
-  return []
 }
 
 export function loadCommands() {
