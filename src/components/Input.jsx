@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import cx from 'classnames'
 import { observer } from 'mobx-react-lite'
 import { useStore } from '../store'
-import { prepareText } from '../utils/utils'
+import { prepareText } from '../utils'
 import { UserDomain, Path } from './Line'
 
 

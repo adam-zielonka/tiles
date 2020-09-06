@@ -1,5 +1,5 @@
 import React from 'react'
-import { parseText } from '../utils/utils'
+import { parseText } from '../utils'
 
 export function UserDomain({ user = 'root', domain = 'adamzielonka.pro' }) {
   return <span className="user">{user}@{domain}</span>
