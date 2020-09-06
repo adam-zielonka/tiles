@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import fs from 'fs'
 import replace from 'replace-in-file'
-import { getMappedLines, parseText } from './utils.js'
+import { parseCommand, parseText } from './utils.js'
 
 const time = (time => delay => time += delay || 0)(0)
 
@@ -28,7 +28,7 @@ function lines(command) {
   if(!body) return ''
   body = body.replace(/---[ \s\S]*---\n/,'')
 
-  const lines = getMappedLines(body).filter(f => !f.system).map(line => {
+  const lines = parseCommand(body).filter(f => !f.system).map(line => {
     const sliced = parseText(line.text).filter(s => s.text)
     return `<li style="animation: hidden ${time(line.time)}ms;">${sliced.map(s => s.url ? `<a href="${s.url}">${s.text}</a>` : (s.text || '&nbsp;') ).join('') || '&nbsp;'}</li>`
   })

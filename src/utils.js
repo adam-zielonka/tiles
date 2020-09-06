@@ -2,11 +2,9 @@ export function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-function markdown(body) {
-  return body.split('\n').map(m => m.replace(/^ *$/,''))
-}
+export function parseCommand(body) {
+  const array = body.split('\n').map(m => m.replace(/^ *$/,''))
 
-function map(array) {
   const base = { time: 20 }
   let settings = {}
   const lines = array.reduce((p, text) => {
@@ -30,9 +28,7 @@ function map(array) {
   return lines
 }
 
-export const getMappedLines = body => map(markdown(body))
-
-export function requireFiles() {
+export function requireCommands() {
   try {
     const context = require.context('./commands', true, /\.md$/)
     return context.keys().map(filename => context(filename))
@@ -41,13 +37,12 @@ export function requireFiles() {
   }
 }
 
-export function loadCommands() {
-  const files = requireFiles()
+export function installCommands(files = []) {
   const help = []
 
   const commands = files.reduce((p,c) => {
     const { attributes, body } = c
-    const lines = getMappedLines(body)
+    const lines = parseCommand(body)
     if(attributes.command) p[attributes.command] = lines
     if(attributes.alias) for(const alias of attributes.alias) {
       p[alias] = lines

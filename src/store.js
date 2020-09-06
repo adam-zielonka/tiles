@@ -1,10 +1,10 @@
 import { createContext, useContext } from 'react'
 import { decorate, observable, action } from 'mobx'
-import { sleep, loadCommands, isFontExist } from './utils.js'
+import { sleep, installCommands, requireCommands, isFontExist } from './utils.js'
 
 class Store {
   constructor() {
-    const { commands, help } = loadCommands()
+    const { commands, help } = installCommands(requireCommands())
     this.commands = commands
     this.help = help
     this.lines = []
