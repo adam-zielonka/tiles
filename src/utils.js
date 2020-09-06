@@ -6,24 +6,25 @@ export function parseCommand(body) {
   const array = body.split('\n').map(m => m.replace(/^ *$/,''))
 
   const base = { time: 20 }
+  const lines = []
   let settings = {}
-  const lines = array.reduce((p, text) => {
-    const match = text.match(/^\[\]\((.*):(.*)\)$/)
+
+  for (const text of array) {
+    const [match, namespace, action] = text.match(/^\[\]\((.*):(.*)\)$/) || []
     if(match) {
-      if(match[1] === 'sleep') {
-        settings.time = +match[2]
+      if(namespace === 'sleep') {
+        settings.time = +action
       } else {
-        settings[match[1]] = match[2]
+        settings[namespace] = action
       }
     } else {
-      p.push({ ...base, ...settings, text })
+      lines.push({ ...base, ...settings, text })
       settings = {}
     }
-    return p
-  },[])
+  }
 
-  const lastLine = lines[lines.length - 1]
-  if(lastLine.system) lines.push({ ...base, text: '' })
+  if(!lines.length) lines.push({ text: '', ...base, ...settings })
+  if(lines[lines.length - 1].system) lines.push({ ...base, text: '' })
 
   return lines
 }
@@ -39,17 +40,16 @@ export function requireCommands() {
 
 export function installCommands(files = []) {
   const help = []
+  const commands = []
 
-  const commands = files.reduce((p,c) => {
-    const { attributes, body } = c
+  for (const { attributes, body } of files) {
     const lines = parseCommand(body)
-    if(attributes.command) p[attributes.command] = lines
+    if(attributes.command) commands[attributes.command] = lines
     if(attributes.alias) for(const alias of attributes.alias) {
-      p[alias] = lines
+      commands[alias] = lines
     }
     if(attributes.help) help.push(attributes)
-    return p
-  }, {})
+  }
 
   return { commands, help }
 }
