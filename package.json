@@ -19,6 +19,9 @@
   "devDependencies": {
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.4",
+    "eslint": "^7.9.0",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.2",
     "esm": "^3.2.25",
     "jest-canvas-mock": "^2.2.0",
     "replace-in-file": "^6.1.0"
