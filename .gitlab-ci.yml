@@ -5,39 +5,39 @@ stages:
 - test
 - deploy
 
+.yarn:
+  before_script:
+    - yarn
+  cache:
+    untracked: true
+    paths:
+      - .yarn/
+      - .pnp.js
+
 build:
+  extends: .yarn
   stage: build
   script:
-    - yarn
     - yarn build
   artifacts:
     expire_in: 1 week
     paths:
       - build
-  cache:
-    paths:
-    - node_modules
 
 test:
+  extends: .yarn
   stage: test
   script:
-    - yarn
     - yarn test-coverage
-  cache:
-    paths:
-    - node_modules
   needs:
     - build
 
 lint:
+  extends: .yarn
   stage: test
   allow_failure: true
   script:
-    - yarn
     - yarn lint
-  cache:
-    paths:
-    - node_modules
   needs:
     - build
 
@@ -59,6 +59,3 @@ pages:
     - public
   only:
     - master
-
-include:
-  - template: Dependency-Scanning.gitlab-ci.yml
