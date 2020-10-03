@@ -4,8 +4,9 @@
 [![coverage report](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro/badges/master/coverage.svg)](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro/pipelines/latest)
 
 ## How to use
+
 1. Go to website [adamzielonka.pro](https://adamzielonka.pro)
-2. Wait for start scripts ends. 
+2. Wait for start scripts ends.
 3. Type something.
 4. Press Enter key.
 5. Enjoy ;-)
@@ -16,11 +17,11 @@ This app interpreted a markdown file with attributes section written in yaml. Yo
 
 ### Attributes
 
-In optional yaml section, you can set: 
+In optional yaml section, you can set:
 
 - `command` - name, that will be use to execute command by user
 - `alias` - table of aliases, that can by used also to execute command by user
-- `help` - text, that wiil by shown in help command 
+- `help` - text, that will be shown in help command
 
 ### Body
 
@@ -39,4 +40,5 @@ You can also use special links, that will be affected to the app:
   - `:command` - name of command
 
 ## Licence
+
 MIT
