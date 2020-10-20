@@ -1,6 +1,7 @@
 import { createContext, useContext } from 'react'
 import { makeAutoObservable } from 'mobx'
 import { sleep, installCommands, requireCommands, isFontExist } from './utils.js'
+import TerminalHistory from './store/TerminalHistory'
 
 type Line = {
   time?: number
@@ -25,10 +26,8 @@ class Store {
   commands: Commands
   help: any[]
   startCommand: string[]
-  history: string[]
-  lastCommand: string
-  historyPosition: number
-
+  history: TerminalHistory = new TerminalHistory()
+  
   constructor() {
     makeAutoObservable(this)
     const { commands, help } = installCommands(requireCommands())
@@ -38,9 +37,6 @@ class Store {
     this.toProcess = []
     this.isProcessing = false
     this.startCommand = process.env.NODE_ENV !== 'production' ? [] : ['whoami', 'description']
-    this.history = []
-    this.lastCommand = ''
-    this.historyPosition = this.history.length
     this.shutdown = false
     this.freeze = false
     this.font = ''
@@ -49,26 +45,15 @@ class Store {
   }
 
   arrowUp = (lastCommand: string) => {
-    if(this.historyPosition === this.history.length) this.lastCommand = lastCommand
-    if(this.historyPosition - 1 >= 0) {
-      this.historyPosition -= 1
-    }
-    return this.history[this.historyPosition] ? this.history[this.historyPosition] : this.lastCommand
+    return this.history.up(lastCommand)
   }
 
   arrowDown = () => {
-    if(this.historyPosition + 1 <= this.history.length) {
-      this.historyPosition += 1
-    }
-    if(this.historyPosition === this.history.length) return this.lastCommand
-    return this.history[this.historyPosition]
+    return this.history.down()
   }
 
   pushHistory = (line: Command) => {
-    if(line.command && (!this.history.length || this.history[this.history.length-1] !== line.command)) {
-      this.history.push(line.command)
-    }
-    this.historyPosition = this.history.length
+    this.history.add(line.command)
   }
 
   pushLine = (line: Line | Command) => {
@@ -78,7 +63,6 @@ class Store {
   }
 
   start = async () => {
-    console.log('Hello')
     this.isProcessing = true
     for (const command of this.startCommand) {
       this.pushLine({command:'', blink:true})
@@ -99,7 +83,6 @@ class Store {
 
   addCommand = (command: string) => {
     this.isProcessing = true
-    this.lastCommand = ''
     this.pushLine({command})
     if(!command) {
       this.isProcessing = false
