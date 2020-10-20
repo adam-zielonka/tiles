@@ -1,16 +1,43 @@
 import { createContext, useContext } from 'react'
-import { decorate, observable, action } from 'mobx'
+import { action, makeAutoObservable } from 'mobx'
 import { sleep, installCommands, requireCommands, isFontExist } from './utils.js'
 
+type Line = {
+  time?: number
+  text: string
+  system?: string
+}
+
+type Command = {
+  command: string
+  blink?: boolean
+}
+
+type Commands = Record<string, Line[]>
+
 class Store {
+  lines: (Line | Command)[]
+  toProcess: any[]
+  isProcessing: boolean
+  shutdown: boolean
+  freeze: boolean
+  font: string
+  commands: Commands
+  help: any[]
+  startCommand: string[]
+  history: string[]
+  lastCommand: string
+  historyPosition: number
+
   constructor() {
+    makeAutoObservable(this)
     const { commands, help } = installCommands(requireCommands())
-    this.commands = commands
+    this.commands = commands as Commands
     this.help = help
     this.lines = []
     this.toProcess = []
     this.isProcessing = false
-    this.startCommand = process.env.NODE_ENV !== 'production' ? [] : ['whoami', 'description']
+    this.startCommand = process.env.NODE_ENV !== 'production' ? ['whoami'] : ['whoami', 'description']
     this.history = []
     this.lastCommand = ''
     this.historyPosition = this.history.length
@@ -21,7 +48,7 @@ class Store {
     setTimeout(this.start)
   }
 
-  arrowUp(lastCommand) {
+  @action arrowUp = (lastCommand: string) => {
     if(this.historyPosition === this.history.length) this.lastCommand = lastCommand
     if(this.historyPosition - 1 >= 0) {
       this.historyPosition -= 1
@@ -29,7 +56,7 @@ class Store {
     return this.history[this.historyPosition] ? this.history[this.historyPosition] : this.lastCommand
   }
 
-  arrowDown() {
+  @action arrowDown = () => {
     if(this.historyPosition + 1 <= this.history.length) {
       this.historyPosition += 1
     }
@@ -37,24 +64,25 @@ class Store {
     return this.history[this.historyPosition]
   }
 
-  pushHistory(line) {
+  pushHistory = (line: Command) => {
     if(line.command && (!this.history.length || this.history[this.history.length-1] !== line.command)) {
       this.history.push(line.command)
     }
     this.historyPosition = this.history.length
   }
 
-  pushLine(line) {
+  pushLine = (line: Line | Command) => {
     this.lines.push(line)
-    this.pushHistory(line)
+    if ('command' in line) this.pushHistory(line)
     window.scrollTo(0,document.body.scrollHeight)
   }
 
-  async start() {
+  @action start = async () => {
+    console.log('Hello')
     this.isProcessing = true
     for (const command of this.startCommand) {
       this.pushLine({command:'', blink:true})
-      const commandLine = this.lines[this.lines.length -1]
+      const commandLine = this.lines[this.lines.length -1] as Command
       for (const c of command) {
         await sleep(50)
         commandLine.command += c
@@ -69,7 +97,7 @@ class Store {
     window.scrollTo(0,document.body.scrollHeight)
   }
 
-  addCommand(command) {
+  @action addCommand = (command: string) => {
     this.isProcessing = true
     this.lastCommand = ''
     this.pushLine({command})
@@ -87,9 +115,9 @@ class Store {
     }
   }
 
-  async system(sysCommand,  {args}) {
+  system = async (sysCommand: string,  { args }: any) => {
     switch (sysCommand) {
-    case 'clear': this.lines.clear()
+    case 'clear': this.lines.length = 0
       break
     case 'shutdown': this.shutdown = true
       break
@@ -114,7 +142,7 @@ class Store {
     }
   }
 
-  async process(commandArgs, stopProcess = true) {
+  @action process = async (commandArgs: string[], stopProcess = true) => {
     const [command, ...args] = commandArgs
 
     const lines = this.commands[this.commands[command] ? command : 'notFound']
@@ -131,7 +159,7 @@ class Store {
     window.scrollTo(0,document.body.scrollHeight)
   }
 
-  setFont(font) {
+  @action setFont = (font: string) => {
     if(isFontExist(font) || !font) {
       this.font = `${font ? font + ', ' : ''}"Courier New", Courier, monospace`
       return true
@@ -140,25 +168,10 @@ class Store {
   }
 }
 
-decorate(Store, {
-  start: action.bound,
-  lines: observable,
-  toProcess: observable,
-  isProcessing: observable,
-  addCommand: action.bound,
-  process: action.bound,
-  arrowUp: action.bound,
-  arrowDown: action.bound,
-  shutdown: observable,
-  freeze: observable,
-  font: observable,
-  setFont: action.bound,
-})
-
 const store = new Store()
-const storeContext = createContext(store)
-window.store = store
+const storeContext = createContext<Store>(store)
+;(window as any).store = store
 
-export function useStore() {
+export function useStore(): Store {
   return useContext(storeContext)
 }
