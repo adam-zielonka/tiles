@@ -37,7 +37,7 @@ class Store {
     this.lines = []
     this.toProcess = []
     this.isProcessing = false
-    this.startCommand = process.env.NODE_ENV !== 'production' ? ['whoami'] : ['whoami', 'description']
+    this.startCommand = process.env.NODE_ENV !== 'production' ? [] : ['whoami', 'description']
     this.history = []
     this.lastCommand = ''
     this.historyPosition = this.history.length
