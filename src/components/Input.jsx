@@ -37,8 +37,8 @@ export const Input = observer(({inputRef}) => {
       const valueUp = arrowUp(value)
       setValue(valueUp)
       setSelection({
-        start: valueUp.length,
-        end: valueUp.length,
+        start: 0,
+        end: 0,
       })
     } else if(e.key === 'ArrowDown') {
       const valueDown = arrowDown()

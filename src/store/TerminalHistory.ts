@@ -21,7 +21,7 @@ export default class TerminalHistory {
     return this.value
   }
 
-  down() {
+  down(): string {
     if (this.position + 1 <= this.history.length) this.position += 1
     return this.value
   }
