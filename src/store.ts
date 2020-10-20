@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import { action, makeAutoObservable } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import { sleep, installCommands, requireCommands, isFontExist } from './utils.js'
 
 type Line = {
@@ -48,7 +48,7 @@ class Store {
     setTimeout(this.start)
   }
 
-  @action arrowUp = (lastCommand: string) => {
+  arrowUp = (lastCommand: string) => {
     if(this.historyPosition === this.history.length) this.lastCommand = lastCommand
     if(this.historyPosition - 1 >= 0) {
       this.historyPosition -= 1
@@ -56,7 +56,7 @@ class Store {
     return this.history[this.historyPosition] ? this.history[this.historyPosition] : this.lastCommand
   }
 
-  @action arrowDown = () => {
+  arrowDown = () => {
     if(this.historyPosition + 1 <= this.history.length) {
       this.historyPosition += 1
     }
@@ -77,7 +77,7 @@ class Store {
     window.scrollTo(0,document.body.scrollHeight)
   }
 
-  @action start = async () => {
+  start = async () => {
     console.log('Hello')
     this.isProcessing = true
     for (const command of this.startCommand) {
@@ -97,7 +97,7 @@ class Store {
     window.scrollTo(0,document.body.scrollHeight)
   }
 
-  @action addCommand = (command: string) => {
+  addCommand = (command: string) => {
     this.isProcessing = true
     this.lastCommand = ''
     this.pushLine({command})
@@ -142,7 +142,7 @@ class Store {
     }
   }
 
-  @action process = async (commandArgs: string[], stopProcess = true) => {
+  process = async (commandArgs: string[], stopProcess = true) => {
     const [command, ...args] = commandArgs
 
     const lines = this.commands[this.commands[command] ? command : 'notFound']
@@ -159,7 +159,7 @@ class Store {
     window.scrollTo(0,document.body.scrollHeight)
   }
 
-  @action setFont = (font: string) => {
+  setFont = (font: string) => {
     if(isFontExist(font) || !font) {
       this.font = `${font ? font + ', ' : ''}"Courier New", Courier, monospace`
       return true
