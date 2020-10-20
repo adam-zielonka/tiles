@@ -7,13 +7,12 @@ export default class TerminalHistory {
     return this.history[this.position] || this.temporaryValue
   }
 
-  add(value: string): string {
+  add(value: string) {
     this.temporaryValue = ''
     if (value && value !== this.history[this.history.length - 1]) {
       this.history.push(value)
     }
     this.position = this.history.length
-    return this.value
   }
 
   up(temporaryValue: string): string {
@@ -24,5 +23,6 @@ export default class TerminalHistory {
 
   down() {
     if (this.position + 1 <= this.history.length) this.position += 1
+    return this.value
   }
 }
