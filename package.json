@@ -3,6 +3,7 @@
   "homepage": "https://adamzielonka.pro/",
   "dependencies": {
     "@craco/craco": "^5.7.0",
+    "@types/jest": "^26.0.15",
     "@types/react": "^16.9.53",
     "classnames": "^2.2.6",
     "front-matter-loader": "^1.1.0",
