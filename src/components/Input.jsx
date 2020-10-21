@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import cx from 'classnames'
 import { observer } from 'mobx-react-lite'
-import { useStore } from '../store'
+import { useInputHistory, useStore } from '../store'
 import { prepareText } from '../utils'
 import { UserDomain, Path } from './Line'
 
@@ -19,8 +19,8 @@ export function InputText({ start, end, children }) {
 }
 
 export const Input = observer(({inputRef}) => {
-  const { addCommand, arrowUp, arrowDown } = useStore()
-  const [value, setValue] = useState('')
+  const { value, setValue, historyUp, historyDown, addHistory } = useInputHistory()
+  const { addCommand } = useStore()
   const [focus, setFocus] = useState(false)
   const [selection, setSelection] = useState({start:0,end:0})
 
@@ -32,21 +32,13 @@ export const Input = observer(({inputRef}) => {
   const onKeyDownHandler = (e) => {
     if(e.key === 'Enter') {
       addCommand(value)
-      setValue('')
+      addHistory()
     } else if(e.key === 'ArrowUp') {
-      const valueUp = arrowUp(value)
-      setValue(valueUp)
-      setSelection({
-        start: 0,
-        end: 0,
-      })
+      historyUp()
+      onSelectHandler(e)
     } else if(e.key === 'ArrowDown') {
-      const valueDown = arrowDown()
-      setValue(valueDown)
-      setSelection({
-        start: valueDown.length,
-        end: valueDown.length,
-      })
+      historyDown()
+      onSelectHandler(e)
     }
   }
 

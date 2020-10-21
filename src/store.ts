@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
 import { makeAutoObservable } from 'mobx'
 import { sleep, installCommands, requireCommands, isFontExist } from './utils.js'
-import TerminalHistory from './store/TerminalHistory'
+import InputHistory from './store/InputHistory'
 
 type Line = {
   time?: number
@@ -26,7 +26,7 @@ class Store {
   commands: Commands
   help: any[]
   startCommand: string[]
-  history: TerminalHistory = new TerminalHistory()
+  history: InputHistory = new InputHistory()
   
   constructor() {
     makeAutoObservable(this)
@@ -41,24 +41,13 @@ class Store {
     this.freeze = false
     this.font = ''
 
+    this.history = new InputHistory(this.startCommand)
+
     setTimeout(this.start)
-  }
-
-  arrowUp = (lastCommand: string) => {
-    return this.history.up(lastCommand)
-  }
-
-  arrowDown = () => {
-    return this.history.down()
-  }
-
-  pushHistory = (line: Command) => {
-    this.history.add(line.command)
   }
 
   pushLine = (line: Line | Command) => {
     this.lines.push(line)
-    if ('command' in line) this.pushHistory(line)
     window.scrollTo(0,document.body.scrollHeight)
   }
 
@@ -73,8 +62,6 @@ class Store {
       }
       await sleep(1000)
       commandLine.blink = false
-      this.pushHistory(commandLine)
-  
       await this.process([command], false)
     }
     this.isProcessing = false
@@ -155,6 +142,10 @@ const store = new Store()
 const storeContext = createContext<Store>(store)
 ;(window as any).store = store
 
-export function useStore(): Store {
+export function useStore() {
   return useContext(storeContext)
+}
+
+export function useInputHistory() {
+  return useContext(storeContext).history
 }
