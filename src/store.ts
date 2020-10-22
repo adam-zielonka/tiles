@@ -16,7 +16,7 @@ type Command = {
 
 type Commands = Record<string, Line[]>
 
-class Store {
+export class Store {
   lines: (Line | Command)[]
   toProcess: any[]
   isProcessing: boolean
@@ -138,9 +138,15 @@ class Store {
   }
 }
 
+
 const store = new Store()
-const storeContext = createContext<Store>(store)
+let storeContext = createContext<Store>(store)
 ;(window as any).store = store
+
+export function setStore(newStore: Store) {
+  storeContext = createContext<Store>(newStore)
+  ;(window as any).store = store
+}
 
 export function useStore() {
   return useContext(storeContext)
