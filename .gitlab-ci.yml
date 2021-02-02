@@ -23,6 +23,11 @@ test:
   script:
     - yarn
     - yarn test-coverage
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  artifacts:
+    reports:
+      cobertura: coverage/cobertura-coverage.xml
+      junit: junit.xml
   cache:
     paths:
     - node_modules
@@ -34,7 +39,10 @@ lint:
   allow_failure: true
   script:
     - yarn
-    - yarn lint
+    - yarn lint & yarn lint-junit
+  artifacts:
+    reports:
+      junit: junit.xml
   cache:
     paths:
     - node_modules
