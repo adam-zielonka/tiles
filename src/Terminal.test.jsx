@@ -3,23 +3,23 @@ import { shallow } from 'enzyme'
 import Terminal from './Terminal'
 import { Shutdown } from './components/Shutdown'
 import { Line } from './components/Line'
+import { store } from './store'
 
 describe('<Terminal/>', () => {
   it('System is off', () => {
-    window.store.shutdown = true
+    jest.spyOn(store, 'shutdown', 'get').mockReturnValue(true)
     const wrapper = shallow(<Terminal/>)
     expect(wrapper.containsMatchingElement(<Shutdown/>)).toEqual(true)
   })
 
   it('System is on', () => {
-    window.store.shutdown = false
+    jest.spyOn(store, 'shutdown', 'get').mockReturnValue(false)
     const wrapper = shallow(<Terminal/>)
     expect(wrapper.text()).toEqual('')
   })
 
   it('System has lines', () => {
-    window.store.lines.push({ command: 'echo test' })
-    window.store.lines.push({ text: 'test' })
+    jest.spyOn(store, 'lines', 'get').mockReturnValue([{'command':'echo test'},{'text':'test'}])
     const wrapper = shallow(<Terminal/>)
     expect(wrapper.containsMatchingElement(<Line/>)).toEqual(true)
     expect(wrapper.text()).toEqual('<Line /><Line />')

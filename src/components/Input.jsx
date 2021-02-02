@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import cx from 'classnames'
 import { observer } from 'mobx-react-lite'
-import { useInputHistory, useStore } from '../store'
 import { prepareText } from '../utils'
 import { UserDomain, Path } from './Line'
+import { store } from '../store'
 
 
 export function InputText({ start, end, children }) {
@@ -19,8 +19,8 @@ export function InputText({ start, end, children }) {
 }
 
 export const Input = observer(({inputRef}) => {
-  const { value, setValue, historyUp, historyDown, addHistory } = useInputHistory()
-  const { addCommand } = useStore()
+  const { value, setValue, historyUp, historyDown, addHistory } = store.history
+  const { addCommand } = store
   const [focus, setFocus] = useState(false)
   const [selection, setSelection] = useState({start:0,end:0})
 
@@ -78,7 +78,7 @@ export const Input = observer(({inputRef}) => {
 })
 
 export const InputLine = observer(() => {
-  const { isProcessing, freeze } = useStore()
+  const { isProcessing, freeze } = store
   const inputRef = useRef(null)
 
   if(isProcessing || freeze) return ''

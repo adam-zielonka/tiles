@@ -1,4 +1,3 @@
-import { createContext, useContext } from 'react'
 import { makeAutoObservable } from 'mobx'
 import { sleep, installCommands, requireCommands, isFontExist } from './utils.js'
 import InputHistory from './store/InputHistory'
@@ -139,19 +138,5 @@ export class Store {
 }
 
 
-const store = new Store()
-let storeContext = createContext<Store>(store)
+export const store = new Store()
 ;(window as any).store = store
-
-export function setStore(newStore: Store) {
-  storeContext = createContext<Store>(newStore)
-  ;(window as any).store = store
-}
-
-export function useStore() {
-  return useContext(storeContext)
-}
-
-export function useInputHistory() {
-  return useContext(storeContext).history
-}

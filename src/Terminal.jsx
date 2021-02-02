@@ -1,12 +1,12 @@
 import React from 'react'
-import { useStore } from './store'
+import { store } from './store'
 import { observer } from 'mobx-react-lite'
 import { Line } from './components/Line'
 import { Shutdown } from './components/Shutdown'
 import { InputLine } from './components/Input'
 
 function Terminal() {
-  const { lines, shutdown, font } = useStore()
+  const { lines, shutdown, font } = store
 
   if(shutdown) return <Shutdown />
   
