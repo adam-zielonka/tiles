@@ -18,6 +18,7 @@ Questions: [Source](https://gitlab.com/adam-zielonka-pro/questions), [Run](https
 Server Status: [Source](https://gitlab.com/adam-zielonka-pro/server-status), [Demo](https://fake-status.adamzielonka.pro/)  
 Unit Converter: [Source](https://gitlab.com/adam-zielonka-pro/unit-converter), [Google Play](https://play.google.com/store/apps/details?id=pro.adamzielonka.converter)  
 paintAZ: [Source](https://gitlab.com/adam-zielonka-pro/paintaz)  
+mobx-example: [Source](https://gitlab.com/adam-zielonka-pro/mobx-example), [Demo](https://mobx-example.adamzielonka.pro/) 
   
 [GAMES]  
 Deska: [Source](https://gitlab.com/adam-zielonka-pro/deska), [Play](https://deska.adamzielonka.pro/)  
