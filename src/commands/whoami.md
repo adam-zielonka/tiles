@@ -11,6 +11,9 @@ Adam Zielonka
   
 [REPO]  
 [gitlab.com/adam-zielonka-pro](https://gitlab.com/adam-zielonka-pro)
+
+[YouTube]
+[Code in the Machine](https://www.youtube.com/channel/UC9ndsm1I60DjsIqEh1XITRQ)
   
 [APPS]  
 adamzielonka.pro: [Source](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro), [Run](https://adamzielonka.pro/)  
