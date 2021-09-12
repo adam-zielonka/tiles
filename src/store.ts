@@ -138,5 +138,11 @@ export class Store {
 }
 
 
-export const store = new Store()
+export let store = new Store();
 ;(window as any).store = store
+
+export const overrideStore = (): Store => {
+  store = new Store()
+  ;(window as any).store = store
+  return store
+}
