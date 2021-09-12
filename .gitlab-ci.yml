@@ -8,8 +8,8 @@ stages:
 build:
   stage: build
   script:
-    - yarn
-    - yarn build
+    - pnpm install
+    - pnpm build
   artifacts:
     expire_in: 1 week
     paths:
@@ -21,8 +21,8 @@ build:
 test:
   stage: test
   script:
-    - yarn
-    - yarn test-coverage
+    - pnpm install
+    - pnpm test-coverage
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   artifacts:
     reports:
@@ -38,8 +38,8 @@ lint:
   stage: test
   allow_failure: true
   script:
-    - yarn
-    - yarn lint & yarn lint-junit
+    - pnpm install
+    - pnpm lint & pnpm lint-junit
   artifacts:
     reports:
       junit: junit.xml
