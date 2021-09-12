@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import Terminal from './Terminal'
 import { Shutdown } from './components/Shutdown'
 import { Line } from './components/Line'
-import { overrideStore, store } from './store'
+import { overrideStore } from './store'
 
 describe('<Terminal/>', () => {
   it('System is off', () => {
