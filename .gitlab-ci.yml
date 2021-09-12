@@ -8,6 +8,7 @@ stages:
 build:
   stage: build
   script:
+    - npm install -g pnpm
     - pnpm install
     - pnpm build
   artifacts:
@@ -21,6 +22,7 @@ build:
 test:
   stage: test
   script:
+    - npm install -g pnpm
     - pnpm install
     - pnpm test-coverage
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
@@ -38,6 +40,7 @@ lint:
   stage: test
   allow_failure: true
   script:
+    - npm install -g pnpm
     - pnpm install
     - pnpm lint & pnpm lint-junit
   artifacts:
