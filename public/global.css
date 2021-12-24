@@ -1,0 +1,22 @@
+html, body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	background: #111;
+	font: 16px/18px "Courier New", Courier, mono;
+	color: #aaa;
+	margin: 0;
+  padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: deepskyblue;
+}
+
+a:hover {
+	text-decoration-line: underline;
+}

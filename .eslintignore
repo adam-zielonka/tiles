@@ -1,11 +1,8 @@
-# dependencies
-/node_modules
+/node_modules/
+/public/build/
+/build/
 
-# testing
-/coverage
+.DS_Store
 
-# production
-/build
-
-# files
-/src/serviceWorker.js
+/src/postBuild.js
+/.eslintrc.js

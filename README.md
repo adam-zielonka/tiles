@@ -1,8 +1,5 @@
 # [adamzielonka.pro](https://adamzielonka.pro)
 
-[![pipeline status](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro/badges/master/pipeline.svg)](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro/pipelines/latest)
-[![coverage report](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro/badges/master/coverage.svg)](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro/pipelines/latest)
-
 ## How to use
 
 1. Go to website [adamzielonka.pro](https://adamzielonka.pro)
@@ -39,6 +36,6 @@ You can also use special links, that will be affected to the app:
 - `constans:` - this links will be replaced with:
   - `:command` - name of command
 
-## Licence
+## License
 
 MIT

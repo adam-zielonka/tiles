@@ -1,9 +1,9 @@
-image: node:14.9.0-alpine
+image: node:17.1.0-alpine
 
 stages:
-- build
-- test
-- deploy
+  - build
+  - test
+  - deploy
 
 build:
   stage: build
@@ -17,24 +17,7 @@ build:
       - build
   cache:
     paths:
-    - node_modules
-
-test:
-  stage: test
-  script:
-    - npm install -g pnpm
-    - pnpm install
-    - pnpm test-coverage
-  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-  artifacts:
-    reports:
-      cobertura: coverage/cobertura-coverage.xml
-      junit: junit.xml
-  cache:
-    paths:
-    - node_modules
-  needs:
-    - build
+      - node_modules
 
 lint:
   stage: test
@@ -45,7 +28,7 @@ lint:
     - pnpm lint & pnpm lint-junit
   artifacts:
     reports:
-      junit: junit.xml
+      junit: eslint.xml
   cache:
     paths:
     - node_modules
@@ -61,12 +44,11 @@ pages:
   needs:
     - job: build
       artifacts: true
-    - test
   script:
     - mv build public
   artifacts:
     expire_in: 1 week
     paths:
-    - public
+      - public
   only:
     - master

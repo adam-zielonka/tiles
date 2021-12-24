@@ -1,72 +1,48 @@
 {
   "name": "adamzielonka.pro",
-  "homepage": "https://adamzielonka.pro/",
-  "dependencies": {
-    "@craco/craco": "^5.7.0",
-    "@types/jest": "^26.0.15",
-    "@types/react": "^16.9.53",
-    "classnames": "^2.2.6",
-    "front-matter-loader": "^1.1.0",
-    "json-loader": "^0.5.7",
-    "mobx": "^6.0.1",
-    "mobx-react-lite": "^3.0.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-scripts": "^3.4.3",
-    "stylus": "^0.54.8",
-    "stylus-loader": "^4.1.1",
-    "typescript": "^4.0.3"
-  },
-  "devDependencies": {
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5",
-    "enzyme-to-json": "^3.6.1",
-    "esm": "^3.2.25",
-    "jest-canvas-mock": "^2.3.0",
-    "jest-junit": "^12.0.0",
-    "replace-in-file": "^6.1.0"
-  },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "test-coverage": "craco test --coverage --testResultsProcessor jest-junit",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "lint-fix": "eslint --ext .js,.jsx,.ts,.tsx . --fix",
-    "lint-junit": "eslint --ext .js,.jsx,.ts,.tsx . -f junit > junit.xml",
-    "postbuild": "node -r esm ./src/postBuild.js",
-    "noscript": "cp ./public/index.html ./build/index.html && yarn postbuild"
+    "build": "rm -fr ./build && rollup -c && pnpm postbuild",
+    "dev": "rollup -c -w",
+    "start": "sirv public --no-clear",
+    "serve": "sirv build --no-clear",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "postbuild": "cp -R public build && node -r esm ./src/postBuild.js",
+    "format": "prettier --write ./src/**/*.{js,svelte,html,ts}",
+    "lint": "eslint './src/**/*.{js,ts,svelte}'",
+    "lint-junit": "eslint './src/**/*.{js,ts,svelte}' -f junit > eslint.xml",
+    "lint:fix": "eslint --fix './src/**/*.{js,ts,svelte}'",
+    "prelint": "pnpm run format"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "jest-junit": {
-    "classNameTemplate": "{classname}",
-    "titleTemplate": "{classname} {title}"
-  },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "coveragePathIgnorePatterns": [
-      "src/serviceWorker.ts",
-      "index.tsx"
-    ],
-    "coverageReporters": [
-      "text",
-      "cobertura",
-      "clover",
-      "lcov",
-      "json"
-    ]
+  "dependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-typescript": "^8.0.0",
+    "@tsconfig/svelte": "^2.0.0",
+    "@types/marked": "^4.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
+    "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-svelte3": "^3.2.1",
+    "esm": "^3.2.25",
+    "front-matter": "^4.0.2",
+    "marked": "^4.0.8",
+    "node-sass": "^7.0.0",
+    "prettier": "^2.5.1",
+    "prettier-plugin-svelte": "^2.5.1",
+    "replace-in-file": "^6.1.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-string": "^3.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "sass": "^1.45.1",
+    "sirv-cli": "^1.0.0",
+    "svelte": "^3.0.0",
+    "svelte-check": "^2.0.0",
+    "svelte-preprocess": "^4.0.0",
+    "tslib": "^2.0.0",
+    "typescript": "^4.0.0"
   }
 }

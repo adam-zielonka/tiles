@@ -6,10 +6,10 @@ help: information about me
 Adam Zielonka
 
 [](sleep:1000)
-[EMAIL]  
+[EMAIL]
 [root@adamzielonka.pro](mailto:root@adamzielonka.pro)  
   
-[REPO]  
+[REPO]
 [gitlab.com/adam-zielonka-pro](https://gitlab.com/adam-zielonka-pro)
 
 [YouTube]
