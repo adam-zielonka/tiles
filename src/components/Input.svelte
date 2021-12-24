@@ -54,7 +54,9 @@
 <li>
   <LinePrefix />
   <InputText value={$value} {start} {end} />
+  <!-- svelte-ignore a11y-autofocus -->
   <input
+    autofocus
     value={$value}
     bind:this={input}
     on:select={updateStartEnd}
