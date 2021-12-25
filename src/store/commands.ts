@@ -7,6 +7,7 @@ export type LineType = {
   system?: string
   blink?: boolean
   command?: boolean
+  path?: string
 }
 
 export type Commands = Record<string, LineType[]>

@@ -4,6 +4,7 @@
   import { addCommand } from '../store/system'
   import LinePrefix from './LinePrefix.svelte'
   import InputText from './InputText.svelte'
+  import { path } from '../store/path'
 
   let input: HTMLInputElement
   let start = 0
@@ -52,11 +53,9 @@
 </script>
 
 <li>
-  <LinePrefix />
+  <LinePrefix path={$path} />
   <InputText value={$value} {start} {end} />
-  <!-- svelte-ignore a11y-autofocus -->
   <input
-    autofocus
     value={$value}
     bind:this={input}
     on:select={updateStartEnd}

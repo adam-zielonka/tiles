@@ -1,6 +1,7 @@
 import { get } from 'svelte/store'
 import * as commands from './commands'
 import * as constants from './constants'
+import * as path from './path'
 import * as font from './font'
 import * as history from './history'
 import * as lines from './lines'
@@ -15,6 +16,7 @@ window.store = {
   get,
   commands,
   constants,
+  path,
   font,
   history,
   lines,

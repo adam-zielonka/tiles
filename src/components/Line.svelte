@@ -5,6 +5,7 @@
   export let value: string
   export let command = false
   export let blink = false
+  export let path = '~'
 
   Renderer.prototype.paragraph = function (text) {
     return text + '\n'
@@ -13,7 +14,7 @@
 
 <li>
   {#if command}
-    <LinePrefix />
+    <LinePrefix {path} />
     {value}{#if blink}<span class="blink">_</span>{/if}
   {:else}
     {@html marked(value || '\u00a0')}

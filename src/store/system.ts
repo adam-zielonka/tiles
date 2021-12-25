@@ -1,9 +1,10 @@
-import { writable } from 'svelte/store'
+import { writable, get } from 'svelte/store'
 import { sleep } from '../utils'
 import { commands, help } from './commands'
 import { START_COMMANDS } from './constants'
 import { setFont } from './font'
 import { clearLines, pushLine, updateLastLine } from './lines'
+import { cd, path } from './path'
 
 export const isProcessing = writable(false)
 export const shutdown = writable(false)
@@ -43,6 +44,9 @@ const system = async (sysCommand: string, args: string[]) => {
       for (const text of setFont(args && args.length ? args.join(' ') : '')) {
         pushLine({ text, time: 20 })
       }
+      break
+    case 'cd':
+      cd(args && args.length ? args.join(' ') : '')
       break
     case 'help':
       for (const line of help) {
@@ -84,7 +88,7 @@ const process = async (commandArgs: string[], stopProcess = true) => {
 
 export const addCommand = (command: string) => {
   startProcessing()
-  pushLine({ text: command, command: true, time: 20 })
+  pushLine({ text: command, command: true, time: 20, path: get(path) })
   if (!command) {
     stopProcessing()
     setTimeout(() => window.scrollTo(0, document.body.scrollHeight))
@@ -109,6 +113,7 @@ const start = async () => {
       blink: true,
       command: true,
       time: 20,
+      path: get(path),
     })
     for (const c of command) {
       await sleep(50)

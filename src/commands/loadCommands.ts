@@ -1,5 +1,6 @@
 import frontMatter, { FrontMatterResult } from 'front-matter'
 
+import cd from './cd.md'
 import clear from './clear.md'
 import description from './description.md'
 import echo from './echo.md'
@@ -19,6 +20,7 @@ export type CommandProperties = {
 
 export const loadCommands = (): FrontMatterResult<CommandProperties>[] => {
   return [
+    frontMatter<CommandProperties>(cd),
     frontMatter<CommandProperties>(clear),
     frontMatter<CommandProperties>(description),
     frontMatter<CommandProperties>(echo),
