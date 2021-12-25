@@ -42,13 +42,20 @@
     updateStartEnd()
   }
 
+  function click() {
+    input.focus()
+    updateStartEnd()
+  }
+
   onMount(() => {
     document.addEventListener('keydown', keydown)
+    document.addEventListener('click', click)
     window.scrollTo(0, document.body.scrollHeight)
   })
 
   onDestroy(() => {
     document.removeEventListener('keydown', keydown)
+    document.removeEventListener('click', click)
   })
 </script>
 
