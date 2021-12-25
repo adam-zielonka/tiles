@@ -33,7 +33,7 @@ You can also use special links, that will be affected to the app:
   - `:freeze` - freeze the machine
   - `:echo` - print args
   - `:help` - print available instruction
-- `constans:` - this links will be replaced with:
+- `const:` - this links will be replaced with:
   - `:command` - name of command
 
 ## License
