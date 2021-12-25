@@ -36,6 +36,18 @@ fs.renameSync(
   `./build/assets/bundle.${hashBundleJs}.js.map`,
 )
 
+const results = replaceInFileSync({
+  files: [
+    `./build/assets/bundle.${hashBundleJs}.js.map`,
+    `./build/assets/bundle.${hashBundleJs}.js`,
+  ],
+  from: 'bundle.js',
+  to: `bundle.${hashBundleJs}.js`,
+})
+
+if (results[0].hasChanged) console.log(`Update js and map files`)
+else console.error(`Problem with js and map files`)
+
 function createClock() {
   return (
     clock => delay =>
