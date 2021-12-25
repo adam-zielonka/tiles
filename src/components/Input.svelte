@@ -62,6 +62,8 @@
 <li>
   <LinePrefix path={$path} />
   <InputText value={$value} {start} {end} />
+</li>
+<li>
   <input
     value={$value}
     bind:this={input}
