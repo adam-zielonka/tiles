@@ -64,7 +64,10 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
-		typescript(),
+		typescript({
+			sourceMap: true,
+			inlineSources: !production
+		}),
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
