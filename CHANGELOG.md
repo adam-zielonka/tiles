@@ -35,3 +35,7 @@ In March 2019, I decided to move website React.js and I did it. Static website w
 In August 2019, I had the breakdown. I rewrite the terminal code, that me allow to add interaction. I also rewrite the animation form no-script version of website, so no differences between static and react version.
 
 ![](./img/2019-08-17.png)
+
+## Svelte
+
+In December 2021, My friend told me that Svelte is something nicer to use, so here we are, and the new version of this website is base on Svelte. I need to admit that styles, html and scripts in one file look attractive for me. And it works pretty well for me. But stores, needs from me some efforts to understand similar but different approach like in Mobx, but in the end in three days I rewrote app to new technology.
