@@ -62,8 +62,6 @@
 <li>
   <LinePrefix path={$path} />
   <InputText value={$value} {start} {end} />
-</li>
-<li>
   <input
     value={$value}
     bind:this={input}
@@ -81,7 +79,7 @@
 
 <style lang="scss">
   input {
-    width: 100%;
+    width: 1px;
     caret-color: #111;
     color: #111;
     border: none;
