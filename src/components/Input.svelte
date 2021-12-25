@@ -81,6 +81,7 @@
 
 <style lang="scss">
   input {
+    width: 100%;
     caret-color: #111;
     color: #111;
     border: none;
