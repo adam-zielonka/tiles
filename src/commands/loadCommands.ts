@@ -7,6 +7,7 @@ import echo from './echo.md'
 import font from './font.md'
 import help from './help.md'
 import ls from './ls.md'
+import matrix from './matrix.md'
 import notFound from './notFound.md'
 import panic from './panic.md'
 import ping from './ping.md'
@@ -29,6 +30,7 @@ export const loadCommands = (): FrontMatterResult<CommandProperties>[] => {
     frontMatter<CommandProperties>(font),
     frontMatter<CommandProperties>(help),
     frontMatter<CommandProperties>(ls),
+    frontMatter<CommandProperties>(matrix),
     frontMatter<CommandProperties>(notFound),
     frontMatter<CommandProperties>(panic),
     frontMatter<CommandProperties>(ping),

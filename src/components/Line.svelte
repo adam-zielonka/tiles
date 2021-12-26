@@ -15,7 +15,13 @@
     <LinePrefix path={line.path} />
     {line.value}{#if line.blink}<span class="blink">_</span>{/if}
   {:else}
-    {@html marked(line.value || '\u00a0')}
+    <span
+      style={`color: ${line.style.color};` +
+        `font-weight: ${line.style.fontWeight};` +
+        `font-size: ${line.style.fontSize};`}
+    >
+      {@html marked(line.value || '\u00a0')}
+    </span>
   {/if}
 </li>
 

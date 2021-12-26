@@ -8,6 +8,7 @@ body {
 body {
   background: #111;
   font: 16px/18px 'Courier New', Courier, monospace;
+  font-weight: bold;
   color: #aaa;
   word-break: break-all;
   margin: 0;

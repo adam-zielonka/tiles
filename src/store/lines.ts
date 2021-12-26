@@ -1,10 +1,13 @@
 import { get, writable } from 'svelte/store'
 import { sleep } from '../utils'
+import { STYLE_DEFAULTS } from './constants'
 import { path } from './path'
+import { Style } from './system'
 
 export type LineType = {
   value: string
   time: number
+  style: Style
   blink?: boolean
   command?: boolean
   path?: string
@@ -32,12 +35,27 @@ const updateLastLine = (line: LineType) => {
   })
 }
 
-export const processLine = async (line: LineType) => {
+export const processLine = async (line: LineType, animate = false) => {
   await sleep(line.time)
-  pushLine({
-    ...line,
-    value: line.value.replace(/\[.*\]\(const:command\)/, lastCommand),
+
+  if (!animate) {
+    pushLine({
+      ...line,
+      value: line.value.replace(/\[.*\]\(const:command\)/, lastCommand),
+    })
+    return
+  }
+
+  const commandLine = pushLine({
+    value: '',
+    time: 20,
+    style: line.style,
   })
+  for (const l of line.value) {
+    await sleep(100)
+    commandLine.value += l
+    updateLastLine(commandLine)
+  }
 }
 
 export const processCommandLine = async (command: string, animate = false) => {
@@ -49,6 +67,7 @@ export const processCommandLine = async (command: string, animate = false) => {
       command: true,
       time: 0,
       path: get(path),
+      style: STYLE_DEFAULTS,
     })
     return
   }
@@ -59,6 +78,7 @@ export const processCommandLine = async (command: string, animate = false) => {
     command: true,
     time: 20,
     path: get(path),
+    style: STYLE_DEFAULTS,
   })
   for (const c of command) {
     await sleep(50)
