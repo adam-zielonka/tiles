@@ -1,4 +1,5 @@
 ---
 command: ping
 ---
+
 pong
