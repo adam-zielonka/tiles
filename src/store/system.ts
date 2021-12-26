@@ -1,113 +1,75 @@
-import { get } from 'svelte/store'
 import { sleep } from '../utils'
-import { commands, help } from './commands'
+import { getCommandLines, getHelpLines, LineType } from './commands'
 import { START_COMMANDS } from './constants'
 import { setFont } from './font'
-import { clearLines, pushLine, updateLastLine } from './lines'
-import { cd, path } from './path'
+import { clearLines, processCommandLine, processLine } from './lines'
+import { cd } from './path'
 import { setFreeze, setShutdown, startProcessing, stopProcessing } from './state'
 
-const system = async (sysCommand: string, args: string[]) => {
+const system = (sysCommand: string, args: string[]): LineType[] => {
   switch (sysCommand) {
     case 'clear':
       clearLines()
-      break
+      return []
     case 'shutdown':
       setShutdown()
-      break
+      return []
     case 'freeze':
       setFreeze()
-      break
+      return []
     case 'echo':
-      pushLine({ text: args.join(' '), time: 20 })
-      break
+      return [{ text: args.join(' '), time: 20 }]
     case 'font':
-      for (const text of setFont(args && args.length ? args.join(' ') : '')) {
-        pushLine({ text, time: 20 })
-      }
-      break
+      return setFont(args.length ? args.join(' ') : '').map(text => ({
+        text,
+        time: 20,
+      }))
     case 'cd':
-      cd(args && args.length ? args.join(' ') : '')
-      break
+      cd(args.length ? args.join(' ') : '')
+      return []
     case 'help':
-      for (const line of help) {
-        if (!line.help) continue
-        await sleep(20)
-        const commands = line.alias
-          ? [line.command, ...line.alias].join('|')
-          : line.command
-        const text = `${commands} - ${line.help}`
-        pushLine({ text, time: 20 })
-      }
-      break
+      return getHelpLines()
     default:
-      break
+      return []
   }
 }
 
-const process = async (commandArgs: string[], stopProcess = true) => {
-  const [command, ...args] = commandArgs
+const parseArgs = (commandArgs: string): string[] => {
+  return [...commandArgs.matchAll(/["']([^"']*)["']| ?([^"' ]+) ?/g)]
+    .map(m => m[1] || m[2])
+    .filter(c => !!c)
+}
 
-  const lines = commands[commands[command] ? command : 'notFound']
+const process = async (commandArgs: string) => {
+  const [command, ...args] = parseArgs(commandArgs)
+  if (!command) return
 
-  for (let i = 0; i < lines.length - 1; i++) {
-    const line = lines[i]
-    await sleep(line.time)
+  for (const line of getCommandLines(command)) {
     if (line.system) {
-      await system(line.system, args)
-    } else
-      pushLine({
-        ...line,
-        text: line.text.replace(/\[.*\]\(const:command\)/, command),
-      })
-  }
-  await sleep(lines[lines.length - 1].time)
-
-  if (stopProcess) stopProcessing()
-  window.scrollTo(0, document.body.scrollHeight)
-}
-
-export const addCommand = (command: string) => {
-  startProcessing()
-  pushLine({ text: command, command: true, time: 20, path: get(path) })
-  if (!command) {
-    stopProcessing()
-    setTimeout(() => window.scrollTo(0, document.body.scrollHeight))
-  } else {
-    const args = [...command.matchAll(/["']([^"']*)["']| ?([^"' ]+) ?/g)]
-      .map(m => m[1] || m[2])
-      .filter(c => !!c)
-    if (!args.length) {
-      stopProcessing()
-      setTimeout(() => window.scrollTo(0, document.body.scrollHeight))
+      await sleep(line.time)
+      for (const systemLine of system(line.system, args)) {
+        await processLine(systemLine)
+      }
     } else {
-      setTimeout(() => process(args.filter(c => !!c)))
+      await processLine(line)
     }
   }
+}
+
+export const addCommand = async (command: string) => {
+  startProcessing()
+  await processCommandLine(command)
+  await process(command)
+  stopProcessing()
 }
 
 const start = async () => {
   startProcessing()
   for (const command of START_COMMANDS) {
-    const commandLine = pushLine({
-      text: '',
-      blink: true,
-      command: true,
-      time: 20,
-      path: get(path),
-    })
-    for (const c of command) {
-      await sleep(50)
-      commandLine.text += c
-      updateLastLine(commandLine)
-    }
-    await sleep(1000)
-    commandLine.blink = false
-    updateLastLine(commandLine)
-    await process([command], false)
+    await processCommandLine(command, true)
+    await process(command)
   }
   stopProcessing()
-  window.scrollTo(0, document.body.scrollHeight)
 }
 
-setTimeout(start)
+setTimeout(() => void start())

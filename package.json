@@ -7,7 +7,7 @@
     "serve": "sirv build --no-clear",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "postbuild": "cp -R public build && node -r esm ./src/postBuild.js",
-    "format": "prettier --write ./src/**/*.{js,svelte,html,ts}",
+    "format": "prettier --write --plugin-search-dir=. ./src/**/*.{js,svelte,html,ts}",
     "lint": "eslint './src/**/*.{js,ts,svelte}'",
     "lint-junit": "eslint './src/**/*.{js,ts,svelte}' -f junit > eslint.xml",
     "lint:fix": "eslint --fix './src/**/*.{js,ts,svelte}'",

@@ -59,4 +59,19 @@ function installCommands(files: FrontMatterResult<CommandProperties>[] = []): {
   return { commands, help }
 }
 
-export const { commands, help } = installCommands(loadCommands())
+const { commands, help } = installCommands(loadCommands())
+
+export function getCommandLines(command: string): LineType[] {
+  return commands[commands[command] ? command : 'notFound']
+}
+
+export function getHelpLines(): LineType[] {
+  const result = []
+  for (const line of help) {
+    if (!line.help) continue
+    const commands = line.alias ? [line.command, ...line.alias].join('|') : line.command
+    const text = `${commands} - ${line.help}`
+    result.push({ text, time: 20 })
+  }
+  return result
+}

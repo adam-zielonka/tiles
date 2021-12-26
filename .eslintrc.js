@@ -36,7 +36,4 @@ module.exports = {
   },
   plugins: ['svelte3', '@typescript-eslint'],
   ignorePatterns: ['node_modules'],
-  rules: {
-    '@typescript-eslint/no-misused-promises': 'off',
-  },
 }
