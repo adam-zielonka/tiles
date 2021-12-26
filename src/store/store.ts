@@ -8,12 +8,7 @@ import * as path from './path'
 import * as state from './state'
 import * as system from './system'
 
-declare global {
-  interface Window {
-    store: unknown
-  }
-}
-window.store = {
+const store = {
   get,
   commands,
   constants,
@@ -24,3 +19,10 @@ window.store = {
   state,
   system,
 }
+
+declare global {
+  interface Window {
+    store: typeof store
+  }
+}
+window.store = store
