@@ -1,23 +1,20 @@
 import type { FrontMatterResult } from 'front-matter'
 import { CommandProperties, loadCommands } from '../commands/loadCommands'
 
-export type LineType = {
-  text: string
+export type CommandLine = {
+  value: string
   time: number
   system?: string
-  blink?: boolean
-  command?: boolean
-  path?: string
 }
 
-export type Commands = Record<string, LineType[]>
+export type Commands = Record<string, CommandLine[]>
 
-function parseLines(body: string): LineType[] {
+function parseLines(body: string): CommandLine[] {
   const array = body.split('\n').map(m => m.replace(/^ *$/, ''))
 
-  const base = { time: 20, text: '' }
-  const lines: LineType[] = []
-  let settings: LineType = { ...base }
+  const base = { time: 20, value: '' }
+  const lines: CommandLine[] = []
+  let settings: CommandLine = { ...base }
 
   for (const text of array) {
     const [match, namespace, action] = text.match(/^\[\]\((.*):(.*)\)$/) || []
@@ -28,7 +25,7 @@ function parseLines(body: string): LineType[] {
         settings.system = action
       }
     } else {
-      lines.push({ ...settings, text })
+      lines.push({ ...settings, value: text })
       settings = { ...base }
     }
   }
@@ -39,21 +36,28 @@ function parseLines(body: string): LineType[] {
   return lines
 }
 
+type HelpProperties = Required<CommandProperties>
+
 function installCommands(files: FrontMatterResult<CommandProperties>[] = []): {
   commands: Commands
-  help: CommandProperties[]
+  help: HelpProperties[]
 } {
-  const help: CommandProperties[] = []
+  const help: HelpProperties[] = []
   const commands: Commands = {}
 
   for (const { attributes, body } of files) {
     const lines = parseLines(body)
-    if (attributes.command) commands[attributes.command] = lines
-    if (attributes.alias)
-      for (const alias of attributes.alias) {
-        commands[alias] = lines
-      }
-    if (attributes.help) help.push(attributes)
+    commands[attributes.command] = lines
+    for (const alias of attributes.alias || []) {
+      commands[alias] = lines
+    }
+    if (attributes.help) {
+      help.push({
+        command: attributes.command,
+        alias: attributes.alias || [],
+        help: attributes.help,
+      })
+    }
   }
 
   return { commands, help }
@@ -61,16 +65,8 @@ function installCommands(files: FrontMatterResult<CommandProperties>[] = []): {
 
 const { commands, help } = installCommands(loadCommands())
 
-export function getCommandLines(command: string): LineType[] {
-  return commands[commands[command] ? command : 'notFound']
-}
+export const getCommandLines = (command: string): CommandLine[] =>
+  commands[commands[command] ? command : 'notFound']
 
-export function getHelpLines(): string[] {
-  const result = []
-  for (const line of help) {
-    if (!line.help) continue
-    const commands = line.alias ? [line.command, ...line.alias].join('|') : line.command
-    result.push(`${commands} - ${line.help}`)
-  }
-  return result
-}
+export const getHelpLines = (): string[] =>
+  help.map(({ command, alias, help }) => `${[command, ...alias].join('|')} - ${help}`)

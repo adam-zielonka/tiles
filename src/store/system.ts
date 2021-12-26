@@ -45,7 +45,7 @@ const process = async (commandArgs: string) => {
     if (line.system) {
       await sleep(line.time)
       for (const systemLine of system(line.system, args)) {
-        await processLine({ text: systemLine, time: 20 })
+        await processLine({ value: systemLine, time: 20 })
       }
     } else {
       await processLine(line)

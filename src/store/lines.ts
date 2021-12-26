@@ -1,7 +1,14 @@
 import { get, writable } from 'svelte/store'
 import { sleep } from '../utils'
-import type { LineType } from './commands'
 import { path } from './path'
+
+export type LineType = {
+  value: string
+  time: number
+  blink?: boolean
+  command?: boolean
+  path?: string
+}
 
 export const lines = writable<LineType[]>([])
 let lastCommand = ''
@@ -29,7 +36,7 @@ export const processLine = async (line: LineType) => {
   await sleep(line.time)
   pushLine({
     ...line,
-    text: line.text.replace(/\[.*\]\(const:command\)/, lastCommand),
+    value: line.value.replace(/\[.*\]\(const:command\)/, lastCommand),
   })
 }
 
@@ -38,7 +45,7 @@ export const processCommandLine = async (command: string, animate = false) => {
 
   if (!animate) {
     pushLine({
-      text: command,
+      value: command,
       command: true,
       time: 0,
       path: get(path),
@@ -47,7 +54,7 @@ export const processCommandLine = async (command: string, animate = false) => {
   }
 
   const commandLine = pushLine({
-    text: '',
+    value: '',
     blink: true,
     command: true,
     time: 20,
@@ -55,7 +62,7 @@ export const processCommandLine = async (command: string, animate = false) => {
   })
   for (const c of command) {
     await sleep(50)
-    commandLine.text += c
+    commandLine.value += c
     updateLastLine(commandLine)
   }
   await sleep(1000)

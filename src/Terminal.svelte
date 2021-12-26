@@ -13,12 +13,7 @@
   <div style={`font-family: ${$font}`}>
     <ul>
       {#each $lines as line}
-        <Line
-          value={line.text}
-          command={line.command}
-          blink={line.blink}
-          path={line.path}
-        />
+        <Line {line} />
       {/each}
 
       {#if !$isProcessing && !$freeze}

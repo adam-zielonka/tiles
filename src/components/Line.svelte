@@ -1,11 +1,9 @@
 <script lang="ts">
   import { marked, Renderer } from 'marked'
+  import { LineType } from '../store/lines'
   import LinePrefix from './LinePrefix.svelte'
 
-  export let value: string
-  export let command = false
-  export let blink = false
-  export let path = '~'
+  export let line: LineType
 
   Renderer.prototype.paragraph = function (text) {
     return text + '\n'
@@ -13,11 +11,11 @@
 </script>
 
 <li>
-  {#if command}
-    <LinePrefix {path} />
-    {value}{#if blink}<span class="blink">_</span>{/if}
+  {#if line.command}
+    <LinePrefix path={line.path} />
+    {line.value}{#if line.blink}<span class="blink">_</span>{/if}
   {:else}
-    {@html marked(value || '\u00a0')}
+    {@html marked(line.value || '\u00a0')}
   {/if}
 </li>
 
