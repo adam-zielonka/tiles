@@ -1,7 +1,11 @@
-/* eslint-disable no-console */
 import fs from 'fs'
 import replace, { replaceInFileSync } from 'replace-in-file'
+import { marked, Renderer } from 'marked'
 import crypto from 'crypto'
+
+Renderer.prototype.paragraph = function (text) {
+  return text + '\n'
+}
 
 function getFileHash(file) {
   const hash = crypto.createHash('shake256', { outputLength: 8 })
@@ -84,15 +88,6 @@ function parseCommand(body) {
   return lines
 }
 
-export function parseText(text, result = []) {
-  const [match, leftText, title, url, rightText] =
-    text.match(/^(.*)\[(.*?)\]\((.*?)\)(.*)$/) || []
-
-  if (!match) return [{ text }, ...result]
-
-  return parseText(leftText, [{ text: title, url }, { text: rightText }, ...result])
-}
-
 function userLine(command) {
   const splitted = command.split('')
 
@@ -125,15 +120,13 @@ function lines(command) {
 
   const lines = parseCommand(body)
     .filter(f => !f.system)
-    .map(line => {
-      const sliced = parseText(line.text).filter(s => s.text)
-      return `<li style="animation: hidden ${clock(line.time)}ms;">${
-        sliced
-          .map(s => (s.url ? `<a href="${s.url}">${s.text}</a>` : s.text || '&nbsp;'))
-          .join('') || '&nbsp;'
-      }</li>`
-    })
-  lines.pop()
+    .map(
+      line =>
+        `<li style="animation: hidden ${clock(line.time)}ms;">${marked(
+          line.text || '\u00a0',
+        )}</li>`,
+    )
+  lines.shift()
   return lines.join('')
 }
 
@@ -151,7 +144,7 @@ const html =
 
 replace({
   files: './build/index.html',
-  from: /<links\/>/,
+  from: /<links \/>/g,
   to: html,
 })
   .then(results => {
