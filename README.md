@@ -35,6 +35,11 @@ You can also use special links, that will be affected to the app:
   - `:help` - print available instruction
 - `const:` - this links will be replaced with:
   - `:command` - name of command
+- `ui:` - adjust user interface
+  - `:color` - set color
+  - `:font-weight` - set font weight
+  - `:font-size` - set font size
+  - `:animate` - animate text
 
 ## License
 
