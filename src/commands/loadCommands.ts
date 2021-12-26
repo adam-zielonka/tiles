@@ -9,6 +9,7 @@ import help from './help.md'
 import notFound from './notFound.md'
 import panic from './panic.md'
 import ping from './ping.md'
+import pong from './pong.md'
 import shutdown from './shutdown.md'
 import whoami from './whoami.md'
 
@@ -29,6 +30,7 @@ export const loadCommands = (): FrontMatterResult<CommandProperties>[] => {
     frontMatter<CommandProperties>(notFound),
     frontMatter<CommandProperties>(panic),
     frontMatter<CommandProperties>(ping),
+    frontMatter<CommandProperties>(pong),
     frontMatter<CommandProperties>(shutdown),
     frontMatter<CommandProperties>(whoami),
   ]
