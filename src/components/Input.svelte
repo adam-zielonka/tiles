@@ -25,7 +25,7 @@
   function keydown(event: KeyboardEvent) {
     switch (event.key) {
       case 'Enter':
-        addCommand($value)
+        void addCommand($value)
         addHistory()
         break
       case 'ArrowUp':
