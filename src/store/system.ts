@@ -47,7 +47,7 @@ const process = async (commandArgs: string) => {
   const [command, ...args] = parseArgs(commandArgs)
   if (!command) return
 
-  const style: Style = STYLE_DEFAULTS
+  const style: Style = { ...STYLE_DEFAULTS }
 
   for (const line of getCommandLines(command)) {
     if (line.system) {
