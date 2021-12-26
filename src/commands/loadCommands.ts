@@ -23,19 +23,19 @@ export type CommandProperties = {
 
 export const loadCommands = (): FrontMatterResult<CommandProperties>[] => {
   return [
-    frontMatter<CommandProperties>(cd),
-    frontMatter<CommandProperties>(clear),
-    frontMatter<CommandProperties>(description),
-    frontMatter<CommandProperties>(echo),
-    frontMatter<CommandProperties>(font),
-    frontMatter<CommandProperties>(help),
-    frontMatter<CommandProperties>(ls),
-    frontMatter<CommandProperties>(matrix),
-    frontMatter<CommandProperties>(notFound),
-    frontMatter<CommandProperties>(panic),
-    frontMatter<CommandProperties>(ping),
-    frontMatter<CommandProperties>(pong),
-    frontMatter<CommandProperties>(shutdown),
-    frontMatter<CommandProperties>(whoami),
-  ]
+    cd,
+    clear,
+    description,
+    echo,
+    font,
+    help,
+    ls,
+    matrix,
+    notFound,
+    panic,
+    ping,
+    pong,
+    shutdown,
+    whoami,
+  ].map(command => frontMatter<CommandProperties>(command))
 }
