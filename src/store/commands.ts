@@ -71,3 +71,7 @@ export const getHelpLines = (): string[] =>
   help.map(
     ({ command, alias, help }) => `**${[command, ...alias].join(' | ')}** - ${help}`,
   )
+
+export const getCommandCompletions = (command: string): string[] => {
+  return Object.keys(commands).filter(c => c.startsWith(command) && c !== command)
+}

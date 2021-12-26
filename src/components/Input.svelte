@@ -5,10 +5,16 @@
   import LinePrefix from './LinePrefix.svelte'
   import InputText from './InputText.svelte'
   import { path } from '../store/path'
+  import { getCommandCompletions } from '../store/commands'
+  import Completion from './Completion.svelte'
 
   let input: HTMLInputElement
   let start = 0
   let end = 0
+
+  let showCompletion = false
+  let completionIndex = -1
+  $: completions = getCommandCompletions($value)
 
   const updateStartEnd = () => {
     start = input.selectionStart || 0
@@ -22,19 +28,45 @@
     }, 10)
   }
 
+  const resetCompletion = () => {
+    showCompletion = false
+    completionIndex = -1
+  }
+
   function keydown(event: KeyboardEvent) {
     switch (event.key) {
       case 'Enter':
+        if (completionIndex > -1 && completions.length > completionIndex) {
+          setValue(completions[completionIndex])
+        }
         void addCommand($value)
         addHistory()
         break
       case 'ArrowUp':
+        event.preventDefault()
         historyUp()
         moveCaretToEnd()
+        resetCompletion()
         break
       case 'ArrowDown':
+        event.preventDefault()
         historyDown()
         moveCaretToEnd()
+        resetCompletion()
+        break
+      case 'Tab':
+        event.preventDefault()
+        if (completions.length === 1) {
+          setValue(completions[0])
+          moveCaretToEnd()
+        }
+        if (showCompletion) {
+          completionIndex =
+            completionIndex === -1 ? 0 : (completionIndex + 1) % completions.length
+        } else {
+          showCompletion = true
+        }
+        window.scrollTo(0, document.body.scrollHeight)
         break
     }
 
@@ -76,6 +108,10 @@
     }}
   />
 </li>
+
+{#if showCompletion}
+  <Completion {completions} index={completionIndex} />
+{/if}
 
 <style lang="scss">
   input {
