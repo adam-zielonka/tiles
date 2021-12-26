@@ -68,4 +68,6 @@ export const getCommandLines = (command: string): CommandLine[] =>
   commands[commands[command] ? command : 'notFound']
 
 export const getHelpLines = (): string[] =>
-  help.map(({ command, alias, help }) => `${[command, ...alias].join('|')} - ${help}`)
+  help.map(
+    ({ command, alias, help }) => `**${[command, ...alias].join(' | ')}** - ${help}`,
+  )

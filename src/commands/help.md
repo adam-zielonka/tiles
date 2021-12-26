@@ -3,6 +3,6 @@ command: help
 help: display information about builtin commands
 ---
 
-Commands list:
+**Commands list:**
 
 [](system:help)

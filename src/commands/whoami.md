@@ -7,16 +7,16 @@ help: information about me
 Adam Zielonka
 
 [](sleep:1000)
-[EMAIL]
+**[EMAIL]**  
 [root@adamzielonka.pro](mailto:root@adamzielonka.pro)
 
-[REPO]
+**[REPO]**  
 [gitlab.com/adam-zielonka-pro](https://gitlab.com/adam-zielonka-pro)
 
-[YouTube]
+**[YouTube]**  
 [Code in the Machine](https://www.youtube.com/channel/UC9ndsm1I60DjsIqEh1XITRQ)
 
-[APPS]  
+**[APPS]**  
 adamzielonka.pro: [Source](https://gitlab.com/adam-zielonka-pro/adamzielonka.pro), [Run](https://adamzielonka.pro/)  
 Questions: [Source](https://gitlab.com/adam-zielonka-pro/questions), [Run](https://questions.adamzielonka.pro/)  
 Server Status: [Source](https://gitlab.com/adam-zielonka-pro/server-status), [Demo](https://fake-status.adamzielonka.pro/)  
@@ -24,7 +24,7 @@ Unit Converter: [Source](https://gitlab.com/adam-zielonka-pro/unit-converter), [
 paintAZ: [Source](https://gitlab.com/adam-zielonka-pro/paintaz)  
 mobx-example: [Source](https://gitlab.com/adam-zielonka-pro/mobx-example), [Demo](https://mobx-example.adamzielonka.pro/)
 
-[GAMES]  
+**[GAMES]**  
 Deska: [Source](https://gitlab.com/adam-zielonka-pro/deska), [Play](https://deska.adamzielonka.pro/)  
 Saper: [Source](https://gitlab.com/adam-zielonka-pro/saper), [Play](https://saper.adamzielonka.pro/)  
 Tetris: [Source](https://gitlab.com/adam-zielonka-pro/tetris)  

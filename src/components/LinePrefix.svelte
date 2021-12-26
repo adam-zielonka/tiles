@@ -7,6 +7,10 @@
 <span class="user">{user}@{domain}</span>:<span class="path">{path}</span>#
 
 <style>
+  span {
+    font-weight: bold;
+  }
+
   .user {
     color: lawngreen;
   }
