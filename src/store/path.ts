@@ -15,6 +15,8 @@ export const cd = (newDir: string) => {
       return dir
     } else if (newDir === '~') {
       return '~'
+    } else if (newDir === '') {
+      return dir
     } else if (newDir.startsWith('/')) {
       return newDir
         .replace(/\/\//, '/')

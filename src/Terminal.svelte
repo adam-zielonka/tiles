@@ -4,7 +4,7 @@
   import Shutdown from './components/Shutdown.svelte'
   import { font } from './store/font'
   import { lines } from './store/lines'
-  import { freeze, isProcessing, shutdown } from './store/system'
+  import { freeze, isProcessing, shutdown } from './store/state'
 </script>
 
 {#if $shutdown}

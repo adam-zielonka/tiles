@@ -1,30 +1,11 @@
-import { writable, get } from 'svelte/store'
+import { get } from 'svelte/store'
 import { sleep } from '../utils'
 import { commands, help } from './commands'
 import { START_COMMANDS } from './constants'
 import { setFont } from './font'
 import { clearLines, pushLine, updateLastLine } from './lines'
 import { cd, path } from './path'
-
-export const isProcessing = writable(false)
-export const shutdown = writable(false)
-export const freeze = writable(false)
-
-export const startProcessing = () => {
-  isProcessing.set(true)
-}
-
-export const stopProcessing = () => {
-  isProcessing.set(false)
-}
-
-export const setShutdown = () => {
-  shutdown.set(true)
-}
-
-export const setFreeze = () => {
-  freeze.set(true)
-}
+import { setFreeze, setShutdown, startProcessing, stopProcessing } from './state'
 
 const system = async (sysCommand: string, args: string[]) => {
   switch (sysCommand) {
