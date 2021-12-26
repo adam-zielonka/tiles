@@ -1,5 +1,5 @@
 import './store/store'
-import Terminal from './Terminal.svelte'
+import Terminal from './components/Terminal.svelte'
 
 const app = new Terminal({
   target: document.body,

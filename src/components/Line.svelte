@@ -26,6 +26,14 @@
 </li>
 
 <style lang="scss">
+  :global(a) {
+    text-decoration: none;
+    color: deepskyblue;
+  }
+
+  :global(a:hover) {
+    text-decoration-line: underline;
+  }
   .blink {
     color: #111;
     animation: blink 0.5s linear infinite;

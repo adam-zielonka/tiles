@@ -27,11 +27,9 @@ function renameFile(file, newName) {
 
 renameFile('build', `assets`)
 
-const hashGlobalCss = getFileHash('./build/global.css')
 const hashBundleJs = getFileHash('./build/assets/bundle.js')
 const hashBundleCss = getFileHash('./build/assets/bundle.css')
 
-renameFile('global.css', `global.${hashGlobalCss}.css`)
 renameFile('assets/bundle.js', `assets/bundle.${hashBundleJs}.js`)
 renameFile('assets/bundle.css', `assets/bundle.${hashBundleCss}.css`)
 
