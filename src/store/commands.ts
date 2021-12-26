@@ -65,13 +65,12 @@ export function getCommandLines(command: string): LineType[] {
   return commands[commands[command] ? command : 'notFound']
 }
 
-export function getHelpLines(): LineType[] {
+export function getHelpLines(): string[] {
   const result = []
   for (const line of help) {
     if (!line.help) continue
     const commands = line.alias ? [line.command, ...line.alias].join('|') : line.command
-    const text = `${commands} - ${line.help}`
-    result.push({ text, time: 20 })
+    result.push(`${commands} - ${line.help}`)
   }
   return result
 }

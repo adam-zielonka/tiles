@@ -1,12 +1,12 @@
 import { sleep } from '../utils'
-import { getCommandLines, getHelpLines, LineType } from './commands'
+import { getCommandLines, getHelpLines } from './commands'
 import { START_COMMANDS } from './constants'
 import { setFont } from './font'
 import { clearLines, processCommandLine, processLine } from './lines'
 import { cd } from './path'
 import { setFreeze, setShutdown, startProcessing, stopProcessing } from './state'
 
-const system = (sysCommand: string, args: string[]): LineType[] => {
+const system = (sysCommand: string, args: string[]): string[] => {
   switch (sysCommand) {
     case 'clear':
       clearLines()
@@ -18,12 +18,9 @@ const system = (sysCommand: string, args: string[]): LineType[] => {
       setFreeze()
       return []
     case 'echo':
-      return [{ text: args.join(' '), time: 20 }]
+      return [args.join(' ')]
     case 'font':
-      return setFont(args.length ? args.join(' ') : '').map(text => ({
-        text,
-        time: 20,
-      }))
+      return setFont(args.length ? args.join(' ') : '')
     case 'cd':
       cd(args.length ? args.join(' ') : '')
       return []
@@ -48,7 +45,7 @@ const process = async (commandArgs: string) => {
     if (line.system) {
       await sleep(line.time)
       for (const systemLine of system(line.system, args)) {
-        await processLine(systemLine)
+        await processLine({ text: systemLine, time: 20 })
       }
     } else {
       await processLine(line)
