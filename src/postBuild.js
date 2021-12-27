@@ -154,15 +154,6 @@ let html =
   '</ul>'
 
 html = html
-  .replace(
-    />root@adamzielonka.pro</g,
-    '>' +
-      'root@adamzielonka.pro'
-        .split('')
-        .map(l => `<div>${l}</div>` + `<div class='hidden'>${randomLetter()}</div>`)
-        .join('') +
-      '<',
-  )
   .replace(/ul><li/g, 'ul>\n          <li')
   .replace(/<\/li><li/g, '</li>\n          <li')
   .replace(/><div/g, '>\n            <div')
