@@ -18,7 +18,6 @@ let lastCommand = ''
 
 const pushLine = (line: LineType): LineType => {
   lines.update(_lines => [..._lines, line])
-  window.scrollTo(0, document.body.scrollHeight)
   return line
 }
 

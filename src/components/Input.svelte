@@ -66,7 +66,6 @@
         } else {
           showCompletion = true
         }
-        window.scrollTo(0, document.body.scrollHeight)
         break
     }
 

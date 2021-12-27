@@ -1,5 +1,6 @@
 <script lang="ts">
   import { marked, Renderer } from 'marked'
+  import { onMount } from 'svelte'
   import { LineType } from '../store/lines'
   import LinePrefix from './LinePrefix.svelte'
 
@@ -8,6 +9,10 @@
   Renderer.prototype.paragraph = function (text) {
     return text + '\n'
   }
+
+  onMount(() => {
+    window.scrollTo(0, document.body.scrollHeight)
+  })
 </script>
 
 <li>
