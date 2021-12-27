@@ -4,7 +4,7 @@ import { marked, Renderer } from 'marked'
 import crypto from 'crypto'
 
 Renderer.prototype.paragraph = function (text) {
-  return text + '\n'
+  return text
 }
 
 function getFileHash(file) {
@@ -59,6 +59,8 @@ function createClock() {
 
 const clock = createClock()
 
+clock(100)
+
 function parseCommand(body) {
   const array = body.split('\n').map(m => m.replace(/^ *$/, ''))
 
@@ -108,7 +110,7 @@ function userLine(command) {
     clock(),
   )};">_</div>`
   clock(1000)
-  return `<li>${result}</li>`
+  return `          <li>${result}</li>\n`
 }
 
 function lines(command) {
@@ -120,9 +122,9 @@ function lines(command) {
     .filter(f => !f.system)
     .map(
       line =>
-        `<li style="animation: hidden ${clock(line.time)}ms;">${marked(
+        `          <li style="animation: hidden ${clock(line.time)}ms;">${marked(
           line.text || '\u00a0',
-        )}</li>`,
+        )}</li>\n`,
     )
   lines.shift()
   return lines.join('')
@@ -133,12 +135,12 @@ function runCommand(command) {
 }
 
 const html =
-  '<ul>' +
+  '<ul>\n' +
   runCommand('whoami') +
   runCommand('description') +
   userLine('') +
   lines('panic') +
-  '</ul>'
+  '        </ul>'
 
 replace({
   files: './build/index.html',
