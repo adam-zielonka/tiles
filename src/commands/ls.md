@@ -10,6 +10,3 @@ There is nothing.
 [](ui:animate)
 Only warm, primordial blackness.  
 [](sleep:2000)
-
-. ..  
-[](sleep:1000)
