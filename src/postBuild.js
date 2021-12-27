@@ -110,7 +110,7 @@ function userLine(command) {
     clock(),
   )};">_</div>`
   clock(1000)
-  return `          <li>${result}</li>\n`
+  return `<li>${result}</li>`
 }
 
 function lines(command) {
@@ -122,9 +122,9 @@ function lines(command) {
     .filter(f => !f.system)
     .map(
       line =>
-        `          <li style="animation: hidden ${clock(line.time)}ms;">${marked(
+        `<li style="animation: hidden ${clock(line.time)}ms;">${marked(
           line.text || '\u00a0',
-        )}</li>\n`,
+        )}</li>`,
     )
   lines.shift()
   return lines.join('')
@@ -134,13 +134,21 @@ function runCommand(command) {
   return userLine(command) + lines(command)
 }
 
-const html =
-  '<ul>\n' +
+let html =
+  '<ul>' +
   runCommand('whoami') +
   runCommand('description') +
   userLine('') +
   lines('panic') +
-  '        </ul>'
+  '</ul>'
+
+html = html
+  .replace(/ul><li/g, 'ul>\n          <li')
+  .replace(/<\/li><li/g, '</li>\n          <li')
+  .replace(/li><div/g, 'li>\n            <div')
+  .replace(/<\/div><div/g, '</div>\n            <div')
+  .replace(/div><\/li/g, 'div>\n          </li')
+  .replace(/li><\/ul/g, 'li>\n        </ul')
 
 replace({
   files: './build/index.html',
