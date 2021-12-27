@@ -36,8 +36,8 @@
   function keydown(event: KeyboardEvent) {
     switch (event.key) {
       case 'Enter':
-        if (completionIndex > -1 && completions.length > completionIndex) {
-          setValue(completions[completionIndex] + ' ')
+        if (completionIndex > -1 && completions[completionIndex]) {
+          setValue(`${completions[completionIndex]} `)
           resetCompletion()
         } else {
           void addCommand($value)
