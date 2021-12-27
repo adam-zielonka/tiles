@@ -16,7 +16,7 @@
   let completionIndex = -1
   $: completions = getCommandCompletions($value)
 
-  const updateStartEnd = () => {
+  function updateStartEnd() {
     start = input.selectionStart || 0
     end = input.selectionEnd || 0
   }
@@ -28,7 +28,7 @@
     }, 10)
   }
 
-  const resetCompletion = () => {
+  function resetCompletion() {
     showCompletion = false
     completionIndex = -1
   }

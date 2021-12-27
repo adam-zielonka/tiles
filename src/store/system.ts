@@ -6,7 +6,7 @@ import { clearLines, processCommandLine, processLine } from './lines'
 import { cd } from './path'
 import { setFreeze, setShutdown, startProcessing, stopProcessing } from './state'
 
-const system = (sysCommand: string, args: string[]): string[] => {
+function system(sysCommand: string, args: string[]): string[] {
   switch (sysCommand) {
     case 'clear':
       clearLines()
@@ -31,7 +31,7 @@ const system = (sysCommand: string, args: string[]): string[] => {
   }
 }
 
-const parseArgs = (commandArgs: string): string[] => {
+function parseArgs(commandArgs: string): string[] {
   return [...commandArgs.matchAll(/["']([^"']*)["']| ?([^"' ]+) ?/g)]
     .map(m => m[1] || m[2])
     .filter(c => !!c)
@@ -43,7 +43,7 @@ export type Style = {
   fontSize: string
 }
 
-const process = async (commandArgs: string) => {
+async function process(commandArgs: string) {
   const [command, ...args] = parseArgs(commandArgs)
   if (!command) return
 
@@ -71,14 +71,14 @@ const process = async (commandArgs: string) => {
   }
 }
 
-export const addCommand = async (command: string) => {
+export async function addCommand(command: string) {
   startProcessing()
   await processCommandLine(command)
   await process(command)
   stopProcessing()
 }
 
-const start = async () => {
+async function start() {
   startProcessing()
   for (const command of START_COMMANDS) {
     await processCommandLine(command, true)

@@ -16,16 +16,16 @@ export type LineType = {
 export const lines = writable<LineType[]>([])
 let lastCommand = ''
 
-const pushLine = (line: LineType): LineType => {
+function pushLine(line: LineType): LineType {
   lines.update(_lines => [..._lines, line])
   return line
 }
 
-export const clearLines = () => {
+export function clearLines() {
   lines.set([])
 }
 
-const updateLastLine = (line: LineType) => {
+function updateLastLine(line: LineType) {
   lines.update(_lines => {
     if (_lines.length) {
       _lines[_lines.length - 1] = line
@@ -34,7 +34,7 @@ const updateLastLine = (line: LineType) => {
   })
 }
 
-export const processLine = async (line: LineType, animate = false) => {
+export async function processLine(line: LineType, animate = false) {
   await sleep(line.time)
 
   if (!animate) {
@@ -57,7 +57,7 @@ export const processLine = async (line: LineType, animate = false) => {
   }
 }
 
-export const processCommandLine = async (command: string, animate = false) => {
+export async function processCommandLine(command: string, animate = false) {
   lastCommand = command
 
   if (!animate) {

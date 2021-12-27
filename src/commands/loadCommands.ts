@@ -21,7 +21,7 @@ export type CommandProperties = {
   help?: string
 }
 
-export const loadCommands = (): FrontMatterResult<CommandProperties>[] => {
+export function loadCommands(): FrontMatterResult<CommandProperties>[] {
   return [
     cd,
     clear,

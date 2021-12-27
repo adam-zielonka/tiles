@@ -2,7 +2,7 @@ import { writable } from 'svelte/store'
 
 export const path = writable('~')
 
-export const cd = (newDir: string) => {
+export function cd(newDir: string) {
   path.update(dir => {
     if (newDir === '..') {
       const parts = dir.split('/')

@@ -22,7 +22,7 @@ function isFontExist(font: string): boolean {
   )
 }
 
-export const setFont = (newFont: string): string[] => {
+export function setFont(newFont: string): string[] {
   if (!isFontExist(newFont) && newFont) {
     return [`Font family **'${newFont}'** is not installed`]
   }

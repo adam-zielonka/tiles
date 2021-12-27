@@ -64,14 +64,16 @@ function installCommands(files: FrontMatterResult<CommandProperties>[] = []): {
 
 const { commands, help } = installCommands(loadCommands())
 
-export const getCommandLines = (command: string): CommandLine[] =>
-  commands[commands[command] ? command : 'notFound']
+export function getCommandLines(command: string): CommandLine[] {
+  return commands[commands[command] ? command : 'notFound']
+}
 
-export const getHelpLines = (): string[] =>
-  help.map(
+export function getHelpLines(): string[] {
+  return help.map(
     ({ command, alias, help }) => `**${[command, ...alias].join(' | ')}** - ${help}`,
   )
+}
 
-export const getCommandCompletions = (command: string): string[] => {
+export function getCommandCompletions(command: string): string[] {
   return Object.keys(commands).filter(c => c.startsWith(command) && c !== command)
 }
