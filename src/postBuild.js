@@ -88,6 +88,10 @@ function parseCommand(body) {
   return lines
 }
 
+function randomLetter() {
+  return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
+}
+
 function userLine(command) {
   const splitted = command.split('')
 
@@ -98,7 +102,11 @@ function userLine(command) {
   let result = ''
   result += 'root@adamzielonka.pro'
     .split('')
-    .map(l => `<div class="user" style="animation: hidden ${clock()}ms;">${l}</div>`)
+    .map(
+      l =>
+        `<div class="user" style="animation: hidden ${clock()}ms;">${l}</div>` +
+        `<div class="hidden">${randomLetter()}</div>`,
+    )
     .join('')
   result += `<div class="user-end" style="animation: hidden ${clock()}ms;">:~#&nbsp;</div>`
   const startTime = clock()

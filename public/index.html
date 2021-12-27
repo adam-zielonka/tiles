@@ -110,12 +110,20 @@
           }
 
           to {
-            position: unset;
-            top: unset;
+            position: absolute;
+            top: -100vh;
             width: 0;
             height: 0;
             overflow: hidden;
           }
+        }
+
+        .hidden {
+          position: absolute;
+          top: -100vh;
+          width: 0;
+          height: 0;
+          overflow: hidden;
         }
       </style>
       <div style="animation: hidden 100ms">
