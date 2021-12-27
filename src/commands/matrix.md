@@ -1,7 +1,7 @@
 ---
 command: matrix
 alias: [neo]
-help: enter to matrix
+help: enter to the matrix
 ---
 
 [](ui:color)
