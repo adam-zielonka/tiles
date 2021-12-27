@@ -37,10 +37,12 @@
     switch (event.key) {
       case 'Enter':
         if (completionIndex > -1 && completions.length > completionIndex) {
-          setValue(completions[completionIndex])
+          setValue(completions[completionIndex] + ' ')
+          resetCompletion()
+        } else {
+          void addCommand($value)
+          addHistory()
         }
-        void addCommand($value)
-        addHistory()
         break
       case 'ArrowUp':
         event.preventDefault()
