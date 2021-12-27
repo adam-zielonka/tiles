@@ -96,7 +96,10 @@ function userLine(command) {
   }
 
   let result = ''
-  result += `<div class="user" style="animation: hidden ${clock()}ms;">root@adamzielonka.pro</div>`
+  result += 'root@adamzielonka.pro'
+    .split('')
+    .map(l => `<div class="user" style="animation: hidden ${clock()}ms;">${l}</div>`)
+    .join('')
   result += `<div class="user-end" style="animation: hidden ${clock()}ms;">:~#&nbsp;</div>`
   const startTime = clock()
   clock(1000)
