@@ -6,10 +6,9 @@ export type CommandAttributes = {
   alias?: string[]
   help?: string
 }
-
 type Files = Record<string, { default: CommandAttributes }>
-export type Commands = Record<string, CommandLine[]>
 type HelpProperties = Required<Omit<CommandAttributes, 'body'>>
+export type Commands = Record<string, CommandLine[]>
 
 export function loadCommands(): CommandAttributes[] {
   const files = import.meta.globEager('../commands/*.md') as Files

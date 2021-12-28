@@ -81,7 +81,7 @@ async function process(commandArgs: string): Promise<void> {
       }
     }
 
-    !hide && (await processLine({ ...line, style }, animate))
+    !hide && (await processLine({ value: line.value, style }, animate))
   }
 }
 

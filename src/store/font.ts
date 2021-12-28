@@ -4,10 +4,11 @@ export const font = writable('')
 
 function fontCompare(font: string, baseFont: string): boolean {
   const context = document.createElement('canvas').getContext('2d')
-  const text = 'abcdefghijklmnopqrstuvwxyz0123456789'
   if (!context) {
     return false
   }
+
+  const text = 'abcdefghijklmnopqrstuvwxyz0123456789'
   context.font = `72px ${baseFont}`
   const baselineSize = context.measureText(text).width
   context.font = `72px ${font}, ${baseFont}`
