@@ -1,9 +1,7 @@
 /node_modules/
-/public/build/
 /build/
+/dist/
 /.vscode/
-
 .DS_Store
 
 eslint.xml
-

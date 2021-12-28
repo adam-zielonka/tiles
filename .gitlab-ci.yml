@@ -14,7 +14,7 @@ build:
   artifacts:
     expire_in: 1 week
     paths:
-      - build
+      - dist
   cache:
     paths:
       - node_modules
@@ -31,7 +31,7 @@ lint:
       junit: eslint.xml
   cache:
     paths:
-    - node_modules
+      - node_modules
   needs:
     - build
 
@@ -39,13 +39,13 @@ pages:
   image: alpine
   variables:
     GIT_STRATEGY: none
-    GIT_CHECKOUT: "false"
+    GIT_CHECKOUT: 'false'
   stage: deploy
   needs:
     - job: build
       artifacts: true
   script:
-    - mv build public
+    - mv dist public
   artifacts:
     expire_in: 1 week
     paths:
