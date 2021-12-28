@@ -9,8 +9,6 @@ function createClock(clock = 0): (delay?: number) => number {
   return (delay = 0) => (clock += delay)
 }
 
-const clock = createClock()
-
 function randomLetter(): string {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
 }
@@ -76,14 +74,6 @@ function renderCommand(command: string): string {
   return renderCommandLine(command) + renderLines(command)
 }
 
-const html =
-  '<ul>' +
-  renderCommand('whoami') +
-  renderCommand('description') +
-  renderCommandLine('') +
-  renderLines('panic') +
-  '</ul>'
-
 function addIntent(line: string, level: number): string {
   return '  '.repeat(level) + line
 }
@@ -100,6 +90,16 @@ function formatHtml(html: string): string {
   return lines.join('\n').trimStart()
 }
 
+const clock = createClock()
+
+const html =
+  '<ul>' +
+  renderCommand('whoami') +
+  renderCommand('description') +
+  renderCommandLine('') +
+  renderLines('panic') +
+  '</ul>'
+
 const results = replaceInFileSync({
   files: './dist/index.html',
   from: /<links \/>/g,
@@ -107,4 +107,4 @@ const results = replaceInFileSync({
 })
 
 if (results[0]?.hasChanged) console.log('Generated no-script section')
-else console.error('Not found <links/> tag')
+else console.error('Not found <links /> tag')
