@@ -1,6 +1,6 @@
 <span>_</span>
 
-<style lang="scss">
+<style>
   span {
     color: #111;
     animation: blink 0.5s linear infinite;

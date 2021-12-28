@@ -14,7 +14,7 @@
 
 {beforText}<span class={isSelection ? 'selection' : 'caret'}>{text}</span>{afterText}
 
-<style lang="scss">
+<style>
   .selection,
   ::selection {
     background-color: #aaa;

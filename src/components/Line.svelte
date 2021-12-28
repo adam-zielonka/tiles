@@ -27,7 +27,7 @@
   {/if}
 </li>
 
-<style lang="scss">
+<style>
   :global(a) {
     text-decoration: none;
     color: deepskyblue;

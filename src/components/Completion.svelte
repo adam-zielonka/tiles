@@ -15,7 +15,7 @@
   {/each}
 </li>
 
-<style lang="scss">
+<style>
   .completions {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
