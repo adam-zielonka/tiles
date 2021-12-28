@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
-    "lib": ["DOM", "ES2017", "WebWorker"],
+    "lib": ["DOM", "ES2021", "WebWorker", ],
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "importsNotUsedAsValues": "remove",
@@ -15,4 +15,9 @@
     "__sapper__/*",
     "public/*"
   ],
+  "ts-node": {
+    "moduleTypes": {
+      "*": "cjs"
+    }
+  }
 }

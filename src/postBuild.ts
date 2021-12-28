@@ -1,6 +1,7 @@
 import fs from 'fs'
-import replace from 'replace-in-file'
+import { replaceInFileSync } from 'replace-in-file'
 import { marked, Renderer } from 'marked'
+import { parseLines } from './utils'
 
 Renderer.prototype.paragraph = function (text) {
   return text
@@ -8,8 +9,9 @@ Renderer.prototype.paragraph = function (text) {
 
 function createClock() {
   return (
-    clock => delay =>
-      (clock += delay || 0)
+    (clock: number) =>
+    (delay = 0) =>
+      (clock += delay)
   )(0)
 }
 
@@ -17,41 +19,14 @@ const clock = createClock()
 
 clock(100)
 
-function parseCommand(body) {
-  const array = body.split('\n').map(m => m.replace(/^ *$/, ''))
-
-  const base = { time: 20 }
-  const lines = []
-  let settings = {}
-
-  for (const text of array) {
-    const [match, namespace, action] = text.match(/^\[\]\((.*):(.*)\)$/) || []
-    if (match) {
-      if (namespace === 'sleep') {
-        settings.time = +action
-      } else {
-        settings[namespace] = action
-      }
-    } else {
-      lines.push({ ...base, ...settings, text })
-      settings = {}
-    }
-  }
-
-  if (!lines.length) lines.push({ text: '', ...base, ...settings })
-  if (lines[lines.length - 1].system) lines.push({ ...base, text: '' })
-
-  return lines
-}
-
 function randomLetter() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
 }
 
-function userLine(command) {
+function userLine(command: string) {
   const splitted = command.split('')
 
-  function blinkTimes(start, end) {
+  function blinkTimes(start: number, end: number) {
     return Math.ceil((end - start) / 500) + 2
   }
 
@@ -80,24 +55,24 @@ function userLine(command) {
   return `<li>${result}</li>`
 }
 
-function lines(command) {
+function lines(command: string) {
   let body = fs.readFileSync(`./src/commands/${command}.md`, 'utf8')
   if (!body) return ''
   body = body.replace(/---[ \s\S]*---\n/, '')
 
-  const lines = parseCommand(body)
+  const lines = parseLines(body)
     .filter(f => !f.system)
     .map(
       line =>
         `<li style="animation: hidden ${clock(line.time)}ms;">${marked(
-          line.text || '\u00a0',
+          line.value || '\u00a0',
         )}</li>`,
     )
   lines.shift()
   return lines.join('')
 }
 
-function runCommand(command) {
+function runCommand(command: string) {
   return userLine(command) + lines(command)
 }
 
@@ -116,15 +91,11 @@ html = html
   .replace(/div><\//g, 'div>\n          </')
   .replace(/li><\/ul/g, 'li>\n        </ul')
 
-replace({
+const results = replaceInFileSync({
   files: './dist/index.html',
   from: /<links \/>/g,
   to: html,
 })
-  .then(results => {
-    if (results[0].hasChanged) console.log('Generated no-script section')
-    else console.error('Not found <links/> tag')
-  })
-  .catch(error => {
-    console.error('Error occurred:', error)
-  })
+
+if (results[0]?.hasChanged) console.log('Generated no-script section')
+else console.error('Not found <links/> tag')
