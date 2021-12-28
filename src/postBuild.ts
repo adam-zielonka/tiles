@@ -76,7 +76,7 @@ function renderCommand(command: string): string {
   return renderCommandLine(command) + renderLines(command)
 }
 
-let html =
+const html =
   '<ul>' +
   renderCommand('whoami') +
   renderCommand('description') +
@@ -84,17 +84,26 @@ let html =
   renderLines('panic') +
   '</ul>'
 
-html = html
-  .replace(/ul><li/g, 'ul>\n          <li')
-  .replace(/<\/li><li/g, '</li>\n          <li')
-  .replace(/><div/g, '>\n            <div')
-  .replace(/div><\//g, 'div>\n          </')
-  .replace(/li><\/ul/g, 'li>\n        </ul')
+function addIntent(line: string, level: number): string {
+  return '  '.repeat(level) + line
+}
+
+function formatHtml(html: string): string {
+  const textLines = html.replace(/((li)|(div)|(ul))>/g, '$1>\n').split('\n')
+  let level = 3
+  const lines = textLines.map(line => {
+    if (line.match(/^.+<\//)) return addIntent(line, level)
+    if (line.match(/^<\//)) return addIntent(line, --level)
+    if (line.match(/\/>$/)) return addIntent(line, level)
+    return addIntent(line, level++)
+  })
+  return lines.join('\n').trimStart()
+}
 
 const results = replaceInFileSync({
   files: './dist/index.html',
   from: /<links \/>/g,
-  to: html,
+  to: formatHtml(html),
 })
 
 if (results[0]?.hasChanged) console.log('Generated no-script section')
