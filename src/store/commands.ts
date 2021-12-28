@@ -1,19 +1,36 @@
-import type { FrontMatterResult } from 'front-matter'
-import { CommandProperties, loadCommands } from '../commands/loadCommands'
 import { CommandLine, parseLines } from '../utils'
 
-export type Commands = Record<string, CommandLine[]>
-type HelpProperties = Required<CommandProperties>
+export type CommandAttributes = {
+  body: string
+  command: string
+  alias?: string[]
+  help?: string
+}
 
-function installCommands(files: FrontMatterResult<CommandProperties>[] = []): {
+type Files = Record<
+  string,
+  {
+    [key: string]: CommandAttributes
+  }
+>
+
+export type Commands = Record<string, CommandLine[]>
+type HelpProperties = Required<Omit<CommandAttributes, 'body'>>
+
+export function loadCommands(): CommandAttributes[] {
+  const files = import.meta.globEager('../commands/*.md') as Files
+  return Object.keys(files).map(file => files[file].default)
+}
+
+function installCommands(files: CommandAttributes[]): {
   commands: Commands
   help: HelpProperties[]
 } {
   const help: HelpProperties[] = []
   const commands: Commands = {}
 
-  for (const { attributes, body } of files) {
-    const lines = parseLines(body)
+  for (const attributes of files) {
+    const lines = parseLines(attributes.body)
     commands[attributes.command] = lines
     for (const alias of attributes.alias || []) {
       commands[alias] = lines
