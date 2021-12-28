@@ -4,9 +4,7 @@
   export let index: number
   export let completions: string[]
 
-  onMount(() => {
-    window.scrollTo(0, document.body.scrollHeight)
-  })
+  onMount(() => window.scrollTo(0, document.body.scrollHeight))
 </script>
 
 <li class="completions">

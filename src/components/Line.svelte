@@ -2,23 +2,20 @@
   import { marked, Renderer } from 'marked'
   import { onMount } from 'svelte'
   import { LineType } from '../store/lines'
+  import Caret from './Caret.svelte'
   import LinePrefix from './LinePrefix.svelte'
 
   export let line: LineType
 
-  Renderer.prototype.paragraph = function (text) {
-    return text + '\n'
-  }
+  Renderer.prototype.paragraph = text => text
 
-  onMount(() => {
-    window.scrollTo(0, document.body.scrollHeight)
-  })
+  onMount(() => window.scrollTo(0, document.body.scrollHeight))
 </script>
 
 <li>
   {#if line.command}
     <LinePrefix path={line.path} />
-    {line.value}{#if line.blink}<span class="blink">_</span>{/if}
+    {line.value}{#if line.blink}<Caret />{/if}
   {:else}
     <span
       style={`color: ${line.style.color};` +
@@ -38,27 +35,5 @@
 
   :global(a:hover) {
     text-decoration-line: underline;
-  }
-  .blink {
-    color: #111;
-    animation: blink 0.5s linear infinite;
-  }
-
-  @keyframes blink {
-    0% {
-      color: #aaa;
-    }
-
-    50% {
-      color: #aaa;
-    }
-
-    50.01% {
-      color: #111;
-    }
-
-    100% {
-      color: #111;
-    }
   }
 </style>
