@@ -41,5 +41,6 @@ module.exports = {
       'error',
       { allowExpressions: true },
     ],
+    curly: ['error'],
   },
 }

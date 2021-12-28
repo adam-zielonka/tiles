@@ -82,9 +82,15 @@ function formatHtml(html: string): string {
   const textLines = html.replace(/((li)|(div)|(ul))>/g, '$1>\n').split('\n')
   let level = 3
   const lines = textLines.map(line => {
-    if (line.match(/^.+<\//)) return addIntent(line, level)
-    if (line.match(/^<\//)) return addIntent(line, --level)
-    if (line.match(/\/>$/)) return addIntent(line, level)
+    if (line.match(/^.+<\//)) {
+      return addIntent(line, level)
+    }
+    if (line.match(/^<\//)) {
+      return addIntent(line, --level)
+    }
+    if (line.match(/\/>$/)) {
+      return addIntent(line, level)
+    }
     return addIntent(line, level++)
   })
   return lines.join('\n').trimStart()
@@ -106,5 +112,8 @@ const results = replaceInFileSync({
   to: formatHtml(html),
 })
 
-if (results[0]?.hasChanged) console.log('Generated no-script section')
-else console.error('Not found <links /> tag')
+if (results[0]?.hasChanged) {
+  console.log('Generated no-script section')
+} else {
+  console.error('Not found <links /> tag')
+}

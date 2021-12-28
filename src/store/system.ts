@@ -45,7 +45,9 @@ export type Style = {
 
 async function process(commandArgs: string): Promise<void> {
   const [command, ...args] = parseArgs(commandArgs)
-  if (!command) return
+  if (!command) {
+    return
+  }
 
   const style: Style = { ...STYLE_DEFAULTS }
 
