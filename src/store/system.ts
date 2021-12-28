@@ -1,6 +1,6 @@
 import { sleep } from '../utils'
 import { getCommandLines, getHelpLines } from './commands'
-import { START_COMMANDS, STYLE_DEFAULTS } from './constants'
+import { START_COMMANDS } from './constants'
 import { setFont } from './font'
 import { clearLines, processCommandLine, processLine } from './lines'
 import { cd } from './path'
@@ -37,10 +37,10 @@ function parseArgs(commandArgs: string): string[] {
     .filter(c => !!c)
 }
 
-export type Style = {
-  color: string
-  fontWeight: string
-  fontSize: string
+export class Style {
+  color = ''
+  fontWeight = ''
+  fontSize = ''
 }
 
 async function process(commandArgs: string): Promise<void> {
@@ -49,27 +49,39 @@ async function process(commandArgs: string): Promise<void> {
     return
   }
 
-  const style: Style = { ...STYLE_DEFAULTS }
+  const style: Style = new Style()
 
   for (const line of getCommandLines(command)) {
-    if (line.system) {
-      await sleep(line.time)
-      for (const systemLine of system(line.system, args)) {
-        await processLine({ value: systemLine, time: 20, style })
+    let animate = false
+    let hide = false
+
+    for (const action of line.actions) {
+      switch (action.namespace) {
+        case 'sleep':
+          await sleep(+action.action)
+          continue
+        case 'system':
+          for (const systemLine of system(action.action, args)) {
+            await processLine({ value: systemLine, style })
+          }
+          continue
+        case 'ui':
+          if (action.action === 'color') {
+            style.color = action.value
+          } else if (action.action === 'font-weight') {
+            style.fontWeight = action.value
+          } else if (action.action === 'font-size') {
+            style.fontSize = action.value
+          } else if (action.action === 'animate') {
+            animate = true
+          } else if (action.action === 'hide') {
+            hide = true
+          }
+          continue
       }
-    } else if (line.ui) {
-      if (line.ui === 'color') {
-        style.color = line.value
-      } else if (line.ui === 'font-weight') {
-        style.fontWeight = line.value
-      } else if (line.ui === 'font-size') {
-        style.fontSize = line.value
-      } else if (line.ui === 'animate') {
-        await processLine({ ...line, style }, true)
-      }
-    } else {
-      await processLine({ ...line, style })
     }
+
+    !hide && (await processLine({ ...line, style }, animate))
   }
 }
 

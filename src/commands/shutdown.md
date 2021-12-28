@@ -8,6 +8,5 @@ help: power-off the machine
 Wait ...
 [](sleep:1000)
 [](system:clear)
-
 [](sleep:1000)
 [](system:shutdown)

@@ -1,12 +1,10 @@
 import { get, writable } from 'svelte/store'
 import { sleep } from '../utils'
-import { STYLE_DEFAULTS } from './constants'
 import { path } from './path'
 import { Style } from './system'
 
 export type LineType = {
   value: string
-  time: number
   style: Style
   blink?: boolean
   command?: boolean
@@ -35,7 +33,7 @@ function updateLastLine(line: LineType): void {
 }
 
 export async function processLine(line: LineType, animate = false): Promise<void> {
-  await sleep(line.time)
+  await sleep(20)
 
   if (!animate) {
     pushLine({
@@ -47,7 +45,6 @@ export async function processLine(line: LineType, animate = false): Promise<void
 
   const commandLine = pushLine({
     value: '',
-    time: 20,
     style: line.style,
   })
   for (const l of line.value) {
@@ -67,9 +64,8 @@ export async function processCommandLine(
     pushLine({
       value: command,
       command: true,
-      time: 0,
       path: get(path),
-      style: STYLE_DEFAULTS,
+      style: new Style(),
     })
     return
   }
@@ -78,9 +74,8 @@ export async function processCommandLine(
     value: '',
     blink: true,
     command: true,
-    time: 20,
     path: get(path),
-    style: STYLE_DEFAULTS,
+    style: new Style(),
   })
   for (const c of command) {
     await sleep(50)

@@ -57,14 +57,12 @@ function renderLines(command: string): string {
     .readFileSync(`./src/commands/${command}.md`, 'utf8')
     .replace(/---[ \s\S]*---\n/, '')
 
-  const lines = parseLines(body)
-    .filter(f => !f.system || !f.ui)
-    .map(
-      line =>
-        `<li style="animation: hidden ${clock(line.time)}ms;">${marked(
-          line.value || '&nbsp;',
-        )}</li>`,
-    )
+  const lines = parseLines(body).map(
+    line =>
+      `<li style="animation: hidden ${clock(20)}ms;">${marked(
+        line.value || '&nbsp;',
+      )}</li>`,
+  )
 
   lines.shift()
   return lines.join('')

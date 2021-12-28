@@ -7,13 +7,7 @@ export type CommandAttributes = {
   help?: string
 }
 
-type Files = Record<
-  string,
-  {
-    [key: string]: CommandAttributes
-  }
->
-
+type Files = Record<string, { [key: string]: CommandAttributes }>
 export type Commands = Record<string, CommandLine[]>
 type HelpProperties = Required<Omit<CommandAttributes, 'body'>>
 
