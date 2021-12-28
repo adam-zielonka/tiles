@@ -21,11 +21,11 @@ function pushLine(line: LineType): LineType {
   return line
 }
 
-export function clearLines() {
+export function clearLines(): void {
   lines.set([])
 }
 
-function updateLastLine(line: LineType) {
+function updateLastLine(line: LineType): void {
   lines.update(_lines => {
     if (_lines.length) {
       _lines[_lines.length - 1] = line
@@ -34,7 +34,7 @@ function updateLastLine(line: LineType) {
   })
 }
 
-export async function processLine(line: LineType, animate = false) {
+export async function processLine(line: LineType, animate = false): Promise<void> {
   await sleep(line.time)
 
   if (!animate) {
@@ -57,7 +57,10 @@ export async function processLine(line: LineType, animate = false) {
   }
 }
 
-export async function processCommandLine(command: string, animate = false) {
+export async function processCommandLine(
+  command: string,
+  animate = false,
+): Promise<void> {
   lastCommand = command
 
   if (!animate) {

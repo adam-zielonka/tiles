@@ -3,85 +3,85 @@ import { replaceInFileSync } from 'replace-in-file'
 import { marked, Renderer } from 'marked'
 import { parseLines } from './utils'
 
-Renderer.prototype.paragraph = function (text) {
-  return text
-}
+Renderer.prototype.paragraph = text => text
 
-function createClock() {
-  return (
-    (clock: number) =>
-    (delay = 0) =>
-      (clock += delay)
-  )(0)
+function createClock(clock = 0): (delay?: number) => number {
+  return (delay = 0) => (clock += delay)
 }
 
 const clock = createClock()
 
-clock(100)
-
-function randomLetter() {
+function randomLetter(): string {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
 }
 
-function userLine(command: string) {
-  const splitted = command.split('')
-
-  function blinkTimes(start: number, end: number) {
-    return Math.ceil((end - start) / 500) + 2
-  }
-
-  let result = ''
-  result += 'root@adamzielonka.pro'
-    .split('')
-    .map(
-      l =>
-        `<div class="user" style="animation: hidden ${clock()}ms;">${l}</div>` +
-        `<div class="hidden">${randomLetter()}</div>`,
-    )
-    .join('')
-  result += `<div class="user-end" style="animation: hidden ${clock()}ms;">:~#&nbsp;</div>`
-  const startTime = clock()
-  clock(1000)
-  result += splitted
-    .map(
-      l => `<div class="user-end" style="animation: hidden ${clock(50)}ms;">${l}</div>`,
-    )
-    .join('')
-  result += `<div class="blink" style="animation: blink 500ms linear ${startTime}ms ${blinkTimes(
-    startTime,
-    clock(),
-  )};">_</div>`
-  clock(1000)
-  return `<li>${result}</li>`
+function split_map(text: string, fn: (letter: string) => string): string {
+  return text.split('').map(fn).join('')
 }
 
-function lines(command: string) {
-  let body = fs.readFileSync(`./src/commands/${command}.md`, 'utf8')
-  if (!body) return ''
-  body = body.replace(/---[ \s\S]*---\n/, '')
+function renderLinePrefix(): string {
+  return (
+    split_map(
+      'root@adamzielonka.pro',
+      letter =>
+        `<div class="user" style="animation: hidden ${clock()}ms;">${letter}</div>` +
+        `<div class="hidden">${randomLetter()}</div>`,
+    ) + `<div class="user-end" style="animation: hidden ${clock()}ms;">:~#&nbsp;</div>`
+  )
+}
+
+function calculateBlinkCount(startTime: number, endTime: number): number {
+  const blinkTime = 500
+  return Math.ceil((endTime - startTime) / blinkTime) + 2
+}
+
+function renderCommandLine(command: string): string {
+  const linePrefix = renderLinePrefix()
+  const startTime = clock()
+
+  clock(1000)
+
+  const lineCommand = split_map(
+    command,
+    letter =>
+      `<div class="user-end" style="animation: hidden ${clock(50)}ms;">${letter}</div>`,
+  )
+  const blinkTimes = calculateBlinkCount(startTime, clock())
+  const caret = `<div class="blink" style="animation: blink 500ms linear ${startTime}ms ${blinkTimes};">_</div>`
+
+  clock(1000)
+
+  return `<li>${linePrefix}${lineCommand}${caret}</li>`
+}
+
+function renderLines(command: string): string {
+  const body = fs
+    .readFileSync(`./src/commands/${command}.md`, 'utf8')
+    .replace(/---[ \s\S]*---\n/, '')
 
   const lines = parseLines(body)
-    .filter(f => !f.system)
+    .filter(f => !f.system || !f.ui)
     .map(
       line =>
         `<li style="animation: hidden ${clock(line.time)}ms;">${marked(
-          line.value || '\u00a0',
+          line.value || '&nbsp;',
         )}</li>`,
     )
+
   lines.shift()
   return lines.join('')
 }
 
-function runCommand(command: string) {
-  return userLine(command) + lines(command)
+function renderCommand(command: string): string {
+  return renderCommandLine(command) + renderLines(command)
 }
 
 let html =
   '<ul>' +
-  runCommand('whoami') +
-  runCommand('description') +
-  userLine('') +
-  lines('panic') +
+  renderCommand('whoami') +
+  renderCommand('description') +
+  renderCommandLine('') +
+  renderLines('panic') +
   '</ul>'
 
 html = html

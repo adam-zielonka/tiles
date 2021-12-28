@@ -4,18 +4,18 @@ export const isProcessing = writable(false)
 export const shutdown = writable(false)
 export const freeze = writable(false)
 
-export function startProcessing() {
+export function startProcessing(): void {
   isProcessing.set(true)
 }
 
-export function stopProcessing() {
+export function stopProcessing(): void {
   isProcessing.set(false)
 }
 
-export function setShutdown() {
+export function setShutdown(): void {
   shutdown.set(true)
 }
 
-export function setFreeze() {
+export function setFreeze(): void {
   freeze.set(true)
 }

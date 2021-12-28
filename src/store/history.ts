@@ -10,12 +10,12 @@ export const value = derived(
   ([$history, $position, $temporaryValue]) => $history[$position] || $temporaryValue,
 )
 
-export function setValue(value: string) {
+export function setValue(value: string): void {
   position.set(get(history).length)
   temporaryValue.set(value)
 }
 
-export function addHistory() {
+export function addHistory(): void {
   history.update(_history => {
     const _value = get(value)
     if (_value && _value !== _history[_history.length - 1]) {
@@ -26,11 +26,11 @@ export function addHistory() {
   setValue('')
 }
 
-export function historyUp() {
+export function historyUp(): void {
   position.update(_position => (_position - 1 >= 0 ? _position - 1 : _position))
 }
 
-export function historyDown() {
+export function historyDown(): void {
   position.update(_position =>
     _position + 1 <= get(history).length ? _position + 1 : _position,
   )

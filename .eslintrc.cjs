@@ -36,4 +36,10 @@ module.exports = {
   },
   plugins: ['svelte3', '@typescript-eslint'],
   ignorePatterns: ['node_modules'],
+  rules: {
+    '@typescript-eslint/explicit-function-return-type': [
+      'error',
+      { allowExpressions: true },
+    ],
+  },
 }

@@ -43,7 +43,7 @@ export type Style = {
   fontSize: string
 }
 
-async function process(commandArgs: string) {
+async function process(commandArgs: string): Promise<void> {
   const [command, ...args] = parseArgs(commandArgs)
   if (!command) return
 
@@ -71,14 +71,14 @@ async function process(commandArgs: string) {
   }
 }
 
-export async function addCommand(command: string) {
+export async function addCommand(command: string): Promise<void> {
   startProcessing()
   await processCommandLine(command)
   await process(command)
   stopProcessing()
 }
 
-async function start() {
+async function start(): Promise<void> {
   startProcessing()
   for (const command of START_COMMANDS) {
     await processCommandLine(command, true)

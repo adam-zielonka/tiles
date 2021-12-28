@@ -16,24 +16,24 @@
   let completionIndex = -1
   $: completions = getCommandCompletions($value)
 
-  function updateStartEnd() {
+  function updateStartEnd(): void {
     start = input.selectionStart || 0
     end = input.selectionEnd || 0
   }
 
-  function moveCaretToEnd() {
+  function moveCaretToEnd(): void {
     setTimeout(() => {
       input.setSelectionRange(input.value.length, input.value.length)
       updateStartEnd()
     }, 10)
   }
 
-  function resetCompletion() {
+  function resetCompletion(): void {
     showCompletion = false
     completionIndex = -1
   }
 
-  function keydown(event: KeyboardEvent) {
+  function keydown(event: KeyboardEvent): void {
     switch (event.key) {
       case 'Enter':
         if (completionIndex > -1 && completions[completionIndex]) {
@@ -75,7 +75,7 @@
     updateStartEnd()
   }
 
-  function click() {
+  function click(): void {
     input.focus()
     updateStartEnd()
   }
