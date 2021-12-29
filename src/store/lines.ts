@@ -3,20 +3,28 @@ import { sleep } from '../utils'
 import { path } from './path'
 import { Style } from './system'
 
-export type LineType = {
+type TextLineType = {
   value: string
   style: Style
-  blink?: boolean
-  command?: boolean
-  path?: string
+}
+
+type CommandLineType = {
+  value: string
+  blink: boolean
+  path: string
+}
+
+export type LineType = TextLineType | CommandLineType
+
+export function isCommandLine(line: LineType): line is CommandLineType {
+  return (<CommandLineType>line).path !== undefined
 }
 
 export const lines = writable<LineType[]>([])
 let lastCommand = ''
 
-function pushLine(line: LineType): LineType {
+function pushLine(line: LineType): void {
   lines.update(_lines => [..._lines, line])
-  return line
 }
 
 export function clearLines(): void {
@@ -32,25 +40,27 @@ function updateLastLine(line: LineType): void {
   })
 }
 
-export async function processLine(line: LineType, animate = false): Promise<void> {
+export async function processLine(line: TextLineType, animate = false): Promise<void> {
   await sleep(20)
 
+  const value = line.value.replace(/\[.*\]\(const:command\)/, lastCommand)
+
+  const textLine: TextLineType = {
+    ...line,
+    value,
+  }
+
   if (!animate) {
-    pushLine({
-      ...line,
-      value: line.value.replace(/\[.*\]\(const:command\)/, lastCommand),
-    })
+    pushLine(textLine)
     return
   }
 
-  const commandLine = pushLine({
-    value: '',
-    style: line.style,
-  })
-  for (const l of line.value) {
+  textLine.value = ''
+  pushLine(textLine)
+  for (const letter of value) {
     await sleep(100)
-    commandLine.value += l
-    updateLastLine(commandLine)
+    textLine.value += letter
+    updateLastLine(textLine)
   }
 }
 
@@ -60,26 +70,23 @@ export async function processCommandLine(
 ): Promise<void> {
   lastCommand = command
 
+  const commandLine: CommandLineType = {
+    value: command,
+    blink: false,
+    path: get(path),
+  }
+
   if (!animate) {
-    pushLine({
-      value: command,
-      command: true,
-      path: get(path),
-      style: new Style(),
-    })
+    pushLine(commandLine)
     return
   }
 
-  const commandLine = pushLine({
-    value: '',
-    blink: true,
-    command: true,
-    path: get(path),
-    style: new Style(),
-  })
-  for (const c of command) {
+  commandLine.value = ''
+  commandLine.blink = true
+  pushLine(commandLine)
+  for (const letter of command) {
     await sleep(50)
-    commandLine.value += c
+    commandLine.value += letter
     updateLastLine(commandLine)
   }
   await sleep(1000)

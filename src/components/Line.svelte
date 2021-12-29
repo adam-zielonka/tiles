@@ -1,7 +1,7 @@
 <script lang="ts">
   import { marked, Renderer } from 'marked'
   import { onMount } from 'svelte'
-  import { LineType } from '../store/lines'
+  import { isCommandLine, LineType } from '../store/lines'
   import Caret from './Caret.svelte'
   import LinePrefix from './LinePrefix.svelte'
 
@@ -13,7 +13,7 @@
 </script>
 
 <li>
-  {#if line.command}
+  {#if isCommandLine(line)}
     <LinePrefix path={line.path} />
     {line.value}{#if line.blink}<Caret />{/if}
   {:else}
