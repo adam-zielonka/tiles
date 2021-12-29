@@ -1,5 +1,6 @@
 import { get, writable } from 'svelte/store'
 import { sleep } from '../utils'
+import { lastCommand } from './history'
 import { path } from './path'
 import { Style } from './system'
 
@@ -21,7 +22,6 @@ export function isCommandLine(line: LineType): line is CommandLineType {
 }
 
 export const lines = writable<LineType[]>([])
-let lastCommand = ''
 
 function pushLine(line: LineType): void {
   lines.update(_lines => [..._lines, line])
@@ -43,7 +43,7 @@ function updateLastLine(line: LineType): void {
 export async function processLine(line: TextLineType, animate = false): Promise<void> {
   await sleep(20)
 
-  const value = line.value.replace(/\[.*\]\(const:command\)/, lastCommand)
+  const value = line.value.replace(/\[.*\]\(const:command\)/, get(lastCommand))
 
   const textLine: TextLineType = {
     ...line,
@@ -68,8 +68,6 @@ export async function processCommandLine(
   command: string,
   animate = false,
 ): Promise<void> {
-  lastCommand = command
-
   const commandLine: CommandLineType = {
     value: command,
     blink: false,

@@ -10,6 +10,11 @@ export const value = derived(
   ([$history, $position, $temporaryValue]) => $history[$position] || $temporaryValue,
 )
 
+export const lastCommand = derived(
+  history,
+  $history => $history[$history.length - 1] || '',
+)
+
 export function setValue(value: string): void {
   position.set(get(history).length)
   temporaryValue.set(value)
