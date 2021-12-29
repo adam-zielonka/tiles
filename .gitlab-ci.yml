@@ -35,6 +35,18 @@ lint:
   needs:
     - build
 
+check:
+  stage: test
+  script:
+    - npm install -g pnpm
+    - pnpm install
+    - pnpm check
+  cache:
+    paths:
+      - node_modules
+  needs:
+    - build
+
 pages:
   image: alpine
   variables:

@@ -6,3 +6,6 @@
 
 /src/postBuild.js
 /.eslintrc.js
+/.eslintrc.cjs
+/vite.config.js
+/svelte.config.js
