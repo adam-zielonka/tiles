@@ -58,11 +58,11 @@ export class Commands {
     )
   }
 
-  getCommandLines(command: string): CommandLine[] {
+  getLines(command: string): CommandLine[] {
     return this.commands[this.commands[command] ? command : 'notFound']
   }
 
-  getCommandCompletions(command: string): string[] {
+  getCompletions(command: string): string[] {
     return Object.keys(this.commands).filter(c => c.startsWith(command) && c !== command)
   }
 }

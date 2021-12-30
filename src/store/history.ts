@@ -14,23 +14,23 @@ export class History extends SubscribableStore {
     return this.history[this.history.length - 1] || ''
   }
 
-  setValue(value: string): void {
+  set(value: string): void {
     this.position = this.history.length
     this.temporaryValue = value
   }
 
-  addHistory(): void {
+  add(): void {
     if (this.value && this.value !== this.history[this.history.length - 1]) {
       this.history = [...this.history, this.value]
     }
-    this.setValue('')
+    this.set('')
   }
 
-  historyUp(): void {
+  up(): void {
     this.position - 1 >= 0 && --this.position
   }
 
-  historyDown(): void {
+  down(): void {
     this.position + 1 <= this.history.length && ++this.position
   }
 }

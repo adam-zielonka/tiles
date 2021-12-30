@@ -15,7 +15,7 @@
 
   let showCompletion = false
   let completionIndex = -1
-  $: completions = commands.getCommandCompletions($history.value)
+  $: completions = commands.getCompletions($history.value)
 
   function updateStartEnd(): void {
     start = input.selectionStart || 0
@@ -38,29 +38,29 @@
     switch (event.key) {
       case 'Enter':
         if (completionIndex > -1 && completions[completionIndex]) {
-          history.setValue(`${completions[completionIndex]} `)
+          history.set(`${completions[completionIndex]} `)
           resetCompletion()
         } else {
           void addCommand($history.value)
-          history.addHistory()
+          history.add()
         }
         break
       case 'ArrowUp':
         event.preventDefault()
-        history.historyUp()
+        history.up()
         moveCaretToEnd()
         resetCompletion()
         break
       case 'ArrowDown':
         event.preventDefault()
-        history.historyDown()
+        history.down()
         moveCaretToEnd()
         resetCompletion()
         break
       case 'Tab':
         event.preventDefault()
         if (completions.length === 1) {
-          history.setValue(completions[0])
+          history.set(completions[0])
           moveCaretToEnd()
         }
         if (showCompletion) {
@@ -105,7 +105,7 @@
     on:keypress={updateStartEnd}
     on:change={updateStartEnd}
     on:input={e => {
-      history.setValue(e.currentTarget.value)
+      history.set(e.currentTarget.value)
       updateStartEnd()
     }}
   />

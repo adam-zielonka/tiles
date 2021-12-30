@@ -49,7 +49,7 @@ async function process(commandArgs: string): Promise<void> {
 
   const style: Style = new Style()
 
-  for (const line of store.commands.getCommandLines(command)) {
+  for (const line of store.commands.getLines(command)) {
     let animate = false
     let hide = false
 
