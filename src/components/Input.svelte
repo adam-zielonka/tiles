@@ -5,11 +5,9 @@
   import LinePrefix from './LinePrefix.svelte'
   import InputText from './InputText.svelte'
   import { path } from '../store/path'
-  import { getCommandCompletions } from '../store/commands'
   import Completion from './Completion.svelte'
 
-  const { history } = store
-  const { addHistory, setValue, historyDown, historyUp } = history
+  const { history, commands } = store
 
   let input: HTMLInputElement
   let start = 0
@@ -17,7 +15,7 @@
 
   let showCompletion = false
   let completionIndex = -1
-  $: completions = getCommandCompletions($history.value)
+  $: completions = commands.getCommandCompletions($history.value)
 
   function updateStartEnd(): void {
     start = input.selectionStart || 0
@@ -40,29 +38,29 @@
     switch (event.key) {
       case 'Enter':
         if (completionIndex > -1 && completions[completionIndex]) {
-          setValue(`${completions[completionIndex]} `)
+          history.setValue(`${completions[completionIndex]} `)
           resetCompletion()
         } else {
           void addCommand($history.value)
-          addHistory()
+          history.addHistory()
         }
         break
       case 'ArrowUp':
         event.preventDefault()
-        historyUp()
+        history.historyUp()
         moveCaretToEnd()
         resetCompletion()
         break
       case 'ArrowDown':
         event.preventDefault()
-        historyDown()
+        history.historyDown()
         moveCaretToEnd()
         resetCompletion()
         break
       case 'Tab':
         event.preventDefault()
         if (completions.length === 1) {
-          setValue(completions[0])
+          history.setValue(completions[0])
           moveCaretToEnd()
         }
         if (showCompletion) {
@@ -107,7 +105,7 @@
     on:keypress={updateStartEnd}
     on:change={updateStartEnd}
     on:input={e => {
-      setValue(e.currentTarget.value)
+      history.setValue(e.currentTarget.value)
       updateStartEnd()
     }}
   />

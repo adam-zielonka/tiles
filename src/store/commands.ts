@@ -1,3 +1,4 @@
+import autoBind from 'auto-bind'
 import { CommandLine, parseLines } from '../utils'
 
 export type CommandAttributes = {
@@ -8,19 +9,19 @@ export type CommandAttributes = {
 }
 type Files = Record<string, { default: CommandAttributes }>
 type HelpProperties = Required<Omit<CommandAttributes, 'body'>>
-export type Commands = Record<string, CommandLine[]>
+export type CommandsLines = Record<string, CommandLine[]>
 
-export function loadCommands(): CommandAttributes[] {
+function loadCommands(): CommandAttributes[] {
   const files = import.meta.globEager('../commands/*.md') as Files
   return Object.keys(files).map(file => files[file].default)
 }
 
 function installCommands(files: CommandAttributes[]): {
-  commands: Commands
+  commands: CommandsLines
   help: HelpProperties[]
 } {
   const help: HelpProperties[] = []
-  const commands: Commands = {}
+  const commands: CommandsLines = {}
 
   for (const attributes of files) {
     const lines = parseLines(attributes.body)
@@ -40,18 +41,28 @@ function installCommands(files: CommandAttributes[]): {
   return { commands, help }
 }
 
-const { commands, help } = installCommands(loadCommands())
+export class Commands {
+  private commands: CommandsLines = {}
+  private help: HelpProperties[] = []
 
-export function getCommandLines(command: string): CommandLine[] {
-  return commands[commands[command] ? command : 'notFound']
-}
+  constructor() {
+    const { commands, help } = installCommands(loadCommands())
+    this.commands = commands
+    this.help = help
+    autoBind(this)
+  }
 
-export function getHelpLines(): string[] {
-  return help.map(
-    ({ command, alias, help }) => `**${[command, ...alias].join(' | ')}** - ${help}`,
-  )
-}
+  get helpLines(): string[] {
+    return this.help.map(
+      ({ command, alias, help }) => `**${[command, ...alias].join(' | ')}** - ${help}`,
+    )
+  }
 
-export function getCommandCompletions(command: string): string[] {
-  return Object.keys(commands).filter(c => c.startsWith(command) && c !== command)
+  getCommandLines(command: string): CommandLine[] {
+    return this.commands[this.commands[command] ? command : 'notFound']
+  }
+
+  getCommandCompletions(command: string): string[] {
+    return Object.keys(this.commands).filter(c => c.startsWith(command) && c !== command)
+  }
 }

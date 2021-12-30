@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import * as commands from './commands'
+import { Commands } from './commands'
 import * as constants from './constants'
 import { Font } from './font'
 import { History } from './history'
@@ -10,7 +10,7 @@ import * as system from './system'
 
 class Store {
   get = get
-  commands = commands
+  commands = new Commands()
   constants = constants
   font = new Font()
   history = new History()

@@ -1,5 +1,4 @@
 import { sleep } from '../utils'
-import { getCommandLines, getHelpLines } from './commands'
 import { START_COMMANDS } from './constants'
 import { clearLines, processCommandLine, processLine } from './lines'
 import { cd } from './path'
@@ -24,7 +23,7 @@ function system(sysCommand: string, args: string[]): string[] {
       cd(args.length ? args.join(' ') : '')
       return []
     case 'help':
-      return getHelpLines()
+      return store.commands.helpLines
     default:
       return []
   }
@@ -50,7 +49,7 @@ async function process(commandArgs: string): Promise<void> {
 
   const style: Style = new Style()
 
-  for (const line of getCommandLines(command)) {
+  for (const line of store.commands.getCommandLines(command)) {
     let animate = false
     let hide = false
 
