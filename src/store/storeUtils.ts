@@ -4,10 +4,8 @@ export class SubscribableStore {
   subscribers: Array<(value: typeof this) => void> = []
 
   constructor() {
-    setTimeout(() => {
-      makeAutoNotify(this)
-      autoBind(this)
-    })
+    autoBind(this)
+    setTimeout(() => makeAutoNotify(this))
   }
 
   subscribe = (subscriber: (value: typeof this) => void): (() => void) => {
