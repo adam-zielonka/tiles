@@ -1,5 +1,6 @@
 import { sleep } from '../utils'
 import { store } from './store'
+import { SubscribableStore } from './storeUtils'
 
 function system(sysCommand: string, args: string[]): string[] {
   switch (sysCommand) {
@@ -7,10 +8,10 @@ function system(sysCommand: string, args: string[]): string[] {
       store.lines.clear()
       return []
     case 'shutdown':
-      store.state.setShutdown()
+      store.system.setShutdown()
       return []
     case 'freeze':
-      store.state.setFreeze()
+      store.system.setFreeze()
       return []
     case 'echo':
       return [args.join(' ')]
@@ -80,20 +81,42 @@ async function process(commandArgs: string): Promise<void> {
   }
 }
 
-export async function addCommand(command: string): Promise<void> {
-  store.state.startProcessing()
-  await store.lines.processCommandLine(command)
-  await process(command)
-  store.state.stopProcessing()
-}
+export class System extends SubscribableStore {
+  isProcessing = false
+  shutdown = false
+  freeze = false
 
-export async function start(startCommands: string[]): Promise<void> {
-  store.state.startProcessing()
-  for (const command of startCommands) {
-    store.history.set(command)
-    store.history.add()
-    await store.lines.processCommandLine(command, true)
-    await process(command)
+  startProcessing(): void {
+    this.isProcessing = true
   }
-  store.state.stopProcessing()
+
+  stopProcessing(): void {
+    this.isProcessing = false
+  }
+
+  setShutdown(): void {
+    this.shutdown = true
+  }
+
+  setFreeze(): void {
+    this.freeze = true
+  }
+
+  async addCommand(command: string): Promise<void> {
+    store.system.startProcessing()
+    await store.lines.processCommandLine(command)
+    await process(command)
+    store.system.stopProcessing()
+  }
+
+  async start(startCommands: string[]): Promise<void> {
+    store.system.startProcessing()
+    for (const command of startCommands) {
+      store.history.set(command)
+      store.history.add()
+      await store.lines.processCommandLine(command, true)
+      await process(command)
+    }
+    store.system.stopProcessing()
+  }
 }

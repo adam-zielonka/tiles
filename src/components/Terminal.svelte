@@ -4,10 +4,10 @@
   import Shutdown from './Shutdown.svelte'
   import { store } from '../store/store'
 
-  const { state, font, lines } = store
+  const { system, font, lines } = store
 </script>
 
-{#if $state.shutdown}
+{#if $system.shutdown}
   <Shutdown />
 {:else}
   <div style={`font-family: ${$font.value}`}>
@@ -16,7 +16,7 @@
         <Line {line} />
       {/each}
 
-      {#if !$state.isProcessing && !$state.freeze}
+      {#if !$system.isProcessing && !$system.freeze}
         <Input />
       {/if}
     </ul>

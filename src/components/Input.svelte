@@ -1,12 +1,11 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte'
   import { store } from '../store/store'
-  import { addCommand } from '../store/system'
   import LinePrefix from './LinePrefix.svelte'
   import InputText from './InputText.svelte'
   import Completion from './Completion.svelte'
 
-  const { history, commands, path } = store
+  const { history, commands, path, system } = store
 
   let input: HTMLInputElement
   let start = 0
@@ -40,7 +39,7 @@
           history.set(`${completions[completionIndex]} `)
           resetCompletion()
         } else {
-          void addCommand($history.value)
+          void system.addCommand($history.value)
           history.add()
         }
         break
