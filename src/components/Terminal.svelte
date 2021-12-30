@@ -4,7 +4,9 @@
   import Shutdown from './Shutdown.svelte'
   import { font } from '../store/font'
   import { lines } from '../store/lines'
-  import { state } from '../store/state'
+  import { store } from '../store/store'
+
+  const { state } = store
 </script>
 
 {#if $state.shutdown}

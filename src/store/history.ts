@@ -1,42 +1,36 @@
-import { writable, derived, get } from 'svelte/store'
 import { START_COMMANDS } from './constants'
+import { SubscribableStore } from './storeUtils'
 
-const history = writable<string[]>(START_COMMANDS)
-const position = writable(START_COMMANDS.length)
-const temporaryValue = writable('')
+export class History extends SubscribableStore {
+  private history: string[] = [...START_COMMANDS]
+  private position = START_COMMANDS.length
+  private temporaryValue = ''
 
-export const value = derived(
-  [history, position, temporaryValue],
-  ([$history, $position, $temporaryValue]) => $history[$position] || $temporaryValue,
-)
+  get value(): string {
+    return this.history[this.position] || this.temporaryValue
+  }
 
-export const lastCommand = derived(
-  history,
-  $history => $history[$history.length - 1] || '',
-)
+  get lastCommand(): string {
+    return this.history[this.history.length - 1] || ''
+  }
 
-export function setValue(value: string): void {
-  position.set(get(history).length)
-  temporaryValue.set(value)
-}
+  setValue = (value: string): void => {
+    this.position = this.history.length
+    this.temporaryValue = value
+  }
 
-export function addHistory(): void {
-  history.update(_history => {
-    const _value = get(value)
-    if (_value && _value !== _history[_history.length - 1]) {
-      return [..._history, _value]
+  addHistory = (): void => {
+    if (this.value && this.value !== this.history[this.history.length - 1]) {
+      this.history = [...this.history, this.value]
     }
-    return _history
-  })
-  setValue('')
-}
+    this.setValue('')
+  }
 
-export function historyUp(): void {
-  position.update(_position => (_position - 1 >= 0 ? _position - 1 : _position))
-}
+  historyUp = (): void => {
+    this.position - 1 >= 0 && --this.position
+  }
 
-export function historyDown(): void {
-  position.update(_position =>
-    _position + 1 <= get(history).length ? _position + 1 : _position,
-  )
+  historyDown = (): void => {
+    this.position + 1 <= this.history.length && ++this.position
+  }
 }

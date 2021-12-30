@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 import { sleep } from '../utils'
-import { lastCommand } from './history'
+import { store } from './store'
 import { path } from './path'
 import { Style } from './system'
 
@@ -43,7 +43,7 @@ function updateLastLine(line: LineType): void {
 export async function processLine(line: TextLineType, animate = false): Promise<void> {
   await sleep(20)
 
-  const value = line.value.replace(/\[.*\]\(const:command\)/, get(lastCommand))
+  const value = line.value.replace(/\[.*\]\(const:command\)/, store.history.lastCommand)
 
   const textLine: TextLineType = {
     ...line,

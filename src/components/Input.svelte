@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte'
-  import { value, addHistory, setValue, historyDown, historyUp } from '../store/history'
+  import { store } from '../store/store'
   import { addCommand } from '../store/system'
   import LinePrefix from './LinePrefix.svelte'
   import InputText from './InputText.svelte'
@@ -8,13 +8,16 @@
   import { getCommandCompletions } from '../store/commands'
   import Completion from './Completion.svelte'
 
+  const { history } = store
+  const { addHistory, setValue, historyDown, historyUp } = history
+
   let input: HTMLInputElement
   let start = 0
   let end = 0
 
   let showCompletion = false
   let completionIndex = -1
-  $: completions = getCommandCompletions($value)
+  $: completions = getCommandCompletions($history.value)
 
   function updateStartEnd(): void {
     start = input.selectionStart || 0
@@ -40,7 +43,7 @@
           setValue(`${completions[completionIndex]} `)
           resetCompletion()
         } else {
-          void addCommand($value)
+          void addCommand($history.value)
           addHistory()
         }
         break
@@ -94,9 +97,9 @@
 
 <li>
   <LinePrefix path={$path} />
-  <InputText value={$value} {start} {end} />
+  <InputText value={$history.value} {start} {end} />
   <input
-    value={$value}
+    value={$history.value}
     bind:this={input}
     on:select={updateStartEnd}
     on:keyup={updateStartEnd}

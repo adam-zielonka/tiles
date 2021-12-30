@@ -1,6 +1,6 @@
-import { Store } from './storeUtils'
+import { SubscribableStore } from './storeUtils'
 
-class State extends Store {
+export class State extends SubscribableStore {
   isProcessing = false
   shutdown = false
   freeze = false
@@ -25,5 +25,3 @@ class State extends Store {
     this.freeze = true
   }
 }
-
-export const state = new State()

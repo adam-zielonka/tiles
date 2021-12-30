@@ -1,4 +1,4 @@
-export class Store {
+export class SubscribableStore {
   subscribers: Array<(value: typeof this) => void> = []
 
   constructor() {
@@ -14,12 +14,11 @@ export class Store {
   }
 
   notify = (): void => {
-    console.log('notify')
     this.subscribers.forEach(s => s(this))
   }
 }
 
-export function makeAutoNotify<T extends Store>(self: T): void {
+export function makeAutoNotify<T extends SubscribableStore>(self: T): void {
   const properties = Object.entries(self).filter(
     ([key, value]) => typeof value !== 'function' && key !== 'subscribers',
   )

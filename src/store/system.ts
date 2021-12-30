@@ -4,9 +4,7 @@ import { START_COMMANDS } from './constants'
 import { setFont } from './font'
 import { clearLines, processCommandLine, processLine } from './lines'
 import { cd } from './path'
-import { state } from './state'
-
-const { setFreeze, setShutdown, startProcessing, stopProcessing } = state
+import { store } from './store'
 
 function system(sysCommand: string, args: string[]): string[] {
   switch (sysCommand) {
@@ -14,10 +12,10 @@ function system(sysCommand: string, args: string[]): string[] {
       clearLines()
       return []
     case 'shutdown':
-      setShutdown()
+      store.state.setShutdown()
       return []
     case 'freeze':
-      setFreeze()
+      store.state.setFreeze()
       return []
     case 'echo':
       return [args.join(' ')]
@@ -88,19 +86,17 @@ async function process(commandArgs: string): Promise<void> {
 }
 
 export async function addCommand(command: string): Promise<void> {
-  startProcessing()
+  store.state.startProcessing()
   await processCommandLine(command)
   await process(command)
-  stopProcessing()
+  store.state.stopProcessing()
 }
 
-async function start(): Promise<void> {
-  startProcessing()
+export async function start(): Promise<void> {
+  store.state.startProcessing()
   for (const command of START_COMMANDS) {
     await processCommandLine(command, true)
     await process(command)
   }
-  stopProcessing()
+  store.state.stopProcessing()
 }
-
-setTimeout(() => void start())
