@@ -1,7 +1,5 @@
-import { get } from 'svelte/store'
 import { sleep } from '../utils'
 import { store } from './store'
-import { path } from './path'
 import { Style } from './system'
 import { SubscribableStore } from './storeUtils'
 
@@ -68,7 +66,7 @@ export class Lines extends SubscribableStore {
     const commandLine: CommandLineType = {
       value: command,
       blink: false,
-      path: get(path),
+      path: store.path.value,
     }
 
     if (!animate) {

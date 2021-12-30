@@ -4,10 +4,9 @@
   import { addCommand } from '../store/system'
   import LinePrefix from './LinePrefix.svelte'
   import InputText from './InputText.svelte'
-  import { path } from '../store/path'
   import Completion from './Completion.svelte'
 
-  const { history, commands } = store
+  const { history, commands, path } = store
 
   let input: HTMLInputElement
   let start = 0
@@ -94,7 +93,7 @@
 </script>
 
 <li>
-  <LinePrefix path={$path} />
+  <LinePrefix path={$path.value} />
   <InputText value={$history.value} {start} {end} />
   <input
     value={$history.value}

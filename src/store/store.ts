@@ -4,7 +4,7 @@ import * as constants from './constants'
 import { Font } from './font'
 import { History } from './history'
 import { Lines } from './lines'
-import * as path from './path'
+import { Path } from './path'
 import { State } from './state'
 import * as system from './system'
 
@@ -15,7 +15,7 @@ class Store {
   font = new Font()
   history = new History()
   lines = new Lines()
-  path = path
+  path = new Path()
   state = new State()
   system = system
 }

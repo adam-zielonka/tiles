@@ -1,32 +1,36 @@
-import { writable } from 'svelte/store'
+import { SubscribableStore } from './storeUtils'
 
-export const path = writable('~')
-
-export function cd(newDir: string): void {
-  path.update(dir => {
-    if (newDir === '..') {
-      const parts = dir.split('/')
-      parts.pop()
-      if (parts.length === 0 || parts[0] === '') {
-        return '/'
-      }
-      return parts.join('/')
-    } else if (newDir === '.') {
-      return dir
-    } else if (newDir === '~') {
-      return '~'
-    } else if (newDir === '') {
-      return dir
-    } else if (newDir.startsWith('/')) {
-      return newDir
-        .replace(/\/\//, '/')
-        .replace(/.\/$/, '')
-        .replace(/^\/root/, '~')
-    } else {
-      return `${dir}/${newDir}`
-        .replace(/\/\//, '/')
-        .replace(/.\/$/, '')
-        .replace(/^\/root/, '~')
+function cd(dir: string, newDir: string): string {
+  if (newDir === '..') {
+    const parts = dir.split('/')
+    parts.pop()
+    if (parts.length === 0 || parts[0] === '') {
+      return '/'
     }
-  })
+    return parts.join('/')
+  } else if (newDir === '.') {
+    return dir
+  } else if (newDir === '~') {
+    return '~'
+  } else if (newDir === '') {
+    return dir
+  } else if (newDir.startsWith('/')) {
+    return newDir
+      .replace(/\/\//, '/')
+      .replace(/.\/$/, '')
+      .replace(/^\/root/, '~')
+  } else {
+    return `${dir}/${newDir}`
+      .replace(/\/\//, '/')
+      .replace(/.\/$/, '')
+      .replace(/^\/root/, '~')
+  }
+}
+
+export class Path extends SubscribableStore {
+  value = '~'
+
+  cd(newDir: string): void {
+    this.value = cd(this.value, newDir)
+  }
 }

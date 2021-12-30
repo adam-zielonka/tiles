@@ -1,6 +1,5 @@
 import { sleep } from '../utils'
 import { START_COMMANDS } from './constants'
-import { cd } from './path'
 import { store } from './store'
 
 function system(sysCommand: string, args: string[]): string[] {
@@ -19,7 +18,7 @@ function system(sysCommand: string, args: string[]): string[] {
     case 'font':
       return store.font.set(args.length ? args.join(' ') : '')
     case 'cd':
-      cd(args.length ? args.join(' ') : '')
+      store.path.cd(args.length ? args.join(' ') : '')
       return []
     case 'help':
       return store.commands.helpLines
