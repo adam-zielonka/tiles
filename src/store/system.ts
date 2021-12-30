@@ -1,13 +1,12 @@
 import { sleep } from '../utils'
 import { START_COMMANDS } from './constants'
-import { clearLines, processCommandLine, processLine } from './lines'
 import { cd } from './path'
 import { store } from './store'
 
 function system(sysCommand: string, args: string[]): string[] {
   switch (sysCommand) {
     case 'clear':
-      clearLines()
+      store.lines.clear()
       return []
     case 'shutdown':
       store.state.setShutdown()
@@ -60,7 +59,7 @@ async function process(commandArgs: string): Promise<void> {
           continue
         case 'system':
           for (const systemLine of system(action.action, args)) {
-            await processLine({ value: systemLine, style })
+            await store.lines.processLine({ value: systemLine, style })
           }
           continue
         case 'ui':
@@ -79,13 +78,13 @@ async function process(commandArgs: string): Promise<void> {
       }
     }
 
-    !hide && (await processLine({ value: line.value, style }, animate))
+    !hide && (await store.lines.processLine({ value: line.value, style }, animate))
   }
 }
 
 export async function addCommand(command: string): Promise<void> {
   store.state.startProcessing()
-  await processCommandLine(command)
+  await store.lines.processCommandLine(command)
   await process(command)
   store.state.stopProcessing()
 }
@@ -93,7 +92,7 @@ export async function addCommand(command: string): Promise<void> {
 export async function start(): Promise<void> {
   store.state.startProcessing()
   for (const command of START_COMMANDS) {
-    await processCommandLine(command, true)
+    await store.lines.processCommandLine(command, true)
     await process(command)
   }
   store.state.stopProcessing()

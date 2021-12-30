@@ -2,10 +2,9 @@
   import Input from './Input.svelte'
   import Line from './Line.svelte'
   import Shutdown from './Shutdown.svelte'
-  import { lines } from '../store/lines'
   import { store } from '../store/store'
 
-  const { state, font } = store
+  const { state, font, lines } = store
 </script>
 
 {#if $state.shutdown}
@@ -13,7 +12,7 @@
 {:else}
   <div style={`font-family: ${$font.value}`}>
     <ul>
-      {#each $lines as line}
+      {#each $lines.value as line}
         <Line {line} />
       {/each}
 

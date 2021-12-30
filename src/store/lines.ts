@@ -1,8 +1,9 @@
-import { get, writable } from 'svelte/store'
+import { get } from 'svelte/store'
 import { sleep } from '../utils'
 import { store } from './store'
 import { path } from './path'
 import { Style } from './system'
+import { SubscribableStore } from './storeUtils'
 
 type TextLineType = {
   value: string
@@ -21,73 +22,70 @@ export function isCommandLine(line: LineType): line is CommandLineType {
   return (<CommandLineType>line).path !== undefined
 }
 
-export const lines = writable<LineType[]>([])
+export class Lines extends SubscribableStore {
+  value: LineType[] = []
 
-function pushLine(line: LineType): void {
-  lines.update(_lines => [..._lines, line])
-}
+  private push(line: LineType): void {
+    this.value = [...this.value, line]
+  }
 
-export function clearLines(): void {
-  lines.set([])
-}
+  clear(): void {
+    this.value = []
+  }
 
-function updateLastLine(line: LineType): void {
-  lines.update(_lines => {
-    if (_lines.length) {
-      _lines[_lines.length - 1] = line
+  updateLast(line: LineType): void {
+    if (this.value.length) {
+      this.value[this.value.length - 1] = line
     }
-    return [..._lines]
-  })
-}
-
-export async function processLine(line: TextLineType, animate = false): Promise<void> {
-  await sleep(20)
-
-  const value = line.value.replace(/\[.*\]\(const:command\)/, store.history.lastCommand)
-
-  const textLine: TextLineType = {
-    ...line,
-    value,
+    this.value = [...this.value]
   }
 
-  if (!animate) {
-    pushLine(textLine)
-    return
+  async processLine(line: TextLineType, animate = false): Promise<void> {
+    await sleep(20)
+
+    const value = line.value.replace(/\[.*\]\(const:command\)/, store.history.lastCommand)
+
+    const textLine: TextLineType = {
+      ...line,
+      value,
+    }
+
+    if (!animate) {
+      this.push(textLine)
+      return
+    }
+
+    textLine.value = ''
+    this.push(textLine)
+    for (const letter of value) {
+      await sleep(100)
+      textLine.value += letter
+      this.updateLast(textLine)
+    }
   }
 
-  textLine.value = ''
-  pushLine(textLine)
-  for (const letter of value) {
-    await sleep(100)
-    textLine.value += letter
-    updateLastLine(textLine)
-  }
-}
+  async processCommandLine(command: string, animate = false): Promise<void> {
+    const commandLine: CommandLineType = {
+      value: command,
+      blink: false,
+      path: get(path),
+    }
 
-export async function processCommandLine(
-  command: string,
-  animate = false,
-): Promise<void> {
-  const commandLine: CommandLineType = {
-    value: command,
-    blink: false,
-    path: get(path),
-  }
+    if (!animate) {
+      this.push(commandLine)
+      return
+    }
 
-  if (!animate) {
-    pushLine(commandLine)
-    return
+    commandLine.value = ''
+    commandLine.blink = true
+    this.push(commandLine)
+    for (const letter of command) {
+      await sleep(50)
+      commandLine.value += letter
+      this.updateLast(commandLine)
+    }
+    await sleep(1000)
+    commandLine.blink = false
+    this.updateLast(commandLine)
   }
-
-  commandLine.value = ''
-  commandLine.blink = true
-  pushLine(commandLine)
-  for (const letter of command) {
-    await sleep(50)
-    commandLine.value += letter
-    updateLastLine(commandLine)
-  }
-  await sleep(1000)
-  commandLine.blink = false
-  updateLastLine(commandLine)
 }
