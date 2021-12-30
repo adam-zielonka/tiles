@@ -26,7 +26,7 @@ function isFontExist(font: string): boolean {
 export class Font extends SubscribableStore {
   value = ''
 
-  set = (font: string): string[] => {
+  set(font: string): string[] {
     if (!isFontExist(font) && font) {
       return [`Font family **'${font}'** is not installed`]
     }

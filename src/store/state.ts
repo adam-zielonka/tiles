@@ -5,23 +5,19 @@ export class State extends SubscribableStore {
   shutdown = false
   freeze = false
 
-  private setIsProcessing = (isProcessing: boolean): void => {
-    this.isProcessing = isProcessing
+  startProcessing(): void {
+    this.isProcessing = true
   }
 
-  startProcessing = (): void => {
-    this.setIsProcessing(true)
+  stopProcessing(): void {
+    this.isProcessing = false
   }
 
-  stopProcessing = (): void => {
-    this.setIsProcessing(false)
-  }
-
-  setShutdown = (): void => {
+  setShutdown(): void {
     this.shutdown = true
   }
 
-  setFreeze = (): void => {
+  setFreeze(): void {
     this.freeze = true
   }
 }
