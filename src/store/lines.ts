@@ -24,7 +24,7 @@ export class Lines extends SubscribableStore {
   value: LineType[] = []
 
   private push(line: LineType): void {
-    this.value = [...this.value, line]
+    this.value.push(line)
   }
 
   clear(): void {
@@ -35,7 +35,6 @@ export class Lines extends SubscribableStore {
     if (this.value.length) {
       this.value[this.value.length - 1] = line
     }
-    this.value = [...this.value]
   }
 
   async processLine(line: TextLineType, animate = false): Promise<void> {

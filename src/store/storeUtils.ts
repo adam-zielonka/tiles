@@ -8,7 +8,7 @@ export class SubscribableStore {
     setTimeout(() => makeAutoNotify(this))
   }
 
-  subscribe = (subscriber: (value: typeof this) => void): (() => void) => {
+  subscribe(subscriber: (value: typeof this) => void): () => void {
     this.subscribers.push(subscriber)
     subscriber(this)
     return () => {
@@ -16,9 +16,22 @@ export class SubscribableStore {
     }
   }
 
-  notify = (): void => {
+  notify(): void {
     this.subscribers.forEach(s => s(this))
   }
+}
+
+function proxyToArray(array: unknown[], notify: () => void): unknown[] {
+  return new Proxy(array, {
+    get(target, property): unknown {
+      return target[property as unknown as number]
+    },
+    set(target, property, value): boolean {
+      target[property as unknown as number] = value
+      notify()
+      return true
+    },
+  })
 }
 
 export function makeAutoNotify<T extends SubscribableStore>(self: T): void {
@@ -26,11 +39,15 @@ export function makeAutoNotify<T extends SubscribableStore>(self: T): void {
     ([key, value]) => typeof value !== 'function' && key !== 'subscribers',
   )
   const record: Record<string, unknown> = {}
+
   for (const [key, value] of properties) {
-    record[key] = value
+    record[key] = Array.isArray(value) ? proxyToArray(value, () => self.notify()) : value
+
     Object.defineProperty(self, key, {
       set: (value: unknown) => {
-        record[key] = value
+        record[key] = Array.isArray(value)
+          ? proxyToArray(value, () => self.notify())
+          : value
         self.notify()
       },
       get: () => {

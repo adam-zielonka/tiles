@@ -20,7 +20,7 @@ export class History extends SubscribableStore {
 
   add(): void {
     if (this.value && this.value !== this.history[this.history.length - 1]) {
-      this.history = [...this.history, this.value]
+      this.history.push(this.value)
     }
     this.set('')
   }
