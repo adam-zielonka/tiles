@@ -82,24 +82,35 @@ async function process(commandArgs: string): Promise<void> {
 }
 
 export class System extends SubscribableStore {
-  isProcessing = false
-  shutdown = false
-  freeze = false
+  private state: 'processing' | 'shutdown' | 'freeze' | '' = ''
+  get isProcessing(): boolean {
+    return this.state === 'processing'
+  }
+
+  get shutdown(): boolean {
+    return this.state === 'shutdown'
+  }
+
+  get freeze(): boolean {
+    return this.state === 'freeze'
+  }
 
   startProcessing(): void {
-    this.isProcessing = true
+    this.state = 'processing'
   }
 
   stopProcessing(): void {
-    this.isProcessing = false
+    if (this.state === 'processing') {
+      this.state = ''
+    }
   }
 
   setShutdown(): void {
-    this.shutdown = true
+    this.state = 'shutdown'
   }
 
   setFreeze(): void {
-    this.freeze = true
+    this.state = 'freeze'
   }
 
   async addCommand(command: string): Promise<void> {
