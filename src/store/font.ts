@@ -1,6 +1,4 @@
-import { writable } from 'svelte/store'
-
-export const font = writable('')
+import { SubscribableStore } from './storeUtils'
 
 function fontCompare(font: string, baseFont: string): boolean {
   const context = document.createElement('canvas').getContext('2d')
@@ -25,11 +23,15 @@ function isFontExist(font: string): boolean {
   )
 }
 
-export function setFont(newFont: string): string[] {
-  if (!isFontExist(newFont) && newFont) {
-    return [`Font family **'${newFont}'** is not installed`]
-  }
+export class Font extends SubscribableStore {
+  value = ''
 
-  font.set(`${newFont ? newFont + ', ' : ''}"Courier New", Courier, monospace`)
-  return []
+  set = (font: string): string[] => {
+    if (!isFontExist(font) && font) {
+      return [`Font family **'${font}'** is not installed`]
+    }
+
+    this.value = `${font ? font + ', ' : ''}"Courier New", Courier, monospace`
+    return []
+  }
 }

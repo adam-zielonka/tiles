@@ -1,7 +1,6 @@
 import { sleep } from '../utils'
 import { getCommandLines, getHelpLines } from './commands'
 import { START_COMMANDS } from './constants'
-import { setFont } from './font'
 import { clearLines, processCommandLine, processLine } from './lines'
 import { cd } from './path'
 import { store } from './store'
@@ -20,7 +19,7 @@ function system(sysCommand: string, args: string[]): string[] {
     case 'echo':
       return [args.join(' ')]
     case 'font':
-      return setFont(args.length ? args.join(' ') : '')
+      return store.font.set(args.length ? args.join(' ') : '')
     case 'cd':
       cd(args.length ? args.join(' ') : '')
       return []
