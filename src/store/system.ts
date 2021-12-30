@@ -1,5 +1,4 @@
 import { sleep } from '../utils'
-import { START_COMMANDS } from './constants'
 import { store } from './store'
 
 function system(sysCommand: string, args: string[]): string[] {
@@ -88,9 +87,11 @@ export async function addCommand(command: string): Promise<void> {
   store.state.stopProcessing()
 }
 
-export async function start(): Promise<void> {
+export async function start(startCommands: string[]): Promise<void> {
   store.state.startProcessing()
-  for (const command of START_COMMANDS) {
+  for (const command of startCommands) {
+    store.history.set(command)
+    store.history.add()
     await store.lines.processCommandLine(command, true)
     await process(command)
   }

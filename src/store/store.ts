@@ -1,6 +1,4 @@
-import { get } from 'svelte/store'
 import { Commands } from './commands'
-import * as constants from './constants'
 import { Font } from './font'
 import { History } from './history'
 import { Lines } from './lines'
@@ -9,9 +7,7 @@ import { State } from './state'
 import * as system from './system'
 
 class Store {
-  get = get
   commands = new Commands()
-  constants = constants
   font = new Font()
   history = new History()
   lines = new Lines()
@@ -21,7 +17,7 @@ class Store {
 }
 
 export const store = new Store()
-void store.system.start()
+void store.system.start(['whoami', 'description'])
 
 declare global {
   interface Window {

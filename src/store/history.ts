@@ -1,9 +1,8 @@
-import { START_COMMANDS } from './constants'
 import { SubscribableStore } from './storeUtils'
 
 export class History extends SubscribableStore {
-  private history: string[] = [...START_COMMANDS]
-  private position = START_COMMANDS.length
+  private history: string[] = []
+  private position = 0
   private temporaryValue = ''
 
   get value(): string {
