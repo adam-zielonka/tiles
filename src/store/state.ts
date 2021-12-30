@@ -1,21 +1,29 @@
-import { writable } from 'svelte/store'
+import { Store } from './storeUtils'
 
-export const isProcessing = writable(false)
-export const shutdown = writable(false)
-export const freeze = writable(false)
+class State extends Store {
+  isProcessing = false
+  shutdown = false
+  freeze = false
 
-export function startProcessing(): void {
-  isProcessing.set(true)
+  private setIsProcessing = (isProcessing: boolean): void => {
+    this.isProcessing = isProcessing
+  }
+
+  startProcessing = (): void => {
+    this.setIsProcessing(true)
+  }
+
+  stopProcessing = (): void => {
+    this.setIsProcessing(false)
+  }
+
+  setShutdown = (): void => {
+    this.shutdown = true
+  }
+
+  setFreeze = (): void => {
+    this.freeze = true
+  }
 }
 
-export function stopProcessing(): void {
-  isProcessing.set(false)
-}
-
-export function setShutdown(): void {
-  shutdown.set(true)
-}
-
-export function setFreeze(): void {
-  freeze.set(true)
-}
+export const state = new State()

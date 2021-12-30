@@ -6,6 +6,7 @@
     "build": "vite build && pnpm postbuild",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
+    "check-watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "postbuild": "node --loader ts-node/esm ./src/postBuild.ts",
     "format": "prettier --write --plugin-search-dir=. ./src/**/*.{js,svelte,html,ts}",
     "lint": "eslint './src/**/*.{js,ts,svelte}'",

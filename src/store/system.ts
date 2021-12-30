@@ -4,7 +4,9 @@ import { START_COMMANDS } from './constants'
 import { setFont } from './font'
 import { clearLines, processCommandLine, processLine } from './lines'
 import { cd } from './path'
-import { setFreeze, setShutdown, startProcessing, stopProcessing } from './state'
+import { state } from './state'
+
+const { setFreeze, setShutdown, startProcessing, stopProcessing } = state
 
 function system(sysCommand: string, args: string[]): string[] {
   switch (sysCommand) {
