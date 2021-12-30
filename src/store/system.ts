@@ -83,16 +83,13 @@ async function process(commandArgs: string): Promise<void> {
 
 export class System extends SubscribableStore {
   private state: 'processing' | 'shutdown' | 'freeze' | '' = ''
-  get isProcessing(): boolean {
-    return this.state === 'processing'
-  }
 
   get shutdown(): boolean {
     return this.state === 'shutdown'
   }
 
-  get freeze(): boolean {
-    return this.state === 'freeze'
+  get isInputAllowed(): boolean {
+    return !['freeze', 'processing'].includes(this.state)
   }
 
   startProcessing(): void {

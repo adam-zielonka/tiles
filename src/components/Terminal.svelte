@@ -16,7 +16,7 @@
         <Line {line} />
       {/each}
 
-      {#if !$system.isProcessing && !$system.freeze}
+      {#if $system.isInputAllowed}
         <Input />
       {/if}
     </ul>
