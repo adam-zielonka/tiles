@@ -1,6 +1,6 @@
 import autoBind from 'auto-bind'
 
-export class SubscribableStore {
+export abstract class SubscribableStore {
   subscribers: Array<(value: typeof this) => void> = []
 
   constructor() {
