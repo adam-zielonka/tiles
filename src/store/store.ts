@@ -1,16 +1,16 @@
 import { Commands } from './commands'
-import { Font } from './font'
 import { History } from './history'
 import { Lines } from './lines'
 import { Path } from './path'
+import { Style } from './style'
 import { System } from './system'
 
 class Store {
   commands = new Commands()
-  font = new Font()
   history = new History()
   lines = new Lines()
   path = new Path()
+  style = new Style()
   system = new System()
 }
 

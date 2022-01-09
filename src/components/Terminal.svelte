@@ -4,15 +4,15 @@
   import Shutdown from './Shutdown.svelte'
   import { store } from '../store/store'
 
-  const { system, font, lines } = store
+  const { system, style, lines } = store
 </script>
 
 {#if $system.shutdown}
   <Shutdown />
 {:else}
-  <div style={`font-family: ${$font.value}`}>
+  <div style={`font-family: ${$style.font}`}>
     <ul>
-      {#each $lines.value as line}
+      {#each $lines as line}
         <Line {line} />
       {/each}
 

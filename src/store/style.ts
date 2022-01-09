@@ -23,15 +23,15 @@ function isFontExist(font: string): boolean {
   )
 }
 
-export class Font extends SubscribableStore {
-  value = ''
+export class Style extends SubscribableStore {
+  font = ''
 
   set(font: string): string[] {
     if (!isFontExist(font) && font) {
       return [`Font family **'${font}'** is not installed`]
     }
 
-    this.value = `${font ? font + ', ' : ''}"Courier New", Courier, monospace`
+    this.font = `${font ? font + ', ' : ''}"Courier New", Courier, monospace`
     return []
   }
 }

@@ -1,7 +1,7 @@
 import { sleep } from '../utils'
 import { store } from './store'
 import { Style } from './system'
-import { SubscribableStore } from './storeUtils'
+import { SubscribableArray } from './storeUtils'
 
 type TextLineType = {
   value: string
@@ -20,21 +20,23 @@ export function isCommandLine(line: LineType): line is CommandLineType {
   return (<CommandLineType>line).path !== undefined
 }
 
-export class Lines extends SubscribableStore {
-  value: LineType[] = []
-
-  private push(line: LineType): void {
-    this.value.push(line)
+export class Lines extends SubscribableArray<LineType> {
+  push(...line: LineType[]): number {
+    const number = super.push(...line)
+    this.notify()
+    return number
   }
 
   clear(): void {
-    this.value = []
+    this.splice(0, this.length)
+    this.notify()
   }
 
   updateLast(line: LineType): void {
-    if (this.value.length) {
-      this.value[this.value.length - 1] = line
+    if (this.length) {
+      this[this.length - 1] = line
     }
+    this.notify()
   }
 
   async processLine(line: TextLineType, animate = false): Promise<void> {

@@ -21,6 +21,27 @@ export abstract class SubscribableStore {
   }
 }
 
+export abstract class SubscribableArray<T> extends Array<T> {
+  subscribers: Array<(value: typeof this) => void> = []
+
+  constructor(...items: T[]) {
+    super(...items)
+    autoBind(this)
+  }
+
+  subscribe(subscriber: (value: typeof this) => void): () => void {
+    this.subscribers.push(subscriber)
+    subscriber(this)
+    return () => {
+      this.subscribers = this.subscribers.filter(s => s !== subscriber)
+    }
+  }
+
+  notify(): void {
+    this.subscribers.forEach(s => s(this))
+  }
+}
+
 function proxyToArray(array: unknown[], notify: () => void): unknown[] {
   return new Proxy(array, {
     get(target, property): unknown {
