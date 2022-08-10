@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   '@sveltejs/vite-plugin-svelte': ^1.0.0-next.32
@@ -30,8 +30,8 @@ dependencies:
   '@tsconfig/svelte': 2.0.1
   '@types/marked': 4.0.1
   '@types/node': 17.0.5
-  '@typescript-eslint/eslint-plugin': 5.8.1_3a47348159e115370aa4cba56aba33b6
-  '@typescript-eslint/parser': 5.8.1_eslint@8.5.0+typescript@4.5.4
+  '@typescript-eslint/eslint-plugin': 5.8.1_hjdtjakz4ektocvezoswvortwy
+  '@typescript-eslint/parser': 5.8.1_2ogcmk6jnbn3xmgrqg7cazyxl4
   auto-bind: 5.0.1
   eslint: 8.5.0
   eslint-config-prettier: 8.3.0_eslint@8.5.0
@@ -39,13 +39,13 @@ dependencies:
   front-matter: 4.0.2
   marked: 4.0.8
   prettier: 2.5.1
-  prettier-plugin-svelte: 2.5.1_prettier@2.5.1+svelte@3.44.3
+  prettier-plugin-svelte: 2.5.1_2d5j24vruagh2a5fnoq5h6zw2m
   replace-in-file: 6.3.2
   sass: 1.45.1
   svelte: 3.44.3
   svelte-check: 2.2.11_sass@1.45.1+svelte@3.44.3
-  svelte-preprocess: 4.10.1_af932a5b536abf3276c46b38a946bc7b
-  ts-node: 10.4.0_bad060d5f9aca5284661d88d739ba15b
+  svelte-preprocess: 4.10.1_v6jsuw2tnk7te5wenm4ksrv4pm
+  ts-node: 10.4.0_xligbvpzvsssqrtb3cgxhg5blm
   tslib: 2.3.1
   typescript: 4.5.4
   vite: 2.7.7_sass@1.45.1
@@ -190,7 +190,7 @@ packages:
       '@types/node': 17.0.5
     dev: false
 
-  /@typescript-eslint/eslint-plugin/5.8.1_3a47348159e115370aa4cba56aba33b6:
+  /@typescript-eslint/eslint-plugin/5.8.1_hjdtjakz4ektocvezoswvortwy:
     resolution: {integrity: sha512-wTZ5oEKrKj/8/366qTM366zqhIKAp6NCMweoRONtfuC07OAU9nVI2GZZdqQ1qD30WAAtcPdkH+npDwtRFdp4Rw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -201,8 +201,8 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/experimental-utils': 5.8.1_eslint@8.5.0+typescript@4.5.4
-      '@typescript-eslint/parser': 5.8.1_eslint@8.5.0+typescript@4.5.4
+      '@typescript-eslint/experimental-utils': 5.8.1_2ogcmk6jnbn3xmgrqg7cazyxl4
+      '@typescript-eslint/parser': 5.8.1_2ogcmk6jnbn3xmgrqg7cazyxl4
       '@typescript-eslint/scope-manager': 5.8.1
       debug: 4.3.3
       eslint: 8.5.0
@@ -216,7 +216,7 @@ packages:
       - supports-color
     dev: false
 
-  /@typescript-eslint/experimental-utils/5.8.1_eslint@8.5.0+typescript@4.5.4:
+  /@typescript-eslint/experimental-utils/5.8.1_2ogcmk6jnbn3xmgrqg7cazyxl4:
     resolution: {integrity: sha512-fbodVnjIDU4JpeXWRDsG5IfIjYBxEvs8EBO8W1+YVdtrc2B9ppfof5sZhVEDOtgTfFHnYQJDI8+qdqLYO4ceww==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -234,7 +234,7 @@ packages:
       - typescript
     dev: false
 
-  /@typescript-eslint/parser/5.8.1_eslint@8.5.0+typescript@4.5.4:
+  /@typescript-eslint/parser/5.8.1_2ogcmk6jnbn3xmgrqg7cazyxl4:
     resolution: {integrity: sha512-K1giKHAjHuyB421SoXMXFHHVI4NdNY603uKw92++D3qyxSeYvC10CBJ/GE5Thpo4WTUvu1mmJI2/FFkz38F2Gw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -1252,7 +1252,7 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: false
 
-  /prettier-plugin-svelte/2.5.1_prettier@2.5.1+svelte@3.44.3:
+  /prettier-plugin-svelte/2.5.1_2d5j24vruagh2a5fnoq5h6zw2m:
     resolution: {integrity: sha512-IhZUcqr7Bg4LY15d87t9lDr7EyC0IPehkzH5ya5igG8zYwf3UYaYDFnVW2mckREaZyLREcH9YOouesmt4f5Ozg==}
     peerDependencies:
       prettier: ^1.16.4 || ^2.0.0
@@ -1486,7 +1486,7 @@ packages:
       sade: 1.7.4
       source-map: 0.7.3
       svelte: 3.44.3
-      svelte-preprocess: 4.10.1_af932a5b536abf3276c46b38a946bc7b
+      svelte-preprocess: 4.10.1_v6jsuw2tnk7te5wenm4ksrv4pm
       typescript: 4.5.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -1509,7 +1509,7 @@ packages:
       svelte: 3.44.3
     dev: false
 
-  /svelte-preprocess/4.10.1_af932a5b536abf3276c46b38a946bc7b:
+  /svelte-preprocess/4.10.1_v6jsuw2tnk7te5wenm4ksrv4pm:
     resolution: {integrity: sha512-NSNloaylf+o9UeyUR2KvpdxrAyMdHl3U7rMnoP06/sG0iwJvlUM4TpMno13RaNqovh4AAoGsx1jeYcIyuGUXMw==}
     engines: {node: '>= 9.11.2'}
     requiresBuild: true
@@ -1577,7 +1577,7 @@ packages:
       is-number: 7.0.0
     dev: false
 
-  /ts-node/10.4.0_bad060d5f9aca5284661d88d739ba15b:
+  /ts-node/10.4.0_xligbvpzvsssqrtb3cgxhg5blm:
     resolution: {integrity: sha512-g0FlPvvCXSIO1JDF6S232P5jPYqBkRL9qly81ZgAOSU7rwI0stphCgd2kLiCrU9DjQCrJMWEqcNSjQL02s6d8A==}
     hasBin: true
     peerDependencies:
