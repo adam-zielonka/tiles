@@ -12,8 +12,8 @@ Adam Zielonka
 
 **[REPO]**  
 [gitlab.com/adam-zielonka-pro](https://gitlab.com/adam-zielonka-pro)  
-[git.adamzielonka.pro/adam-zielonka-pro](https://git.adamzielonka.pro/adam-zielonka-pro) [MIRROR]  
 [github.com/adam-zielonka](https://github.com/adam-zielonka) [MIRROR]  
+[git.adamzielonka.pro/adam-zielonka-pro](https://git.adamzielonka.pro/adam-zielonka-pro) [MIRROR]  
 
 **[YouTube]**  
 [Code in the Machine](https://www.youtube.com/channel/UC9ndsm1I60DjsIqEh1XITRQ)
