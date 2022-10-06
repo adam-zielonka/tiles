@@ -20,7 +20,7 @@ Adam Zielonka
 
 **[APPS]**  
 adamzielonka.pro: [Source](https://github.com/adam-zielonka/adamzielonka.pro), [Run](https://adamzielonka.pro/)  
-Questions: [Source](https://gitlab.com/adam-zielonka-pro/questions), [Run](https://questions.adamzielonka.pro/)  
+Questions: [Source](https://github.com/adam-zielonka/questions), [Run](https://questions.adamzielonka.pro/)  
 Server Status: [Source](https://gitlab.com/adam-zielonka-pro/server-status), [Demo](https://fake-status.adamzielonka.pro/)  
 Unit Converter: [Source](https://github.com/adam-zielonka/unit-converter), [Google Play](https://play.google.com/store/apps/details?id=pro.adamzielonka.converter)  
 paintAZ: [Source](https://gitlab.com/adam-zielonka-pro/paintaz)  
