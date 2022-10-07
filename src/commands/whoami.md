@@ -11,8 +11,7 @@ Adam Zielonka
 [root@adamzielonka.pro](mailto:root@adamzielonka.pro)
 
 **[REPO]**  
-main: [github](https://github.com/adam-zielonka)  
-mirrors: [gitlab](https://gitlab.com/adam-zielonka-pro), [gitea](https://git.adamzielonka.pro/adam-zielonka)  
+[github.com/adam-zielonka](https://github.com/adam-zielonka)   
 
 **[YouTube]**  
 [Code in the Machine](https://www.youtube.com/channel/UC9ndsm1I60DjsIqEh1XITRQ)
