@@ -1,6 +1,6 @@
 ---
 command: git
-alias: [mirror, mirrors]
+alias: [mirror]
 help: show main and mirrors git repository urls
 ---
 
