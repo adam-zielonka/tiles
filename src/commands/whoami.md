@@ -12,7 +12,7 @@ Adam Zielonka
 
 **[REPO]**  
 main: [github](https://github.com/adam-zielonka)  
-mirrors: [gitlab](https://gitlab.com/adam-zielonka-pro), [gitea](https://git.adamzielonka.pro/adam-zielonka-pro)  
+mirrors: [gitlab](https://gitlab.com/adam-zielonka-pro), [gitea](https://git.adamzielonka.pro/adam-zielonka)  
 
 **[YouTube]**  
 [Code in the Machine](https://www.youtube.com/channel/UC9ndsm1I60DjsIqEh1XITRQ)
