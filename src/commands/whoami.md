@@ -11,9 +11,8 @@ Adam Zielonka
 [root@adamzielonka.pro](mailto:root@adamzielonka.pro)
 
 **[REPO]**  
-[github.com/adam-zielonka](https://github.com/adam-zielonka)  
-[gitlab.com/adam-zielonka-pro](https://gitlab.com/adam-zielonka-pro) [MIRROR]  
-[git.adamzielonka.pro/adam-zielonka-pro](https://git.adamzielonka.pro/adam-zielonka-pro) [MIRROR]  
+main: [github](https://github.com/adam-zielonka)  
+mirrors: [gitlab](https://gitlab.com/adam-zielonka-pro), [gitea](https://git.adamzielonka.pro/adam-zielonka-pro)  
 
 **[YouTube]**  
 [Code in the Machine](https://www.youtube.com/channel/UC9ndsm1I60DjsIqEh1XITRQ)
@@ -21,18 +20,18 @@ Adam Zielonka
 **[APPS]**  
 adamzielonka.pro: [Source](https://github.com/adam-zielonka/adamzielonka.pro), [Run](https://adamzielonka.pro/)  
 Questions: [Source](https://github.com/adam-zielonka/questions), [Run](https://questions.adamzielonka.pro/)  
-Server Status: [Source](https://gitlab.com/adam-zielonka-pro/server-status), [Demo](https://fake-status.adamzielonka.pro/)  
+Server Status: [Source](https://github.com/adam-zielonka/server-status), [Demo](https://fake-status.adamzielonka.pro/)  
 Unit Converter: [Source](https://github.com/adam-zielonka/unit-converter), [Google Play](https://play.google.com/store/apps/details?id=pro.adamzielonka.converter)  
-paintAZ: [Source](https://gitlab.com/adam-zielonka-pro/paintaz)  
-mobx-example: [Source](https://gitlab.com/adam-zielonka-pro/mobx-example), [Demo](https://mobx-example.adamzielonka.pro/)  
-svelte-example: [Source](https://gitlab.com/adam-zielonka-pro/svelte-example), [Demo](https://svelte-example.adamzielonka.pro/)
+paintAZ: [Source](https://github.com/adam-zielonka/paintaz)  
+mobx-example: [Source](https://github.com/adam-zielonka/mobx-example), [Demo](https://mobx-example.adamzielonka.pro/)  
+svelte-example: [Source](https://github.com/adam-zielonka/svelte-example), [Demo](https://svelte-example.adamzielonka.pro/)
 
 **[GAMES]**  
-Deska: [Source](https://gitlab.com/adam-zielonka-pro/deska), [Play](https://deska.adamzielonka.pro/)  
-Saper: [Source](https://gitlab.com/adam-zielonka-pro/saper), [Play](https://saper.adamzielonka.pro/)  
-Tetris: [Source](https://gitlab.com/adam-zielonka-pro/tetris)  
-Ships: [Source](https://gitlab.com/adam-zielonka-pro/statki), [Play](https://statki.adamzielonka.pro/)  
-GameOfLife: [Source](https://gitlab.com/adam-zielonka-pro/game-of-life), [Play](https://game-of-life.adamzielonka.pro/)  
-Pan: [Source](https://gitlab.com/adam-zielonka-pro/pan), [Play](https://pan.adamzielonka.pro/)  
-Chińczyk: [Source](https://gitlab.com/adam-zielonka-pro/chinczyk), [Play](https://chinczyk.adamzielonka.pro/)  
+Deska: [Source](https://github.com/adam-zielonka/deska), [Play](https://deska.adamzielonka.pro/)  
+Saper: [Source](https://github.com/adam-zielonka/saper), [Play](https://saper.adamzielonka.pro/)  
+Tetris: [Source](https://github.com/adam-zielonka/tetris)  
+Ships: [Source](https://github.com/adam-zielonka/statki), [Play](https://statki.adamzielonka.pro/)  
+GameOfLife: [Source](https://github.com/adam-zielonka/game-of-life), [Play](https://game-of-life.adamzielonka.pro/)  
+Pan: [Source](https://github.com/adam-zielonka/pan), [Play](https://pan.adamzielonka.pro/)  
+Chińczyk: [Source](https://github.com/adam-zielonka/chinczyk), [Play](https://chinczyk.adamzielonka.pro/)  
 [](sleep:400)
