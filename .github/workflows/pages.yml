@@ -33,7 +33,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Cache
-        uses: actions/cache@v3.0.10
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
