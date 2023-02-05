@@ -1,7 +1,7 @@
-import { sleep } from '../utils'
-import { store } from './store'
-import { Style } from './system'
-import { SubscribableArray } from './storeUtils'
+import { makeAutoObservable } from "mobx";
+import { sleep } from "../utils";
+import { store } from "./store";
+import { Style } from "./system";
 
 type TextLineType = {
   value: string
@@ -17,49 +17,52 @@ type CommandLineType = {
 export type LineType = TextLineType | CommandLineType
 
 export function isCommandLine(line: LineType): line is CommandLineType {
-  return (<CommandLineType>line).path !== undefined
+  return (<CommandLineType>line).path !== undefined;
 }
 
-export class Lines extends SubscribableArray<LineType> {
+export class Lines {
+  value: LineType[] = [];
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
   push(...line: LineType[]): number {
-    const number = super.push(...line)
-    this.notify()
-    return number
+    const number = this.value.push(...line);
+    return number;
   }
 
   clear(): void {
-    this.splice(0, this.length)
-    this.notify()
+    this.value.splice(0, this.value.length);
   }
 
   updateLast(line: LineType): void {
-    if (this.length) {
-      this[this.length - 1] = line
+    if (this.value.length) {
+      this.value[this.value.length - 1] = line;
     }
-    this.notify()
   }
 
   async processLine(line: TextLineType, animate = false): Promise<void> {
-    await sleep(20)
+    await sleep(20);
 
-    const value = line.value.replace(/\[.*\]\(const:command\)/, store.history.lastCommand)
+    const value = line.value.replace(/\[.*\]\(const:command\)/, store.history.lastCommand);
 
     const textLine: TextLineType = {
       ...line,
       value,
-    }
+    };
 
     if (!animate) {
-      this.push(textLine)
-      return
+      this.push(textLine);
+      return;
     }
 
-    textLine.value = ''
-    this.push(textLine)
+    textLine.value = "";
+    this.push(textLine);
     for (const letter of value) {
-      await sleep(100)
-      textLine.value += letter
-      this.updateLast(textLine)
+      await sleep(100);
+      textLine.value += letter;
+      this.updateLast(textLine);
     }
   }
 
@@ -68,23 +71,23 @@ export class Lines extends SubscribableArray<LineType> {
       value: command,
       blink: false,
       path: store.path.value,
-    }
+    };
 
     if (!animate) {
-      this.push(commandLine)
-      return
+      this.push(commandLine);
+      return;
     }
 
-    commandLine.value = ''
-    commandLine.blink = true
-    this.push(commandLine)
+    commandLine.value = "";
+    commandLine.blink = true;
+    this.push(commandLine);
     for (const letter of command) {
-      await sleep(50)
-      commandLine.value += letter
-      this.updateLast(commandLine)
+      await sleep(50);
+      commandLine.value += letter;
+      this.updateLast(commandLine);
     }
-    await sleep(1000)
-    commandLine.blink = false
-    this.updateLast(commandLine)
+    await sleep(1000);
+    commandLine.blink = false;
+    this.updateLast(commandLine);
   }
 }

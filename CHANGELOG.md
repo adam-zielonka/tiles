@@ -41,3 +41,7 @@ In August 2019, I had the breakdown. I rewrite the terminal code, that me allow 
 In December 2021, My friend told me that Svelte is something nicer to use, so here we are, and the new version of this website is base on Svelte. I need to admit that styles, html and scripts in one file look attractive for me. And it works pretty well for me. But stores, needs from me some efforts to understand similar but different approach like in Mobx, but in the end in three days I rewrote app to new technology.
 
 ![](./img/2021-12-26.3.png)
+
+## Back to React
+
+On 5th February 2023, I just wanna switch back to React in this project. And I did it. I didn't look to my older react code, but I focus to rewrite components that I wrote in Svelte. And it wasn't difficult. One day was enough to do it.
