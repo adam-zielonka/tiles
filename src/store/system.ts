@@ -16,9 +16,9 @@ function system(sysCommand: string, args: string[]): string[] {
   case "echo":
     return [args.join(" ")];
   case "font":
-    return store.style.set(args.length ? args.join(" ") : "");
+    return store.style.set(args.join(" "));
   case "cd":
-    store.path.cd(args.length ? args.join(" ") : "");
+    store.path.cd(args.join(" "));
     return [];
   case "help":
     return store.commands.helpLines;

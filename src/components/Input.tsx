@@ -1,9 +1,9 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useRef, useState } from "react";
 import { store } from "../store/store";
-import "./Input.scss";
 import { LinePrefix } from "./LinePrefix";
 import { InputText } from "./InputText";
+import "./Input.scss";
 
 export const Input = observer(() => {
   const { history, path, system, completion } = store;
