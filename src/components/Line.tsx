@@ -1,6 +1,6 @@
 import { marked, Renderer } from "marked";
 import { useEffect } from "react";
-import { isCommandLine, LineType } from "../store/lines";
+import { isCommandLine, LineType } from "../store/output";
 import { LinePrefix } from "./LinePrefix";
 import { Caret } from "./Caret";
 import "./Line.scss";

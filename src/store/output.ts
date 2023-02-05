@@ -20,25 +20,25 @@ export function isCommandLine(line: LineType): line is CommandLineType {
   return (<CommandLineType>line).path !== undefined;
 }
 
-export class Lines {
-  value: LineType[] = [];
+export class Output {
+  lines: LineType[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
   push(...line: LineType[]): number {
-    const number = this.value.push(...line);
+    const number = this.lines.push(...line);
     return number;
   }
 
   clear(): void {
-    this.value.splice(0, this.value.length);
+    this.lines.splice(0, this.lines.length);
   }
 
   updateLast(line: LineType): void {
-    if (this.value.length) {
-      this.value[this.value.length - 1] = line;
+    if (this.lines.length) {
+      this.lines[this.lines.length - 1] = line;
     }
   }
 

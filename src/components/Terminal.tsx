@@ -13,7 +13,7 @@ export const Terminal = observer(() => {
 
   return <div className="Terminal" style={{fontFamily: store.style.font}}>
     <ul>
-      {store.lines.value.map((line, i) => <Line key={i} line={line}/> )}
+      {store.output.lines.map((line, i) => <Line key={i} line={line}/> )}
       {store.system.isInputAllowed && <Input/>}
       <Completion/>
     </ul>

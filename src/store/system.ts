@@ -5,7 +5,7 @@ import { store } from "./store";
 function system(sysCommand: string, args: string[]): string[] {
   switch (sysCommand) {
   case "clear":
-    store.lines.clear();
+    store.output.clear();
     return [];
   case "shutdown":
     store.system.setShutdown();
@@ -58,7 +58,7 @@ async function process(commandArgs: string): Promise<void> {
         continue;
       case "system":
         for (const systemLine of system(action.action, args)) {
-          await store.lines.processLine({ value: systemLine, style });
+          await store.output.processLine({ value: systemLine, style });
         }
         continue;
       case "ui":
@@ -77,7 +77,7 @@ async function process(commandArgs: string): Promise<void> {
       }
     }
 
-    !hide && (await store.lines.processLine({ value: line.value, style }, animate));
+    !hide && (await store.output.processLine({ value: line.value, style }, animate));
   }
 }
 
@@ -116,7 +116,7 @@ export class System {
 
   async addCommand(command: string): Promise<void> {
     store.system.startProcessing();
-    await store.lines.processCommandLine(command);
+    await store.output.processCommandLine(command);
     await process(command);
     store.system.stopProcessing();
   }
@@ -126,7 +126,7 @@ export class System {
     for (const command of startCommands) {
       store.history.set(command);
       store.history.add();
-      await store.lines.processCommandLine(command, true);
+      await store.output.processCommandLine(command, true);
       await process(command);
     }
     store.system.stopProcessing();
