@@ -6,7 +6,7 @@ import { LinePrefix } from "./LinePrefix";
 import { InputText } from "./InputText";
 
 export const Input = observer(() => {
-  const { history, path, system } = store;
+  const { history, path, system, completion } = store;
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [position, setPosition] = useState({ start: 0, end: 0 });
@@ -28,12 +28,11 @@ export const Input = observer(() => {
   function keydown(event: KeyboardEvent): void {
     switch (event.key) {
     case "Enter":
-      if (history.completionIndex > -1 && history.completions[history.completionIndex]) {
-        history.set(`${history.completions[history.completionIndex]} `);
-        history.resetCompletions();
-        console.log("history.value", history.value);
+      if (completion.selected) {
+        history.set(completion.selected);
+        completion.reset();
       } else {
-        history.resetCompletions();
+        completion.reset();
         void system.addCommand(history.value);
         history.add();
       }
@@ -42,17 +41,22 @@ export const Input = observer(() => {
       event.preventDefault();
       history.up();
       moveCaretToEnd();
-      history.resetCompletions();
+      completion.reset();
       break;
     case "ArrowDown":
       event.preventDefault();
       history.down();
       moveCaretToEnd();
-      history.resetCompletions();
+      completion.reset();
       break;
     case "Tab":
       event.preventDefault();
-      history.nextCompletion();
+      if (completion.theOne) {
+        history.set(completion.theOne);
+        completion.reset();
+      } else {
+        completion.next(); 
+      }
       break;
     }
 

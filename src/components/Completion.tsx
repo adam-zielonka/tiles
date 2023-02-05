@@ -1,9 +1,17 @@
+import { observer } from "mobx-react-lite";
+import { store } from "../store/store";
 import "./Completion.scss";
 
-export function Completion(props: { completions: string[], index: number }) {
+export const Completion = observer(() => {
+  const { list, index, isVisible } = store.completion;
+
+  if (!isVisible) {
+    return null;
+  }
+
   return <li className="Completion">
-    {props.completions.map((completion, i) => <div key={i} className={i === props.index ? "active" : ""}>
+    {list.map((completion, i) => <div key={i} className={i === index ? "active" : ""}>
       {completion}
     </div>)}
   </li>;
-}
+});

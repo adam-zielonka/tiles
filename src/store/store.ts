@@ -1,3 +1,4 @@
+import { Completion } from "./completion";
 import { Commands } from "./commands";
 import { History } from "./history";
 import { Lines } from "./lines";
@@ -12,6 +13,7 @@ class Store {
   path = new Path();
   style = new Style();
   system = new System();
+  completion = new Completion();
 }
 
 export const store = new Store();

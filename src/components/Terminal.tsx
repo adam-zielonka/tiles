@@ -11,13 +11,11 @@ export const Terminal = observer(() => {
     return <Shutdown/>;
   }
 
-  const { history } = store;
-
   return <div className="Terminal" style={{fontFamily: store.style.font}}>
     <ul>
       {store.lines.value.map((line, i) => <Line key={i} line={line}/> )}
       {store.system.isInputAllowed && <Input/>}
-      {history.showCompletion && <Completion completions={history.completions} index={history.completionIndex}/>}
+      <Completion/>
     </ul>
   </div>;
 });

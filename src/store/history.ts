@@ -1,11 +1,9 @@
 import { makeAutoObservable } from "mobx";
-import { store } from "./store";
 
 export class History {
   private history: string[] = [];
   private position = 0;
   private temporaryValue = "";
-  completionIndex = -1;
 
   constructor() {
     makeAutoObservable(this);
@@ -17,29 +15,6 @@ export class History {
 
   get lastCommand(): string {
     return this.history[this.history.length - 1] || "";
-  }
-
-  get completions(): string[] {
-    return store.commands.getCompletions(this.value);
-  }
-
-  get showCompletion(): boolean {
-    return this.completionIndex >= 0;
-  }
-
-  resetCompletions(): void {
-    this.completionIndex = -1;
-  }
-
-  nextCompletion(): void {
-    if (this.completions.length === 1) {
-      this.set(this.completions[0]);
-    } else {
-      this.completionIndex =
-      this.completionIndex + 1 < this.completions.length
-        ? this.completionIndex + 1
-        : 0;
-    }
   }
 
   set(value: string): void {

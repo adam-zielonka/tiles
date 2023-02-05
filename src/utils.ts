@@ -34,5 +34,3 @@ export function parseLines(body: string): CommandLine[] {
 
   return lines;
 }
-
-export default parseLines;
