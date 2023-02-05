@@ -1,16 +1,17 @@
-import { defineConfig } from "vite";
+import { defineConfig, PluginOption } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import frontMatter from "front-matter";
 
-const markdownProcessor = {
+const markdownProcessor: PluginOption = {
   name: "markdown-processor",
   transform: (code, id) => {
     if (!id.endsWith(".md")) return null;
 
-    const { attributes, body } = frontMatter(code);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { attributes, body } = frontMatter<any>(code);
 
     return `export default ${JSON.stringify({
-      ...attributes as any,
+      ...attributes,
       body,
     })}`;
   },
