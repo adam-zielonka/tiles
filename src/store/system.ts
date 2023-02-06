@@ -4,26 +4,26 @@ import { store } from "./store";
 
 function system(sysCommand: string, args: string[]): string[] {
   switch (sysCommand) {
-  case "clear":
-    store.output.clear();
-    return [];
-  case "shutdown":
-    store.system.setShutdown();
-    return [];
-  case "freeze":
-    store.system.setFreeze();
-    return [];
-  case "echo":
-    return [args.join(" ")];
-  case "font":
-    return store.style.set(args.join(" "));
-  case "cd":
-    store.path.cd(args.join(" "));
-    return [];
-  case "help":
-    return store.commands.helpLines;
-  default:
-    return [];
+    case "clear":
+      store.output.clear();
+      return [];
+    case "shutdown":
+      store.system.setShutdown();
+      return [];
+    case "freeze":
+      store.system.setFreeze();
+      return [];
+    case "echo":
+      return [args.join(" ")];
+    case "font":
+      return store.style.set(args.join(" "));
+    case "cd":
+      store.path.cd(args.join(" "));
+      return [];
+    case "help":
+      return store.commands.helpLines;
+    default:
+      return [];
   }
 }
 
@@ -53,27 +53,27 @@ async function process(commandArgs: string): Promise<void> {
 
     for (const action of line.actions) {
       switch (action.namespace) {
-      case "sleep":
-        await sleep(+action.action);
-        continue;
-      case "system":
-        for (const systemLine of system(action.action, args)) {
-          await store.output.processLine({ value: systemLine, style });
-        }
-        continue;
-      case "ui":
-        if (action.action === "color") {
-          style.color = action.value;
-        } else if (action.action === "font-weight") {
-          style.fontWeight = action.value;
-        } else if (action.action === "font-size") {
-          style.fontSize = action.value;
-        } else if (action.action === "animate") {
-          animate = true;
-        } else if (action.action === "hide") {
-          hide = true;
-        }
-        continue;
+        case "sleep":
+          await sleep(+action.action);
+          continue;
+        case "system":
+          for (const systemLine of system(action.action, args)) {
+            await store.output.processLine({ value: systemLine, style });
+          }
+          continue;
+        case "ui":
+          if (action.action === "color") {
+            style.color = action.value;
+          } else if (action.action === "font-weight") {
+            style.fontWeight = action.value;
+          } else if (action.action === "font-size") {
+            style.fontSize = action.value;
+          } else if (action.action === "animate") {
+            animate = true;
+          } else if (action.action === "hide") {
+            hide = true;
+          }
+          continue;
       }
     }
 

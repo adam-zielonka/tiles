@@ -27,37 +27,37 @@ export const Input = observer(() => {
 
   function keydown(event: KeyboardEvent): void {
     switch (event.key) {
-    case "Enter":
-      if (completion.selected) {
-        history.set(completion.selected);
+      case "Enter":
+        if (completion.selected) {
+          history.set(completion.selected);
+          completion.reset();
+        } else {
+          completion.reset();
+          void system.addCommand(history.value);
+          history.add();
+        }
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        history.up();
+        moveCaretToEnd();
         completion.reset();
-      } else {
+        break;
+      case "ArrowDown":
+        event.preventDefault();
+        history.down();
+        moveCaretToEnd();
         completion.reset();
-        void system.addCommand(history.value);
-        history.add();
-      }
-      break;
-    case "ArrowUp":
-      event.preventDefault();
-      history.up();
-      moveCaretToEnd();
-      completion.reset();
-      break;
-    case "ArrowDown":
-      event.preventDefault();
-      history.down();
-      moveCaretToEnd();
-      completion.reset();
-      break;
-    case "Tab":
-      event.preventDefault();
-      if (completion.theOne) {
-        history.set(completion.theOne);
-        completion.reset();
-      } else {
-        completion.next(); 
-      }
-      break;
+        break;
+      case "Tab":
+        event.preventDefault();
+        if (completion.theOne) {
+          history.set(completion.theOne);
+          completion.reset();
+        } else {
+          completion.next(); 
+        }
+        break;
     }
 
     inputRef.current?.focus();
