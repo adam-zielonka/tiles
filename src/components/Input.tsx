@@ -29,7 +29,7 @@ export const Input = observer(() => {
     switch (event.key) {
       case "Enter":
         if (completion.selected) {
-          history.set(completion.selected);
+          history.set(completion.selected + " ");
           completion.reset();
         } else {
           completion.reset();
@@ -52,7 +52,7 @@ export const Input = observer(() => {
       case "Tab":
         event.preventDefault();
         if (completion.theOne) {
-          history.set(completion.theOne);
+          history.set(completion.theOne + " ");
           completion.reset();
         } else {
           completion.next(); 
