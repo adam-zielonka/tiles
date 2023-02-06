@@ -1,13 +1,13 @@
 import { marked, Renderer } from "marked";
 import { useEffect } from "react";
-import { isCommandLine, LineType } from "../store/output";
+import { isCommandLine, OutputLine } from "../store/output";
 import { LinePrefix } from "./LinePrefix";
 import { Caret } from "./Caret";
 import "./Line.scss";
 
 Renderer.prototype.paragraph = text => text;
 
-export function Line({line}: {line: LineType}) {
+export function Line({line}: {line: OutputLine}) {
   useEffect(() => window.scrollTo(0, document.body.scrollHeight));
 
   if (isCommandLine(line)) {

@@ -3,31 +3,31 @@ import { sleep } from "../utils";
 import { store } from "./store";
 import { Style } from "./system";
 
-type TextLineType = {
+type TextLine = {
   value: string
   style: Style
 }
 
-type CommandLineType = {
+type CommandLine = {
   value: string
   blink: boolean
   path: string
 }
 
-export type LineType = TextLineType | CommandLineType
+export type OutputLine = TextLine | CommandLine
 
-export function isCommandLine(line: LineType): line is CommandLineType {
-  return (<CommandLineType>line).path !== undefined;
+export function isCommandLine(line: OutputLine): line is CommandLine {
+  return (<CommandLine>line).path !== undefined;
 }
 
 export class Output {
-  lines: LineType[] = [];
+  lines: OutputLine[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  push(...line: LineType[]): number {
+  push(...line: OutputLine[]): number {
     const number = this.lines.push(...line);
     return number;
   }
@@ -36,18 +36,18 @@ export class Output {
     this.lines.splice(0, this.lines.length);
   }
 
-  updateLast(line: LineType): void {
+  updateLast(line: OutputLine): void {
     if (this.lines.length) {
       this.lines[this.lines.length - 1] = line;
     }
   }
 
-  async processLine(line: TextLineType, animate = false): Promise<void> {
+  async processLine(line: TextLine, animate = false): Promise<void> {
     await sleep(20);
 
     const value = line.value.replace(/\[.*\]\(const:command\)/, store.history.lastCommand);
 
-    const textLine: TextLineType = {
+    const textLine: TextLine = {
       ...line,
       value,
     };
@@ -67,7 +67,7 @@ export class Output {
   }
 
   async processCommandLine(command: string, animate = false): Promise<void> {
-    const commandLine: CommandLineType = {
+    const commandLine: CommandLine = {
       value: command,
       blink: false,
       path: store.path.value,
