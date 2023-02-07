@@ -15,7 +15,7 @@ export const Terminal = observer(() => {
     <ul>
       {store.output.lines.map((line, i) => <Line key={i} line={line}/> )}
       {store.system.isInputAllowed && <Input/>}
-      <Completion/>
+      {store.completion.isVisible && <Completion list={store.completion.list} index={store.completion.index}/>}
     </ul>
   </div>;
 });
