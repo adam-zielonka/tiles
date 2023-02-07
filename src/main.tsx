@@ -1,5 +1,4 @@
-const noscript = document.getElementById("noscript");
-noscript && document.body.removeChild(noscript);
+document.querySelector("#noscript")?.remove();
 
 import React from "react";
 import ReactDOM from "react-dom/client";
