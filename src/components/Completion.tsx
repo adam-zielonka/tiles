@@ -4,6 +4,10 @@ import "./Completion.scss";
 
 export const Completion = observer(() => {
   const { list, index, isVisible } = store.completion;
+  
+  useEffect(() => {
+    window.scrollTo(0, document.body.scrollHeight)
+  });
 
   if (!isVisible) {
     return null;
