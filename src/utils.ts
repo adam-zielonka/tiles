@@ -6,7 +6,7 @@ export class CommandLine {
   value = "";
   actions: {
     namespace: string
-    action: string
+    key: string
     value: string
   }[] = [];
 }
@@ -18,11 +18,11 @@ export function parseLines(body: string): CommandLine[] {
   let line: CommandLine = new CommandLine();
 
   for (const text of array) {
-    const [match, value, namespace, action] =
+    const [match, value, namespace, key] =
       text.match(/^\[(.*)\]\(([a-z-]*):([a-z0-9-]*)\)$/) || [];
 
     if (match) {
-      line.actions.push({ namespace, action, value });
+      line.actions.push({ namespace, key, value });
     } else {
       line.value = text;
       lines.push(line);
@@ -30,7 +30,7 @@ export function parseLines(body: string): CommandLine[] {
     }
   }
 
-  lines[lines.length - 1]?.actions.push({ namespace: "ui", action: "hide", value: "" });
+  lines[lines.length - 1]?.actions.push({ namespace: "ui", key: "hide", value: "" });
 
   return lines;
 }

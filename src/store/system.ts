@@ -56,26 +56,31 @@ async function process(commandArgs: string): Promise<void> {
     for (const action of line.actions) {
       switch (action.namespace) {
         case "sleep":
-          await sleep(+action.action);
+          await sleep(+action.key);
           continue;
         case "system":
-          for (const systemLine of system(action.action, args)) {
+          for (const systemLine of system(action.key, args)) {
             await store.output.processLine({ value: systemLine, style });
           }
           continue;
         case "ui":
-          if (action.action === "color") {
-            style.color = action.value;
-          } else if (action.action === "font-weight") {
-            style.fontWeight = action.value;
-          } else if (action.action === "font-size") {
-            style.fontSize = action.value;
-          } else if (action.action === "animate") {
-            animate = true;
-          } else if (action.action === "hide") {
-            hide = true;
+          switch (action.key) {
+            case "color":
+              style.color = action.value;
+              continue;
+            case "font-weight":
+              style.fontWeight = action.value;
+              continue;
+            case "font-size":
+              style.fontSize = action.value;
+              continue;
+            case "animate":
+              animate = true;
+              continue;
+            case "hide":
+              hide = true;
+              continue;
           }
-          continue;
       }
     }
 
