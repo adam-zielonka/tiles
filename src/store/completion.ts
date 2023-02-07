@@ -33,7 +33,10 @@ export class Completion {
   }
 
   next(): void {
-    if (!this.list.length) this.reset();
+    if (!this.list.length) {
+      this.reset();
+      return;
+    }
     
     this.index = (this.index + 1) % this.list.length;
   }
