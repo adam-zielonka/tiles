@@ -1,14 +1,14 @@
 import { CSSProperties } from "react";
 
-type TextLine = {
+export type TextLine = {
   value: string
   style: CSSProperties
 }
 
-type CommandLine = {
+export type CommandLine = {
   value: string
   blink: boolean
   path: string
 }
 
-type OutputLine = TextLine | CommandLine
+export type OutputLine = TextLine | CommandLine

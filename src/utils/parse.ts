@@ -1,17 +1,10 @@
-export class ParsedLine {
-  value = "";
-  actions: {
-    namespace: string
-    key: string
-    value: string
-  }[] = [];
-}
+import { ParsedLine } from "../types/parse";
 
 export function parseLines(body: string): ParsedLine[] {
   const array = body.split("\n").map(m => m.replace(/^ *$/, ""));
 
   const lines: ParsedLine[] = [];
-  let line: ParsedLine = new ParsedLine();
+  let line: ParsedLine = { value: "", actions: [] };
 
   for (const text of array) {
     const [match, value, namespace, key] =
@@ -22,7 +15,7 @@ export function parseLines(body: string): ParsedLine[] {
     } else {
       line.value = text;
       lines.push(line);
-      line = new ParsedLine();
+      line = { value: "", actions: [] };
     }
   }
 

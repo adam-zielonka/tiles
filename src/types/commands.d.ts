@@ -1,11 +1,14 @@
-import { ParsedLine } from "../utils/parse";
+import { ParsedLine } from "./parse";
 
-type CommandAttributes = {
+export type CommandAttributes = {
   body: string
   command: string
   alias?: string[]
   help?: string
 }
-type Files = Record<string, { default: CommandAttributes }>
-type HelpProperties = Required<Omit<CommandAttributes, "body">>
-type CommandsLines = Record<string, ParsedLine[]>
+
+export type Files = Record<string, { default: CommandAttributes }>
+
+export type HelpProperties = Required<Omit<CommandAttributes, "body">>
+
+export type CommandsLines = Record<string, ParsedLine[]>

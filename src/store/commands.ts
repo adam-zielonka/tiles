@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { CommandsLines, HelpProperties } from "../types/commands";
-import { ParsedLine } from "../utils/parse";
+import { ParsedLine } from "../types/parse";
 import { importCommands } from "../utils/commands";
 
 export class Commands {

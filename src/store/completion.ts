@@ -34,8 +34,7 @@ export class Completion {
 
   next(): void {
     if (!this.list.length) {
-      this.reset();
-      return;
+      return this.reset();
     }
     
     this.index = (this.index + 1) % this.list.length;
