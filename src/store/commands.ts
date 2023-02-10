@@ -1,45 +1,7 @@
 import { makeAutoObservable } from "mobx";
-import { CommandLine, parseLines } from "../utils";
-
-export type CommandAttributes = {
-  body: string
-  command: string
-  alias?: string[]
-  help?: string
-}
-type Files = Record<string, { default: CommandAttributes }>
-type HelpProperties = Required<Omit<CommandAttributes, "body">>
-export type CommandsLines = Record<string, CommandLine[]>
-
-function loadCommands(): CommandAttributes[] {
-  const files = import.meta.glob("../commands/*.md", { eager: true }) as Files;
-  return Object.keys(files).map(file => files[file].default);
-}
-
-function installCommands(files: CommandAttributes[]): {
-  commands: CommandsLines
-  help: HelpProperties[]
-} {
-  const help: HelpProperties[] = [];
-  const commands: CommandsLines = {};
-
-  for (const attributes of files) {
-    const lines = parseLines(attributes.body);
-    commands[attributes.command] = lines;
-    for (const alias of attributes.alias || []) {
-      commands[alias] = lines;
-    }
-    if (attributes.help) {
-      help.push({
-        command: attributes.command,
-        alias: attributes.alias || [],
-        help: attributes.help,
-      });
-    }
-  }
-
-  return { commands, help };
-}
+import { CommandsLines, HelpProperties } from "../types/commands";
+import { ParsedLine } from "../utils/parse";
+import { importCommands } from "../utils/commands";
 
 export class Commands {
   private commands: CommandsLines = {};
@@ -47,7 +9,7 @@ export class Commands {
 
   constructor() {
     makeAutoObservable(this);
-    const { commands, help } = installCommands(loadCommands());
+    const { commands, help } = importCommands();
     this.commands = commands;
     this.help = help;
   }
@@ -58,7 +20,7 @@ export class Commands {
     );
   }
 
-  getLines(command: string): CommandLine[] {
+  getLines(command: string): ParsedLine[] {
     return this.commands[this.commands[command] ? command : "notFound"];
   }
 

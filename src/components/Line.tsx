@@ -1,8 +1,9 @@
 import { marked, Renderer } from "marked";
 import { useEffect } from "react";
-import { isCommandLine, OutputLine } from "../store/output";
 import { LinePrefix } from "./LinePrefix";
 import { Caret } from "./Caret";
+import { OutputLine } from "../types/line";
+import { isCommandLine } from "../utils/line";
 import "./Line.scss";
 
 Renderer.prototype.paragraph = text => text;
@@ -17,9 +18,6 @@ export function Line({line}: {line: OutputLine}) {
     </li>;
   }
 
-  return <li className='Line' style={{
-    color: line.style.color,
-    fontWeight: line.style.fontWeight,
-    fontSize: line.style.fontSize,
-  }} dangerouslySetInnerHTML={{ __html: marked(line.value || "\u00a0")}} />;
+  return <li className='Line' style={{...line.style}} 
+    dangerouslySetInnerHTML={{ __html: marked(line.value || "\u00a0")}} />;
 }

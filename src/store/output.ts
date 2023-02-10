@@ -1,24 +1,7 @@
 import { makeAutoObservable } from "mobx";
-import { sleep } from "../utils";
+import { CommandLine, OutputLine, TextLine } from "../types/line";
+import { sleep } from "../utils/sleep";
 import { store } from "./store";
-import { Style } from "./system";
-
-type TextLine = {
-  value: string
-  style: Style
-}
-
-type CommandLine = {
-  value: string
-  blink: boolean
-  path: string
-}
-
-export type OutputLine = TextLine | CommandLine
-
-export function isCommandLine(line: OutputLine): line is CommandLine {
-  return (<CommandLine>line).path !== undefined;
-}
 
 export class Output {
   lines: OutputLine[] = [];

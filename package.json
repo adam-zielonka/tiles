@@ -3,8 +3,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && pnpm postbuild",
-    "postbuild": "pnpm ts-node --esm src/postBuild.ts",
+    "build": "tsc && vite build && pnpm post-build",
+    "post-build": "pnpm ts-node --esm src/post-build.ts",
     "preview": "vite preview",
     "lint": "eslint './src/**/*.{js,jsx,ts,tsx}'"
   },

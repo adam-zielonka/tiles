@@ -1,22 +1,5 @@
 import { makeAutoObservable } from "mobx";
-
-function cd(dir: string, newDir: string): string {
-  switch (newDir) {
-    case "~":
-      return "~";
-    case ".":
-      return dir;
-    case "":
-      return dir;
-    case "..":
-      return dir.split("/").slice(0, -1).join("/") || "/";
-    default: 
-      return (newDir.startsWith("/") ? newDir : `${dir}/${newDir}`)
-        .replace(/\/\//, "/")  
-        .replace(/\/$/, "")
-        .replace(/^\/root/, "~");
-  }
-}
+import { cd } from "../utils/cd";
 
 export class Path {
   value = "~";

@@ -1,7 +1,7 @@
 import fs from "fs";
 import replaceInFile from "replace-in-file";
 import { marked, Renderer } from "marked";
-import { parseLines } from "./utils.js"; // <-- import from utils.ts :-)
+import { parseLines } from "./utils/parse.js"; // <-- import from parse.ts :-)
 
 Renderer.prototype.paragraph = text => text;
 

@@ -1,8 +1,4 @@
-export function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-export class CommandLine {
+export class ParsedLine {
   value = "";
   actions: {
     namespace: string
@@ -11,11 +7,11 @@ export class CommandLine {
   }[] = [];
 }
 
-export function parseLines(body: string): CommandLine[] {
+export function parseLines(body: string): ParsedLine[] {
   const array = body.split("\n").map(m => m.replace(/^ *$/, ""));
 
-  const lines: CommandLine[] = [];
-  let line: CommandLine = new CommandLine();
+  const lines: ParsedLine[] = [];
+  let line: ParsedLine = new ParsedLine();
 
   for (const text of array) {
     const [match, value, namespace, key] =
@@ -26,7 +22,7 @@ export function parseLines(body: string): CommandLine[] {
     } else {
       line.value = text;
       lines.push(line);
-      line = new CommandLine();
+      line = new ParsedLine();
     }
   }
 
