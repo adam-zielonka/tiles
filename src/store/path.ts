@@ -13,7 +13,7 @@ function cd(dir: string, newDir: string): string {
     default: 
       return (newDir.startsWith("/") ? newDir : `${dir}/${newDir}`)
         .replace(/\/\//, "/")  
-        .replace(/.\/$/, "")
+        .replace(/\/$/, "")
         .replace(/^\/root/, "~");
   }
 }
