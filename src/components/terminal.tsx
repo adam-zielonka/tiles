@@ -6,7 +6,7 @@ import { Line } from "./line";
 import { Input } from "./input";
 import "./terminal.scss";
 
-const Shutdown = lazy(() => import("./Shutdown"));
+const Shutdown = lazy(() => import("./shutdown"));
 
 export const Terminal = observer(() => {
   if (store.system.shutdown) {
