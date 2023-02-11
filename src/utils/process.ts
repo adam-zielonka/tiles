@@ -20,7 +20,7 @@ export async function process(commandArgs: string): Promise<void> {
           await sleep(+action.key);
           continue;
         case "system":
-          for (const systemLine of system(action.key, args)) {
+          for (const systemLine of await system(action.key, args)) {
             await store.output.processLine({ value: systemLine, style });
           }
           continue;
@@ -49,7 +49,7 @@ export async function process(commandArgs: string): Promise<void> {
   }
 }
 
-function system(sysCommand: string, args: string[]): string[] {
+async function system(sysCommand: string, args: string[]): Promise<string[]> {
   switch (sysCommand) {
     case "clear":
       store.output.clear();
@@ -65,7 +65,7 @@ function system(sysCommand: string, args: string[]): string[] {
     case "font":
       return store.style.set(args.join(" "));
     case "cd":
-      store.path.cd(args.join(" "));
+      await store.path.cd(args.join(" "));
       return [];
     case "pwd":
       return [store.path.pwd];
