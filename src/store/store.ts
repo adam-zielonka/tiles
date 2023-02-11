@@ -16,12 +16,5 @@ class Store {
   system = new System();
 }
 
-export const store = new Store();
+export const store = window.store = new Store();
 void store.system.start(["whoami", "description"]);
-
-declare global {
-  interface Window {
-    store: Store
-  }
-}
-window.store = store;
