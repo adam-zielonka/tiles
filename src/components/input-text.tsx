@@ -1,4 +1,4 @@
-import "./InputText.scss";
+import "./input-text.scss";
 
 type InputTextProps = {
   value: string

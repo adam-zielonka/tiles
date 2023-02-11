@@ -1,10 +1,10 @@
 import { lazy, Suspense, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { store } from "../store/store";
-import { Completion } from "./Completion";
-import { Line } from "./Line";
-import { Input } from "./Input";
-import "./Terminal.scss";
+import { Completion } from "./completion";
+import { Line } from "./line";
+import { Input } from "./input";
+import "./terminal.scss";
 
 const Shutdown = lazy(() => import("./Shutdown"));
 

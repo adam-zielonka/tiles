@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { store } from "../store/store";
-import "./Completion.scss";
+import "./completion.scss";
 
 export const Completion = observer(() => {
   if (!store.completion.isVisible) {

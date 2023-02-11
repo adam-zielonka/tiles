@@ -1,4 +1,4 @@
-import "./Shutdown.scss";
+import "./shutdown.scss";
 
 export function Shutdown() {
   return <div className="Shutdown">

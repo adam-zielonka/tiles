@@ -1,4 +1,4 @@
-import "./LinePrefix.scss";
+import "./line-prefix.scss";
 
 type Prefix = {
   user?: string,

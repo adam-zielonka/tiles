@@ -1,10 +1,10 @@
 import { marked, Renderer } from "marked";
 import { useEffect } from "react";
-import { LinePrefix } from "./LinePrefix";
-import { Caret } from "./Caret";
+import { LinePrefix } from "./line-prefix";
+import { Caret } from "./caret";
 import { OutputLine } from "../types/line";
 import { isCommandLine } from "../utils/line";
-import "./Line.scss";
+import "./line.scss";
 
 Renderer.prototype.paragraph = text => text;
 
