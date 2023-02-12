@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { store } from "./store";
 import { process } from "../utils/process";
+import escape from "lodash/escape";
 
 export class System {
   private state: "processing" | "shutdown" | "freeze" | "interrupted" | "" = "";
@@ -52,7 +53,7 @@ export class System {
   async addCommand(command: string): Promise<void> {
     store.system.startProcessing();
     await store.output.processCommandLine(command);
-    await process(command);
+    await process(escape(command));
     store.system.stopProcessing();
   }
 
