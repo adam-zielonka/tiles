@@ -9,14 +9,20 @@ const markdownProcessor: PluginOption = {
 
     const { attributes, body } = frontMatter<object>(code);
 
-    return `export default ${JSON.stringify({
-      ...attributes,
-      body,
-    })}`;
+    return {
+      code: `export default ${JSON.stringify({
+        ...attributes,
+        body,
+      })}`,
+      map: null, 
+    };
   },
 };
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), markdownProcessor],
+  build: {
+    sourcemap: true,
+  }
 });
