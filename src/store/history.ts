@@ -1,4 +1,6 @@
 import { makeAutoObservable } from "mobx";
+import escape from "lodash/escape";
+import unescape from "lodash/unescape";
 
 export class History {
   private history: string[] = [];
@@ -10,7 +12,7 @@ export class History {
   }
 
   get value(): string {
-    return this.history[this.position] || this.temporaryValue;
+    return unescape(this.history[this.position] || this.temporaryValue);
   }
 
   get lastCommand(): string {
@@ -24,7 +26,7 @@ export class History {
 
   add(): void {
     if (this.value && this.value !== this.history[this.history.length - 1]) {
-      this.history.push(this.value);
+      this.history.push(escape(this.value));
     }
     this.set("");
   }

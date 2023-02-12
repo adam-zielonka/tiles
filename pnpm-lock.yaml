@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/lodash': ^4.14.191
   '@types/marked': ^4.0.8
   '@types/node': ^18.13.0
   '@types/react': ^18.0.28
@@ -11,6 +12,7 @@ specifiers:
   eslint: ^8.34.0
   eslint-plugin-react: ^7.32.2
   front-matter: ^4.0.2
+  lodash: ^4.17.21
   marked: ^4.2.12
   mobx: ^6.8.0
   mobx-react-lite: ^3.4.0
@@ -24,6 +26,7 @@ specifiers:
 
 dependencies:
   front-matter: 4.0.2
+  lodash: 4.17.21
   marked: 4.2.12
   mobx: 6.8.0
   mobx-react-lite: 3.4.0_woojb62cqeyk443mbl7msrwu2e
@@ -32,6 +35,7 @@ dependencies:
   replace-in-file: 6.3.5
 
 devDependencies:
+  '@types/lodash': 4.14.191
   '@types/marked': 4.0.8
   '@types/node': 18.13.0
   '@types/react': 18.0.28
@@ -452,6 +456,10 @@ packages:
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
+    dev: true
+
+  /@types/lodash/4.14.191:
+    resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
     dev: true
 
   /@types/marked/4.0.8:
@@ -1584,6 +1592,10 @@ packages:
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
+
+  /lodash/4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: false
 
   /loose-envify/1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
