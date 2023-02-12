@@ -10,9 +10,8 @@ export async function process(commandArgs: string): Promise<void> {
 
   const style: CSSProperties = {};
 
-  for (const line of store.commands.getLines(command)) {
+  main: for (const line of store.commands.getLines(command)) {
     let animate = false;
-    let hide = false;
 
     for (const action of line.actions) {
       switch (action.namespace) {
@@ -25,28 +24,23 @@ export async function process(commandArgs: string): Promise<void> {
           }
           continue;
         case "ui":
-          switch (action.key) {
-            case "color":
-              style.color = action.value;
-              continue;
-            case "font-weight":
-              style.fontWeight = action.value;
-              continue;
-            case "font-size":
-              style.fontSize = action.value;
-              continue;
-            case "animate":
-              animate = true;
-              continue;
-            case "hide":
-              hide = true;
-              continue;
-          }
+          if (action.key === "hide") continue main;
+          if (action.key === "animate") animate = true;
+          continue;
+        case "css": {
+          Object.assign(style, css(action.key, action.value));
+          continue;
+        }
       }
     }
 
-    !hide && (await store.output.processLine({ value: line.value, style }, animate));
+    await store.output.processLine({ value: line.value, style }, animate);
   }
+}
+
+function css(key: string, value: string): CSSProperties {
+  const newKey = key.replace(/-([a-z])/g, g => g[1].toUpperCase());
+  return { [newKey]: value };
 }
 
 async function system(sysCommand: string, args: string[]): Promise<string[]> {
