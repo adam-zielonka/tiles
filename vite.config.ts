@@ -7,8 +7,7 @@ const markdownProcessor: PluginOption = {
   transform: (code, id) => {
     if (!id.endsWith(".md")) return null;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { attributes, body } = frontMatter<any>(code);
+    const { attributes, body } = frontMatter<object>(code);
 
     return `export default ${JSON.stringify({
       ...attributes,
