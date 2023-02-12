@@ -26,7 +26,9 @@ export class Output {
   }
 
   async processLine(line: TextLine, animate = false): Promise<void> {
+    if (!store.system.isProcessing) return;
     await sleep(20);
+    if (!store.system.isProcessing) return;
 
     const value = line.value.replace(/\[.*\]\(const:command\)/, store.history.lastCommand);
 
@@ -44,12 +46,15 @@ export class Output {
     this.push(textLine);
     for (const letter of value) {
       await sleep(100);
+      if (!store.system.isProcessing) return;
       textLine.value += letter;
       this.updateLast(textLine);
     }
   }
 
   async processCommandLine(command: string, animate = false): Promise<void> {
+    if (!store.system.isProcessing) return;
+    
     const commandLine: CommandLine = {
       value: command,
       blink: false,
@@ -66,6 +71,7 @@ export class Output {
     this.push(commandLine);
     for (const letter of command) {
       await sleep(50);
+      if (!store.system.isProcessing) break;
       commandLine.value += letter;
       this.updateLast(commandLine);
     }

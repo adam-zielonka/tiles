@@ -13,12 +13,15 @@ export async function process(commandArgs: string): Promise<void> {
   main: for (const line of store.commands.getLines(command)) {
     let animate = false;
 
+    if (!store.system.isProcessing) return;
+
     for (const action of line.actions) {
       switch (action.namespace) {
         case "sleep":
           await sleep(+action.key);
           continue;
         case "system":
+          if (!store.system.isProcessing) return;
           for (const systemLine of await system(action.key, args)) {
             await store.output.processLine({ value: systemLine, style });
           }

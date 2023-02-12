@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { store } from "../store/store";
 import { Completion } from "./completion";
@@ -9,6 +9,17 @@ import "./terminal.scss";
 const Shutdown = lazy(() => import("./shutdown"));
 
 export const Terminal = observer(() => {
+  useEffect(() => {
+    function detectBrake(e: KeyboardEvent) {
+      if (e.key === "c" && e.ctrlKey) {
+        store.system.brake();
+      }
+    }
+
+    document.addEventListener("keydown", detectBrake);
+    return () => document.removeEventListener("keydown", detectBrake);
+  });
+
   if (store.system.shutdown) {
     return <Suspense fallback={<WaitALiteMore/>}>      
       <Shutdown/>

@@ -3,7 +3,7 @@ import { store } from "./store";
 import { process } from "../utils/process";
 
 export class System {
-  private state: "processing" | "shutdown" | "freeze" | "" = "";
+  private state: "processing" | "shutdown" | "freeze" | "interrupted" | "" = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -14,7 +14,11 @@ export class System {
   }
 
   get isInputAllowed(): boolean {
-    return !["freeze", "processing"].includes(this.state);
+    return this.state === "";
+  }
+
+  get isProcessing(): boolean {
+    return this.state === "processing";
   }
 
   startProcessing(): void {
@@ -22,8 +26,14 @@ export class System {
   }
 
   stopProcessing(): void {
-    if (this.state === "processing") {
+    if (["processing", "interrupted"].includes(this.state)) {
       this.state = "";
+    }
+  }
+
+  brake(): void {
+    if (this.state === "processing") {
+      this.state = "interrupted";
     }
   }
 
@@ -49,6 +59,7 @@ export class System {
       store.history.add();
       await store.output.processCommandLine(command, true);
       await process(command);
+      if (!store.system.isProcessing) break;
     }
     store.system.stopProcessing();
   }
