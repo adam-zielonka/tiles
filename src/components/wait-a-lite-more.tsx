@@ -1,7 +1,7 @@
 import { useVisibilityDelay } from "../hooks/use-visibility-delay";
 
 export function WaitALiteMore() {
-  const isVisible = useVisibilityDelay(1000);
+  const isVisible = useVisibilityDelay(500);
 
   if (!isVisible) {
     return null;
