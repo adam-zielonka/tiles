@@ -21,7 +21,7 @@ export class Commands {
   }
 
   getLines(command: string): ParsedLine[] {
-    return this.commands[this.commands[command] ? command : "notFound"];
+    return this.commands[this.commands[command] ? command : "not-found"];
   }
 
   getCompletions(command: string): string[] {

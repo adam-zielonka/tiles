@@ -30,7 +30,8 @@ export class Output {
     await sleep(20);
     if (!store.system.isProcessing) return;
 
-    const value = line.value.replace(/\[.*\]\(const:command\)/, store.history.lastCommand);
+    const command = store.history.lastCommand.split(" ")[0];
+    const value = line.value.replace(/\[.*\]\(const:command\)/, command);
 
     const textLine: TextLine = {
       ...line,

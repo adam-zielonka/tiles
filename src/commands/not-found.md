@@ -1,5 +1,5 @@
 ---
-command: notFound
+command: not-found
 ---
 
 [](sleep:400)
