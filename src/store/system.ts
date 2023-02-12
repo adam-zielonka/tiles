@@ -31,9 +31,13 @@ export class System {
     }
   }
 
-  brake(): void {
+  async break() {
     if (this.state === "processing") {
       this.state = "interrupted";
+    } else if (this.state === "") {
+      const value = store.history.value;
+      store.history.set("");
+      await this.processNothing(value);
     }
   }
 
@@ -49,6 +53,13 @@ export class System {
     store.system.startProcessing();
     await store.output.processCommandLine(command);
     await process(command);
+    store.system.stopProcessing();
+  }
+
+  async processNothing(command: string): Promise<void> {
+    store.system.startProcessing();
+    await store.output.processCommandLine(command);
+    await process("");
     store.system.stopProcessing();
   }
 

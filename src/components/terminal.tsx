@@ -11,7 +11,7 @@ import "./terminal.scss";
 const Shutdown = lazy(() => import("./shutdown"));
 
 export const Terminal = observer(() => {
-  useBreakDetection(() => store.system.brake());
+  useBreakDetection(() => store.system.break());
 
   if (store.system.shutdown) {
     return <Suspense fallback={<WaitALiteMore/>}>      
