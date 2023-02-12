@@ -5,16 +5,10 @@ import { Caret } from "./caret";
 import { OutputLine } from "../types/line";
 import { isCommandLine } from "../utils/line";
 import "./line.scss";
-import { observer } from "mobx-react-lite";
-import { store } from "../store/store";
 
 Renderer.prototype.paragraph = text => text;
 
-export const Lines = observer(() => {
-  return <>{store.output.lines.map((line, i) => <Line key={i} line={line}/>)}</>;
-});
-
-function Line({line}: {line: OutputLine}) {
+export function Line({line}: {line: OutputLine}) {
   useEffect(() => window.scrollTo(0, document.body.scrollHeight));
 
   if (isCommandLine(line)) {

@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { observer } from "mobx-react-lite";
 import { store } from "../store/store";
 import { Completion } from "./completion";
-import { Lines } from "./line";
+import { Lines } from "./lines";
 import { Input } from "./input";
 import { WaitALiteMore } from "./wait-a-lite-more";
 import { useBreakDetection } from "../hooks/use-break-detection";
