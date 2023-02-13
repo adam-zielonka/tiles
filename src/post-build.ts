@@ -13,13 +13,13 @@ function randomLetter(): string {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
 }
 
-function split_map(text: string, fn: (letter: string) => string): string {
+function splitMap(text: string, fn: (letter: string) => string): string {
   return text.split("").map(fn).join("");
 }
 
 function renderLinePrefix(): string {
   return (
-    split_map(
+    splitMap(
       "root@adamzielonka.pro",
       letter =>
         `<div class="user" style="animation: hidden ${clock()}ms;">${letter}</div>` +
@@ -39,7 +39,7 @@ function renderCommandLine(command: string): string {
 
   clock(1000);
 
-  const lineCommand = split_map(
+  const lineCommand = splitMap(
     command,
     letter =>
       `<div class="user-end" style="animation: hidden ${clock(50)}ms;">${letter}</div>`,
