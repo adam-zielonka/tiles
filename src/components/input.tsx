@@ -1,29 +1,16 @@
 import { observer } from "mobx-react-lite";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { store } from "../store/store";
 import { LinePrefix } from "./line-prefix";
 import { InputText } from "./input-text";
+import { usePosition } from "../hooks/use-position";
 import "./input.scss";
 
 export const Input = observer(() => {
   const { history, path, system, completion } = store;
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const [position, setPosition] = useState({ start: 0, end: 0 });
-
-  function updateStartEnd(): void {
-    setPosition({
-      start: inputRef.current?.selectionStart || 0,
-      end: inputRef.current?.selectionEnd || 0,
-    });
-  }
-
-  function moveCaretToEnd(): void {
-    setTimeout(() => {
-      inputRef.current?.setSelectionRange(inputRef.current?.value.length, inputRef.current?.value.length);
-      updateStartEnd();
-    }, 10);
-  }
+  const [position, updatePosition] = usePosition(inputRef);
 
   function keydown(event: KeyboardEvent): void {
     switch (event.key) {
@@ -40,13 +27,11 @@ export const Input = observer(() => {
       case "ArrowUp":
         event.preventDefault();
         history.up();
-        moveCaretToEnd();
         completion.reset();
         break;
       case "ArrowDown":
         event.preventDefault();
         history.down();
-        moveCaretToEnd();
         completion.reset();
         break;
       case "Tab":
@@ -61,12 +46,12 @@ export const Input = observer(() => {
     }
 
     inputRef.current?.focus();
-    updateStartEnd();
+    updatePosition();
   }
 
   function click(): void {
     inputRef.current?.focus();
-    updateStartEnd();
+    updatePosition();
   }
 
   useEffect(() => {
@@ -84,13 +69,13 @@ export const Input = observer(() => {
     <input
       ref={inputRef}
       value={history.value}
-      onSelect={updateStartEnd}
-      onKeyUp={updateStartEnd}
-      onKeyDown={updateStartEnd}
-      onChange={updateStartEnd}
+      onSelect={updatePosition}
+      onKeyUp={updatePosition}
+      onKeyDown={updatePosition}
+      onChange={updatePosition}
       onInput={e => {
         history.set(e.currentTarget.value);
-        updateStartEnd();
+        updatePosition();
       }}
     />
   </li>;
