@@ -7,8 +7,8 @@ export type CommandAttributes = {
   help?: string
 }
 
-export type Files = Record<string, { default: CommandAttributes }>
+export type FrontMatter = Omit<CommandAttributes, "body">
 
-export type HelpProperties = Required<Omit<CommandAttributes, "body">>
+export type HelpProperties = Required<FrontMatter>
 
 export type CommandsLines = Record<string, ParsedLine[]>

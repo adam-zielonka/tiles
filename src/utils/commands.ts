@@ -1,4 +1,4 @@
-import { CommandAttributes, CommandsLines, Files, HelpProperties } from "../types/commands";
+import { CommandAttributes, CommandsLines, HelpProperties } from "../types/commands";
 import { parseLines } from "./parse";
 
 export function importCommands() {
@@ -6,8 +6,8 @@ export function importCommands() {
 }
 
 function loadCommandsFiles(): CommandAttributes[] {
-  const files = import.meta.glob("../commands/*.md", { eager: true }) as Files;
-  return Object.keys(files).map(file => files[file].default);
+  const files = import.meta.glob<CommandAttributes>("../commands/*.md", { eager: true });
+  return Object.values(files);
 }
 
 function installCommands(files: CommandAttributes[]): {
