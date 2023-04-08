@@ -1,6 +1,7 @@
+import cx from "classnames";
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
 import { store } from "../store/store";
+import { useScrollDown } from "../hooks/use-scroll-down";
 
 export const Completion = observer(() => {
   if (!store.completion.isVisible) {
@@ -13,9 +14,9 @@ export const Completion = observer(() => {
 });
 
 const Element = observer(({ value }:{ value: string }) => {
-  useEffect(() => window.scrollTo(0, document.body.scrollHeight));
+  useScrollDown();
 
-  return <div className={store.completion.selected === value ? "active" : ""}>
+  return <div className={cx({active: store.completion.selected === value})}>
     {value}
   </div>;
 });
