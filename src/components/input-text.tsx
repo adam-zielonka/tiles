@@ -1,5 +1,3 @@
-import "./input-text.scss";
-
 type InputTextProps = {
   value: string
   start: number

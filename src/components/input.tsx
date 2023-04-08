@@ -4,7 +4,6 @@ import { store } from "../store/store";
 import { LinePrefix } from "./line-prefix";
 import { InputText } from "./input-text";
 import { usePosition } from "../hooks/use-position";
-import "./input.scss";
 
 export const Input = observer(() => {
   const { history, path, system, completion } = store;

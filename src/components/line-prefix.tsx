@@ -1,5 +1,3 @@
-import "./line-prefix.scss";
-
 type Prefix = {
   user?: string,
   domain?: string,

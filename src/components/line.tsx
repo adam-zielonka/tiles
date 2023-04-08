@@ -4,7 +4,6 @@ import { LinePrefix } from "./line-prefix";
 import { Caret } from "./caret";
 import { OutputLine } from "../types/line";
 import { isCommandLine } from "../utils/line";
-import "./line.scss";
 
 Renderer.prototype.paragraph = text => text;
 

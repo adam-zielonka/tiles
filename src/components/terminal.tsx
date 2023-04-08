@@ -6,7 +6,6 @@ import { Lines } from "./lines";
 import { Input } from "./input";
 import { WaitALiteMore } from "./wait-a-lite-more";
 import { useBreakDetection } from "../hooks/use-break-detection";
-import "./terminal.scss";
 
 const Shutdown = lazy(() => import("./shutdown"));
 
