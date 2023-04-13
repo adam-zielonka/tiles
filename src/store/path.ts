@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import { cd } from "../utils/cd";
 
 export class Path {
   value = "~";
@@ -12,7 +13,6 @@ export class Path {
   }
 
   async cd(newDir: string): Promise<void> {
-    const { cd } = await import("../utils/cd");
     this.value = cd(this.value, newDir);
   }
 }

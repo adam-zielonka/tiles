@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import { isFontExist } from "../utils/font";
 
 export class Style {
   font = "";
@@ -8,7 +9,6 @@ export class Style {
   }
 
   async set(font: string): Promise<string[]> {
-    const { isFontExist } = await import("../utils/font");
 
     if (!isFontExist(font) && font) {
       return [`Font family **'${font}'** is not installed`];
