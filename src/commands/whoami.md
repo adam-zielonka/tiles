@@ -16,6 +16,9 @@ Adam Zielonka
 **[YouTube]**  
 [Code in the Machine](https://www.youtube.com/channel/UC9ndsm1I60DjsIqEh1XITRQ)
 
+**[PCz Trening]**
+[Frontend tutorial](https://adam-zielonka.github.io/frontend-tutorial/)
+
 **[APPS]**  
 adamzielonka.pro: [Source](https://github.com/adam-zielonka/adamzielonka.pro), [Run](https://adamzielonka.pro/)  
 Questions: [Source](https://github.com/adam-zielonka/questions), [Run](https://questions.adamzielonka.pro/)  
