@@ -6,8 +6,8 @@ help: enter the matrix
 
 [#6CA391](css:color)
 [bold](css:font-weight)
-[20px](css:font-size)
-[30px](css:margin-top)
+[30px](css:font-size)
+[20px](css:margin-top)
 [](system:clear)
 [](sleep:500)
 
