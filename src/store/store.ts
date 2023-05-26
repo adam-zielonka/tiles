@@ -17,4 +17,4 @@ class Store {
 }
 
 export const store = window.store = new Store();
-void store.system.start(["whoami", "description"]);
+void store.system.start(["whoami"]);

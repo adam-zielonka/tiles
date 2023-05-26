@@ -99,7 +99,6 @@ const clock = createClock();
 const html =
   "<ul>" +
   renderCommand("whoami") +
-  renderCommand("description") +
   renderCommandLine("") +
   renderLines("panic") +
   "</ul>";
