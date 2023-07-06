@@ -1,6 +1,6 @@
 import fs from "fs";
 import { marked, Renderer } from "marked";
-import { parseLines } from "./utils/parse";
+import { parseLines } from "../utils/parse";
 import { PluginOption } from "vite";
 
 Renderer.prototype.paragraph = text => text;
