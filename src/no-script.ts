@@ -112,6 +112,6 @@ export const noScript: PluginOption = {
         renderCommandLine("") +
         renderLines("panic") +
       "</ul>"
-    ));
+    )).replace(/\n\s*\n/g, "\n");
   },
 };
