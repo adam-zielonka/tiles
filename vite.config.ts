@@ -1,10 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { markdownProcessor } from "./src/utils/markdown-processor";
+import { noScript } from "./src/no-script";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), markdownProcessor],
+  plugins: [noScript, react(), markdownProcessor],
   build: {
     sourcemap: true,
     rollupOptions: {

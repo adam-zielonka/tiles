@@ -1,12 +1,18 @@
 import fs from "fs";
-import replaceInFile from "replace-in-file";
 import { marked, Renderer } from "marked";
-import { parseLines } from "./utils/parse.js"; // <-- import from parse.ts :-)
+import { parseLines } from "./utils/parse";
+import { PluginOption } from "vite";
 
 Renderer.prototype.paragraph = text => text;
 
-function createClock(clock = 0): (delay?: number) => number {
-  return (delay = 0) => (clock += delay);
+type Clock = (delay?: number) => number
+type ResetClock = () => void
+
+function createClock(clock = 0): [Clock, ResetClock] {
+  return [
+    (delay = 0) => (clock += delay),
+    () => (clock = 0),
+  ];
 }
 
 function randomLetter(): string {
@@ -94,23 +100,18 @@ function formatHtml(html: string): string {
   return lines.join("\n").trimStart();
 }
 
-const clock = createClock();
+const [clock, resetClock] = createClock();
 
-const html =
-  "<ul>" +
-  renderCommand("whoami") +
-  renderCommandLine("") +
-  renderLines("panic") +
-  "</ul>";
-
-const results = replaceInFile.sync({
-  files: "./dist/index.html",
-  from: /<links \/>/g,
-  to: formatHtml(html),
-});
-
-if (results[0]?.hasChanged) {
-  console.log("Generated no-script section");
-} else {
-  console.error("Not found <links /> tag");
-}
+export const noScript: PluginOption = {
+  name: "no-script-section",
+  transformIndexHtml(html) {
+    resetClock();
+    return html.replace(/<links \/>/g, formatHtml(
+      "<ul>" +
+        renderCommand("whoami") +
+        renderCommandLine("") +
+        renderLines("panic") +
+      "</ul>"
+    ));
+  },
+};
