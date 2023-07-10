@@ -20,13 +20,13 @@ function installCommands(files: CommandAttributes[]): {
   for (const attributes of files) {
     const lines = parseLines(attributes.body);
     commands[attributes.command] = lines;
-    for (const alias of attributes.alias || []) {
+    for (const alias of attributes.alias ?? []) {
       commands[alias] = lines;
     }
     if (attributes.help) {
       help.push({
         command: attributes.command,
-        alias: attributes.alias || [],
+        alias: attributes.alias ?? [],
         help: attributes.help,
       });
     }

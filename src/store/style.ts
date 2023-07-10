@@ -8,8 +8,7 @@ export class Style {
     makeAutoObservable(this);
   }
 
-  async set(font: string): Promise<string[]> {
-
+  set(font: string): string[] {
     if (!isFontExist(font) && font) {
       return [`Font family **'${font}'** is not installed`];
     }

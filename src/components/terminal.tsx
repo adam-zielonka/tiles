@@ -10,7 +10,7 @@ import { useBreakDetection } from "../hooks/use-break-detection";
 const Shutdown = lazy(() => import("./shutdown"));
 
 export const Terminal = observer(() => {
-  useBreakDetection(() => store.system.break());
+  useBreakDetection(() => void store.system.break());
 
   if (store.system.shutdown) {
     return <Suspense fallback={<WaitALiteMore/>}>      

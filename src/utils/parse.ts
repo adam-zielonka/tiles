@@ -8,7 +8,7 @@ export function parseLines(body: string): ParsedLine[] {
 
   for (const text of array) {
     const [match, value, namespace, key] =
-      text.match(/^\[(.*)\]\(([a-z-]*):([a-z0-9-]*)\)$/) || [];
+      text.match(/^\[(.*)\]\(([a-z-]*):([a-z0-9-]*)\)$/) ?? [];
 
     if (match) {
       line.actions.push({ namespace, key, value });

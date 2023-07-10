@@ -12,7 +12,7 @@ export class Path {
     return this.value.replace(/^~/, "/root");
   }
 
-  async cd(newDir: string): Promise<void> {
+  cd(newDir: string): void {
     this.value = cd(this.value, newDir);
   }
 }

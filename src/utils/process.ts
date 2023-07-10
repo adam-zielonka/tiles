@@ -22,7 +22,7 @@ export async function process(commandArgs: string): Promise<void> {
           continue;
         case "system":
           if (!store.system.isProcessing) return;
-          for (const systemLine of await system(action.key, args)) {
+          for (const systemLine of system(action.key, args)) {
             await store.output.processLine({ value: systemLine, style });
           }
           continue;
@@ -46,7 +46,7 @@ function css(key: string, value: string): CSSProperties {
   return { [newKey]: value };
 }
 
-async function system(sysCommand: string, args: string[]): Promise<string[]> {
+function system(sysCommand: string, args: string[]): string[] {
   switch (sysCommand) {
     case "clear":
       store.output.clear();
@@ -62,7 +62,7 @@ async function system(sysCommand: string, args: string[]): Promise<string[]> {
     case "font":
       return store.style.set(args.join(" "));
     case "cd":
-      await store.path.cd(args.join(" "));
+      store.path.cd(args.join(" "));
       return [];
     case "pwd":
       return [store.path.pwd];

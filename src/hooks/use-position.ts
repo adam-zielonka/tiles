@@ -8,8 +8,8 @@ export function usePosition(inputRef: React.RefObject<HTMLInputElement>): [
 
   function updatePosition(): void {
     setPosition({
-      start: inputRef.current?.selectionStart || 0,
-      end: inputRef.current?.selectionEnd || 0,
+      start: inputRef.current?.selectionStart ?? 0,
+      end: inputRef.current?.selectionEnd ?? 0,
     });
   }
 
