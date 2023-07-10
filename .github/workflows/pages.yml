@@ -35,6 +35,8 @@ jobs:
           version: 8
       - name: Install dependencies
         run: pnpm install
+      - name: Test
+        run: pnpm coverage
       - name: Lint
         run: pnpm lint
       - name: Build
