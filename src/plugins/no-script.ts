@@ -1,9 +1,8 @@
 import fs from "fs";
-import { marked, Renderer } from "marked";
+import { marked } from "marked";
 import { parseLines } from "../utils/parse";
 import { PluginOption } from "vite";
-
-Renderer.prototype.paragraph = text => text;
+import "../utils/init-marked";
 
 type Clock = (delay?: number) => number
 type ResetClock = () => void

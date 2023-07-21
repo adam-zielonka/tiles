@@ -1,11 +1,10 @@
-import { marked, Renderer } from "marked";
+import { marked } from "marked";
 import { useEffect } from "react";
 import { LinePrefix } from "./line-prefix";
 import { Caret } from "./caret";
 import { OutputLine } from "../types/line";
 import { isCommandLine } from "../utils/line";
-
-Renderer.prototype.paragraph = text => text;
+import "../utils/init-marked";
 
 export function Line({line}: {line: OutputLine}) {
   useEffect(() => window.scrollTo(0, document.body.scrollHeight));
