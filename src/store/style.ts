@@ -10,7 +10,7 @@ export class Style {
 
   set(font: string): string[] {
     if (!isFontExist(font) && font) {
-      return [`Font family **'${font}'** is not installed`];
+      return [`Font family <b>'${font}'</b> is not installed`];
     }
 
     this.font = `${font ? font + ", " : ""}"Courier New", Courier, monospace`;

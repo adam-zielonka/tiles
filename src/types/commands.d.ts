@@ -1,13 +1,13 @@
 import { ParsedLine } from "./parse";
 
 export type CommandAttributes = {
-  body: string
   command: string
   alias?: string[]
   help?: string
+  lines: ParsedLine[]
 }
 
-export type FrontMatter = Omit<CommandAttributes, "body">
+export type FrontMatter = Omit<CommandAttributes, "lines">
 
 export type HelpProperties = Required<FrontMatter>
 

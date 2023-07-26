@@ -1,4 +1,7 @@
 import { ParsedLine } from "../types/parse";
+import { marked, Renderer } from "marked";
+
+Renderer.prototype.paragraph = text => text;
 
 export function parseLines(body: string): ParsedLine[] {
   const array = body.split("\n").map(m => m.replace(/^ *$/, ""));
@@ -13,7 +16,7 @@ export function parseLines(body: string): ParsedLine[] {
     if (match) {
       line.actions.push({ namespace, key, value });
     } else {
-      line.value = text;
+      line.value = marked(text || "&nbsp;", { mangle: false, headerIds: false });
       lines.push(line);
       line = { value: "", actions: [] };
     }

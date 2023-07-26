@@ -1,8 +1,6 @@
 import fs from "fs";
-import { marked } from "marked";
 import { parseLines } from "../utils/parse";
 import { PluginOption } from "vite";
-import "../utils/init-marked";
 
 type Clock = (delay?: number) => number
 type ResetClock = () => void
@@ -63,10 +61,7 @@ function renderLines(command: string): string {
     .replace(/---[ \s\S]*---\n/, "");
 
   const lines = parseLines(body).map(
-    line =>
-      `<li style="animation: hidden ${clock(20)}ms;">${marked(
-        line.value || "&nbsp;",
-      )}</li>`,
+    line => `<li style="animation: hidden ${clock(20)}ms;">${line.value}</li>`,
   );
 
   lines.shift();

@@ -16,7 +16,7 @@ export class Commands {
 
   get helpLines(): string[] {
     return this.help.map(
-      ({ command, alias, help }) => `**${[command, ...alias].join(" | ")}** - ${help}`,
+      ({ command, alias, help }) => `<b>${[command, ...alias].join(" | ")}</b> - ${help}`,
     );
   }
 

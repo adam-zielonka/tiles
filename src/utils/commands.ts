@@ -1,5 +1,4 @@
 import { CommandAttributes, CommandsLines, HelpProperties } from "../types/commands";
-import { parseLines } from "./parse";
 
 export function importCommands() {
   return installCommands(loadCommandsFiles());
@@ -18,10 +17,9 @@ function installCommands(files: CommandAttributes[]): {
   const commands: CommandsLines = {};
 
   for (const attributes of files) {
-    const lines = parseLines(attributes.body);
-    commands[attributes.command] = lines;
+    commands[attributes.command] = attributes.lines;
     for (const alias of attributes.alias ?? []) {
-      commands[alias] = lines;
+      commands[alias] = attributes.lines;
     }
     if (attributes.help) {
       help.push({
