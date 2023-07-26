@@ -3,5 +3,3 @@ export function Shutdown() {
     <p>It{"'"}s now safe to turn off<br />your computer.</p>
   </div>;
 }
-
-export default Shutdown;

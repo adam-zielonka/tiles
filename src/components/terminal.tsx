@@ -1,21 +1,16 @@
-import { lazy, Suspense } from "react";
 import { observer } from "mobx-react-lite";
 import { store } from "../store/store";
 import { Completion } from "./completion";
 import { Lines } from "./lines";
 import { Input } from "./input";
-import { WaitALiteMore } from "./wait-a-lite-more";
 import { useBreakDetection } from "../hooks/use-break-detection";
-
-const Shutdown = lazy(() => import("./shutdown"));
+import { Shutdown } from "./shutdown";
 
 export const Terminal = observer(() => {
   useBreakDetection(() => void store.system.break());
 
   if (store.system.shutdown) {
-    return <Suspense fallback={<WaitALiteMore/>}>      
-      <Shutdown/>
-    </Suspense>;
+    return <Shutdown/>;
   }
 
   return <div className="Terminal" style={{fontFamily: store.style.font}}>
