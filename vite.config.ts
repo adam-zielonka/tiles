@@ -15,17 +15,10 @@ export default defineConfig({
       output: {
         manualChunks: (id) => {
           if (id.includes("node_modules")) {
-            const name = id.replace(/^.*node_modules\//, "").replace(/\/.*$/, "");
-            switch (name) {
-              case "react":
-              case "react-dom":
-                return "react";
-              case "mobx":
-              case "mobx-react-lite":
-                return "mobx";
-              default:
-                return "vendor";
-            }
+            if (id.includes("mobx")) return "mobx";
+            if (id.includes("react")) return "react";
+            
+            return "vendor";
           }
         
           if (id.includes(".md")) {
