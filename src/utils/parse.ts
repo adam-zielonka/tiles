@@ -16,7 +16,7 @@ export function parseLines(body: string): ParsedLine[] {
     if (match) {
       line.actions.push({ namespace, key, value });
     } else {
-      line.value = marked(text || "&nbsp;", { mangle: false, headerIds: false });
+      line.value = marked(text || "&nbsp;");
       lines.push(line);
       line = { value: "", actions: [] };
     }
