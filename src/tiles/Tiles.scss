@@ -1,0 +1,57 @@
+.Tiles {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 80px;
+
+  gap: 10px;
+  margin: 10px;
+
+  h1, h2, .left, .right, p {
+    all: unset;
+  }
+
+  .Tile {
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr auto;
+    
+    header {
+      display: flex;
+      flex-direction: column;
+
+      h1 {
+        font-weight: bold;
+        font-size: larger;
+      }
+
+      h2 {
+        font-style: italic;
+      }
+    }
+
+    main {
+      font-size: x-large;
+      font-weight: bold;
+    }
+
+    footer {
+      grid-column: 1 / -1;
+
+      display: flex;
+      justify-content: space-between;
+
+      p {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+} 
