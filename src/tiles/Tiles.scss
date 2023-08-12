@@ -13,10 +13,21 @@
     all: unset;
   }
 
+  .Wrapper {
+    background: linear-gradient(to right, red 20%, white 0);
+  }
+
   .Tile {
-    background-color: white;
+    background: linear-gradient(to right, white 20%, red 0);
+    background-clip: text;
+    color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
     border-radius: 5px;
     padding: 10px;
+    height: 60px;
+
 
     display: grid;
     grid-template-columns: 1fr auto;
