@@ -23,7 +23,7 @@ export function Tiles() {
       info="123123123"
       leftInfo="12-AB"
     />
-  </div>
+  </div>;
 }
 
 type TileProps = {
@@ -49,5 +49,5 @@ function Tile({ title, description, value, info, leftInfo }: TileProps) {
         <p title={info}>{info}</p>
       </footer>
     </div>
-  </div>
+  </div>;
 }
