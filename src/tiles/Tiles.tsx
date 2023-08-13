@@ -1,3 +1,4 @@
+import { Tile } from "./Tile";
 import "./Tiles.scss";
 
 export function Tiles() {
@@ -23,31 +24,5 @@ export function Tiles() {
       info="123123123"
       leftInfo="12-AB"
     />
-  </div>;
-}
-
-type TileProps = {
-  title: string;
-  description?: string;
-  value: string;
-  info: string;
-  leftInfo?: string;
-}
-
-function Tile({ title, description, value, info, leftInfo }: TileProps) {
-  return <div className="Wrapper">
-    <div className="Tile">
-      <header>
-        <hgroup>
-          <h1>{title}</h1>
-          <h2>{description}</h2>
-        </hgroup>
-        <main>{value}</main>
-      </header>
-      <footer>
-        <p>{leftInfo}</p>
-        <p title={info}>{info}</p>
-      </footer>
-    </div>
   </div>;
 }

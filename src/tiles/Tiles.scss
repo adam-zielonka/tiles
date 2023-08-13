@@ -32,39 +32,34 @@
     flex-direction: column;
     justify-content: space-between;
 
-    header {
+    section {
       display: flex;
       justify-content: space-between;
+    }
 
-      hgroup {
-        display: flex;
-        flex-direction: column;
-  
-        h1 {
-          font-weight: bold;
-          font-size: larger;
-        }
-  
-        h2 {
-          font-style: italic;
-        }
-      }
-  
-      main {
-        font-size: x-large;
+    header {
+      display: flex;
+      flex-direction: column;
+
+      h1 {
         font-weight: bold;
+        font-size: larger;
+      }
+
+      h2 {
+        font-style: italic;
       }
     }
 
-    footer {
-      display: flex;
-      justify-content: space-between;
+    main {
+      font-size: x-large;
+      font-weight: bold;
+    }
 
-      p {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
+    p {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 } 
