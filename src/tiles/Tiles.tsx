@@ -1,6 +1,8 @@
 import "./Tiles.scss";
 
 export function Tiles() {
+  document.body.style.backgroundColor = "white";
+
   return <div className="Tiles">
     <Tile
       title="Title"
@@ -36,10 +38,12 @@ function Tile({ title, description, value, info, leftInfo }: TileProps) {
   return <div className="Wrapper">
     <div className="Tile">
       <header>
-        <h1>{title}</h1>
-        <h2>{description}</h2>
+        <hgroup>
+          <h1>{title}</h1>
+          <h2>{description}</h2>
+        </hgroup>
+        <main>{value}</main>
       </header>
-      <main>{value}</main>
       <footer>
         <p>{leftInfo}</p>
         <p title={info}>{info}</p>
