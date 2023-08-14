@@ -3,6 +3,7 @@ import { TileProps } from "./Tile";
 
 class Store {
   highlight = false;
+  step = -1;
   plan = [{
     material: "200.777.001",
     quantity: 42,
@@ -22,52 +23,68 @@ class Store {
   get tiles(): TileProps[] {
     const tiles = [];
 
-    tiles.push(...this.plan.map(item => ({
-      title: item.material,
-      value: item.quantity,
-      info: "Picking not started yet",
-    })));
+    if (this.step < 0 || this.step === 0) 
+      tiles.push(...this.plan.map(item => ({
+        title: item.material,
+        value: item.quantity,
+        info: "Picking not started yet",
+      })));
 
-    tiles.push(...this.pallets.map(item => ({
-      title: item.pallet,
-      description: item.material,
-      value: item.quantity,
-      info: `TO: ${item.transferOrder}`,
-      leftInfo: item.storageBin,
-      intent: "primary",
-    })));
+    if (this.step < 0 || this.step === 1) 
+      tiles.push(...this.pallets.map(item => ({
+        title: item.pallet,
+        description: item.material,
+        value: item.quantity,
+        info: `TO: ${item.transferOrder}`,
+        leftInfo: item.storageBin,
+        intent: "primary",
+      })));
 
-    tiles.push(...this.pallets.map((item, i) => ({
-      title: item.pallet,
-      description: item.material,
-      value: item.quantity,
-      info: i ? item.storageBin : "Something is wrong with this pallet. It's broken or on the way somewhere.",
-      intent: i ? "success" : "error",
-    })));
+    if (this.step < 0 || this.step === 2) 
+      tiles.push(...this.pallets.map((item, i) => ({
+        title: item.pallet,
+        description: item.material,
+        value: item.quantity,
+        info: i ? item.storageBin : "Something is wrong with this pallet. It's broken or on the way somewhere.",
+        intent: i ? "success" : "error",
+      })));
 
-    tiles.push(...this.pallets.filter(item => item.quantity < 10).map((item, i) => ({
-      title: item.pallet,
-      description: item.material,
-      value: item.quantity,
-      info: i ? `Scanned: ${i}/${item.quantity}` : "Ready to scan",
-      progress: i * 100 / item.quantity,
-    })));
+    if (this.step < 0 || this.step === 3) 
+      tiles.push(...this.pallets.filter(item => item.quantity < 10).map((item, i) => ({
+        title: item.pallet,
+        description: item.material,
+        value: item.quantity,
+        info: i ? `Scanned: ${i}/${item.quantity}` : "Ready to scan",
+        progress: i === item.quantity ? undefined : i * 100 / item.quantity,
+        intent: i === item.quantity ? "success" : undefined,
+      })));
 
-    tiles.push(...this.pallets.filter(item => item.quantity > 10).map((item, i) => ({
-      title: item.pallet,
-      description: item.material,
-      value: item.quantity,
-      info: i ? `Scanned: 360/${item.quantity}` : "Some scanned pallet have a problem",
-      progress: i ? undefined : 30,
-      intent: "error",
-    })));
+    if (this.step < 0 || this.step === 3) 
+      tiles.push(...this.pallets.filter(item => item.quantity > 10).map((item, i) => ({
+        title: item.pallet,
+        description: item.material,
+        value: item.quantity,
+        info: i ? `Scanned: 360/${item.quantity}` : "Some scanned pallet have a problem",
+        progress: i ? undefined : 30,
+        intent: "error",
+      })));
 
-    tiles.push(...this.plan.map(item => ({
-      title: item.material,
-      value: item.quantity,
-      info: "Everything is done",
-      intent: "success",
-    })));
+    if (this.step === 4) 
+      tiles.push(...this.pallets.map(item => ({
+        title: item.pallet,
+        description: item.material,
+        value: item.quantity,
+        info: `Scanned: ${item.quantity}/${item.quantity}`,
+        intent: "success",
+      })));
+
+    if (this.step < 0 || this.step === 5) 
+      tiles.push(...this.plan.map(item => ({
+        title: item.material,
+        value: item.quantity,
+        info: "Everything is done",
+        intent: "success",
+      })));
 
     return tiles;
   }
@@ -94,6 +111,14 @@ class Store {
 
   toggleHighlight() {
     this.highlight = !this.highlight;
+  }
+
+  filter(value: number | string) {
+    if (typeof value === "number") {
+      this.step = value;
+      return;
+    }
+    this.step = -1;
   }
 }
 
