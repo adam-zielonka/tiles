@@ -1,11 +1,11 @@
 import { COLORS, Intent } from "./Colors";
 import { Highlight } from "./Highlight";
 
-type TileProps = {
+export type TileProps = {
   title: string;
   description?: string;
-  value: string;
-  info: string;
+  value: number;
+  info?: string;
   leftInfo?: string;
   intent?: Intent;
   progress?: number;
