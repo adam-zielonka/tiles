@@ -10,7 +10,7 @@ export const Tiles = observer(function Tiles() {
   return <div className="TilesDemo">
     <header>
       Tiles
-      <div>
+      <main>
         <button onClick={() => store.back()}>--</button>
         <button onClick={() => store.filter(-1)} className={
           -1 === store.step ? "active" : ""
@@ -20,7 +20,7 @@ export const Tiles = observer(function Tiles() {
             i === store.step ? "active" : ""
           }>{i}</button>)}
         <button onClick={() => store.next()}>++</button>
-      </div>
+      </main>
       <button onClick={() => store.toggleHighlight()} className={
         store.highlight === true ? "active" : ""
       }>Highlight</button>

@@ -11,6 +11,7 @@
 
     display: flex;
     justify-content: space-between;
+    white-space: nowrap;
   }
 
   .Tiles {
@@ -22,13 +23,21 @@
     border-top: 1px solid rgba(17,20,24,.15);
   }
 
+  main {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+    margin: 0 5px;
+  }
+
   button {
     all: unset;
     cursor: pointer;
-    padding: 0 12px;
-    margin: 0 5px;
+    padding: 0 8px;
     border: 1px solid rgba(17,20,24,.15);
     border-radius: 10px;
+    font-size: smaller;
+    white-space: nowrap;
   }
 
   button:hover {
