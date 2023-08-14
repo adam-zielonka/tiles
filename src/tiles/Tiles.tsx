@@ -1,3 +1,4 @@
+import { store } from "./Store";
 import { Tile } from "./Tile";
 import "./Tiles.scss";
 
@@ -6,7 +7,10 @@ export function Tiles() {
   document.getElementById("root")!.style.height = "100%";
 
   return <div className="TilesDemo">
-    <header>Tiles</header>
+    <header>
+      Tiles
+      <button onClick={() => store.toggleHighlight()}>Toggle Highlight</button>
+    </header>
     <div className="Tiles" style={{"--tile-min-width": "250px"}}>
       <Tile
         title="2077070707"

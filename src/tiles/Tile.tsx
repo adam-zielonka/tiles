@@ -1,4 +1,5 @@
 import { COLORS, Intent } from "./Colors";
+import { Highlight } from "./Highlight";
 
 type TileProps = {
   title: string;
@@ -15,11 +16,12 @@ export function Tile({ title, description, value, info, leftInfo, intent = "defa
     "--tile-progress": `${progress}%`,
     "--tile-color": COLORS[intent].background,
     "--tile-font-color": COLORS[intent].font ?? "black",
+    "--tile-highlight-color": COLORS[intent].font ? COLORS[intent].background : "black",
   }}>
     <div className="Tile">
       <section>
         <header>
-          <h1>{title}</h1>
+          <h1><Highlight>{title}</Highlight></h1>
           <h2>{description}</h2>
         </header>
         <main>{value}</main>
@@ -31,3 +33,4 @@ export function Tile({ title, description, value, info, leftInfo, intent = "defa
     </div>
   </div>;
 }
+
