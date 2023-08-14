@@ -113,12 +113,8 @@ class Store {
     this.highlight = !this.highlight;
   }
 
-  filter(value: number | string) {
-    if (typeof value === "number") {
-      this.step = value;
-      return;
-    }
-    this.step = -1;
+  filter(value: number) {
+    this.step = value;
   }
 
   back() {

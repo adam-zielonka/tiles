@@ -21,6 +21,24 @@
     padding: 10px;
     border-top: 1px solid rgba(17,20,24,.15);
   }
+
+  button {
+    all: unset;
+    cursor: pointer;
+    padding: 0 12px;
+    margin: 0 5px;
+    border: 1px solid rgba(17,20,24,.15);
+    border-radius: 10px;
+  }
+
+  button:hover {
+    background-color: lightyellow;
+  }
+
+  button.active {
+    background-color: yellow;
+    color: #111;
+  }
 }
 
 .Tiles {
