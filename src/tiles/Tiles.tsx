@@ -21,7 +21,7 @@ export function Tiles() {
         value="6"
         info="TO: 1234567"
         leftInfo={`A1-0${i}`}
-        color="transfer-order"
+        intent="transfer-order"
       />)}
 
       {[1,2,3,4,5,6,7].map(i => <Tile
@@ -30,7 +30,7 @@ export function Tiles() {
         description="200.777.001"
         value="6"
         info={`A1-0${i}`}
-        color="pallet"
+        intent="pallet"
       />)}
 
       <Tile
@@ -38,18 +38,41 @@ export function Tiles() {
         description="200.777.001"
         value="6"
         info="Something is wrong with this pallet. It's broken or on the way somewhere."
-        color="error"
+        intent="error"
       />
 
-      {[0,1,2,3,4,5,6,7].map(i => <Tile
+      {[0,1,2,3,4,5,6].map(i => <Tile
         key={i}
         title="2077070707"
         description="200.777.001"
         value="6"
-        info={`Scanned: ${i}/6`}
-        progress={i === 7 ? 0 : i * 100 / 6}
-        color={i === 7 ? "error" : "empty"}
+        info={i ? `Scanned: ${i}/6` : "Ready to scan"}
+        progress={i * 100 / 6}
       />)}
+
+      <Tile
+        title="2077070707"
+        description="200.777.001"
+        value="6"
+        info="Some scanned pallet have a problem"
+        progress={1 * 100 / 6}
+        intent="error"
+      />
+
+      <Tile
+        title="2077070707"
+        description="200.777.001"
+        value="6"
+        info="Scanned: 12/6"
+        intent="error"
+      />
+
+      <Tile
+        title="2077070707"
+        value="42"
+        info="Everything is done"
+        intent="pallet"
+      />
     </div>
     <footer>
       Footer

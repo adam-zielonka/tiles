@@ -1,33 +1,20 @@
+import { COLORS, Intent } from "./Colors";
+
 type TileProps = {
   title: string;
   description?: string;
   value: string;
   info: string;
   leftInfo?: string;
-  color?: TileColor;
+  intent?: Intent;
   progress?: number;
 }
 
-type TileColor = "empty" | "transfer-order" | "pallet" | "error";
-
-function mapColor(color: TileColor | undefined): string {
-  switch (color) {
-    case "transfer-order":
-      return "lightblue";
-    case "pallet":
-      return "lightgreen";
-    case "error":
-      return "red";
-    default:
-      return "white";
-  }
-}
-
-export function Tile({ title, description, value, info, leftInfo, color, progress = 0 }: TileProps) {  
+export function Tile({ title, description, value, info, leftInfo, intent = "default", progress = 0 }: TileProps) {  
   return <div className="Wrapper" style={{
     "--tile-progress": `${progress}%`,
-    "--tile-color": mapColor(color),
-    "--tile-font-color": color === "error" ? "white" : "black",
+    "--tile-color": COLORS[intent].background,
+    "--tile-font-color": COLORS[intent].font ?? "black",
   }}>
     <div className="Tile">
       <section>
