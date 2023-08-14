@@ -34,7 +34,7 @@ class Store {
       value: item.quantity,
       info: `TO: ${item.transferOrder}`,
       leftInfo: item.storageBin,
-      intent: "transfer-order",
+      intent: "primary",
     })));
 
     tiles.push(...this.pallets.map((item, i) => ({
@@ -42,7 +42,7 @@ class Store {
       description: item.material,
       value: item.quantity,
       info: i ? item.storageBin : "Something is wrong with this pallet. It's broken or on the way somewhere.",
-      intent: i ? "pallet" : "error",
+      intent: i ? "success" : "error",
     })));
 
     tiles.push(...this.pallets.filter(item => item.quantity < 10).map((item, i) => ({
@@ -66,7 +66,7 @@ class Store {
       title: item.material,
       value: item.quantity,
       info: "Everything is done",
-      intent: "pallet",
+      intent: "success",
     })));
 
     return tiles;

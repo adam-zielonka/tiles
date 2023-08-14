@@ -1,4 +1,4 @@
-export type Intent = "default" | "transfer-order" | "pallet" | "error";
+export type Intent = "default" | "primary" | "success" | "error";
 
 type Colors = {
   [key in Intent]: {
@@ -11,10 +11,10 @@ export const COLORS: Colors = {
   default: {
     background: "white",
   },
-  "transfer-order": {
+  primary: {
     background: "lightblue",
   },
-  pallet: {
+  success: {
     background: "lightgreen",
   },
   error: {
