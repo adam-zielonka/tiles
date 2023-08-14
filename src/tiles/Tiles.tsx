@@ -11,8 +11,10 @@ export const Tiles = observer(function Tiles() {
     <header>
       Tiles
       <div>
+        <button onClick={() => store.back()}>--</button>
         {["all",0,1,2,3,4,5].map(i => 
           <button key={i} onClick={() => store.filter(i)}>{i}</button>)}
+        <button onClick={() => store.next()}>++</button>
       </div>
       <button onClick={() => store.toggleHighlight()}>Highlight</button>
     </header>

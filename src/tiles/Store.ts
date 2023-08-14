@@ -120,6 +120,20 @@ class Store {
     }
     this.step = -1;
   }
+
+  back() {
+    this.step--;
+    if (this.step < 0) {
+      this.step = 5;
+    }
+  }
+
+  next() {
+    this.step++;
+    if (this.step > 5) {
+      this.step = 0;
+    }
+  }
 }
 
 export const store = new Store();
