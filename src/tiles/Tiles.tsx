@@ -13,8 +13,7 @@ export function Tiles() {
     </header>
     <div className="Tiles" style={{"--tile-min-width": "250px"}}>
       <Tile
-        title="2077070707"
-        description="200.777.001"
+        title="200.777.001"
         value="42"
         info="Picking not started yet"
       />
@@ -73,7 +72,7 @@ export function Tiles() {
       />
 
       <Tile
-        title="2077070707"
+        title="200.777.001"
         value="42"
         info="Everything is done"
         intent="pallet"
