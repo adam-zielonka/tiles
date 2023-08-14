@@ -4,10 +4,31 @@ type TileProps = {
   value: string;
   info: string;
   leftInfo?: string;
+  color?: TileColor;
+  progress?: number;
 }
 
-export function Tile({ title, description, value, info, leftInfo }: TileProps) {
-  return <div className="Wrapper">
+type TileColor = "empty" | "transfer-order" | "pallet" | "error";
+
+function mapColor(color: TileColor | undefined): string {
+  switch (color) {
+    case "transfer-order":
+      return "lightblue";
+    case "pallet":
+      return "lightgreen";
+    case "error":
+      return "red";
+    default:
+      return "white";
+  }
+}
+
+export function Tile({ title, description, value, info, leftInfo, color, progress = 0 }: TileProps) {  
+  return <div className="Wrapper" style={{
+    "--tile-progress": `${progress}%`,
+    "--tile-color": mapColor(color),
+    "--tile-font-color": color === "error" ? "white" : "black",
+  }}>
     <div className="Tile">
       <section>
         <header>
