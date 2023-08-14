@@ -3,6 +3,7 @@ import "./Tiles.scss";
 
 export function Tiles() {
   document.body.style.backgroundColor = "white";
+  document.getElementById("root")!.style.height = "100%";
 
   return <div className="TilesDemo">
     <header>Tiles</header>
