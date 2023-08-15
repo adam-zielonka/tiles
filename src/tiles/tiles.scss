@@ -1,0 +1,119 @@
+.TilesDemo {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+
+  header {
+    padding: 10px;
+    border-bottom: 1px solid rgba(17,20,24,.15);
+
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+  }
+
+  .Tiles {
+    overflow: auto;
+  }
+
+  footer {
+    padding: 10px;
+    border-top: 1px solid rgba(17,20,24,.15);
+  }
+
+  main {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+    margin: 0 5px;
+  }
+
+  button {
+    all: unset;
+    cursor: pointer;
+    padding: 0 8px;
+    border: 1px solid rgba(17,20,24,.15);
+    border-radius: 10px;
+    font-size: smaller;
+    white-space: nowrap;
+  }
+
+  button:hover {
+    background-color: lightyellow;
+  }
+
+  button.active {
+    background-color: yellow;
+    color: #111;
+  }
+}
+
+.Tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--tile-min-width, 250px), 1fr));
+  grid-auto-rows: 80px;
+
+  gap: 10px;
+  padding: 10px;
+
+  header, main, section, h1, h2, p, .left, .right {
+    all: unset;
+  }
+
+  .Wrapper {
+    background: linear-gradient(to right, yellow var(--tile-progress, 0), var(--tile-color, white) 0);
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(17,20,24,.15);
+  }
+
+  .Tile {
+    background: linear-gradient(to right, black var(--tile-progress, 0), var(--tile-font-color, black) 0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    
+    padding: 10px;
+    height: 60px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    section {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+
+      h1 {
+        font-weight: bold;
+        font-size: larger;
+      }
+
+      h2 {
+        font-style: italic;
+      }
+    }
+
+    main {
+      font-size: x-large;
+      font-weight: bold;
+    }
+
+    p {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+} 
+
+.Highlight {
+  color: var(--tile-highlight-color, black);
+  background-color: yellow;
+}
