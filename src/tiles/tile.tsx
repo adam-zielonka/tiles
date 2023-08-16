@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { COLORS, Intent } from "./colors";
 import { Highlight } from "./highlight";
 import { store } from "./store";
@@ -22,7 +22,7 @@ export const Tile = observer(function ({ title, description, value, info, leftIn
   const ref = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(240);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (ref.current) {
       setWidth(ref.current.clientWidth);
     }
