@@ -3,7 +3,7 @@ import { COLORS, Intent } from "./colors";
 import { Highlight } from "./highlight";
 import { store } from "./store";
 import { observer } from "mobx-react-lite";
-import { CubeIcon, BoxMultipleIcon } from "./icons";
+import { CubeIcon, BoxMultipleIcon, CubeOutlineIcon, BoxMultipleOutlineIcon } from "./icons";
 
 export type TileProps = {
   title: string;
@@ -13,7 +13,7 @@ export type TileProps = {
   leftInfo?: string;
   intent?: Intent;
   progress?: number;
-  icon: "plan" | "pick"
+  icon: "plan" | "transfer" | "pick" | "post";
 }
 
 export const Tile = observer(function ({ title, description, value, info, leftInfo, intent = "default", progress = 0,
@@ -32,7 +32,9 @@ export const Tile = observer(function ({ title, description, value, info, leftIn
   function Icon() {
     switch (icon) {
       case "plan": return <BoxMultipleIcon/>;
-      case "pick": return <CubeIcon/>;
+      case "transfer": return <CubeIcon/>;
+      case "pick": return <CubeOutlineIcon/>;
+      case "post": return <BoxMultipleOutlineIcon/>;
     }
   }
 

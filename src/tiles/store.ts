@@ -50,7 +50,7 @@ class Store {
         info: `TO: ${item.transferOrder}`,
         leftInfo: item.storageBin,
         intent: "primary",
-        icon: "plan",
+        icon: "transfer",
       })));
 
     if (this.step < 0 || this.step === 2) 
@@ -101,7 +101,7 @@ class Store {
         value: item.quantity,
         info: "Everything is done",
         intent: "success",
-        icon: "pick",
+        icon: "post",
       })));
 
     return tiles as TileProps[];
