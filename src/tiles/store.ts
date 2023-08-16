@@ -1,19 +1,22 @@
 import { makeAutoObservable } from "mobx";
 import { TileProps } from "./tile";
+import { Dimensions } from "./dimensions.store";
 
 class Store {
+  dimensions = new Dimensions();
+
   highlight = false;
   step = -1;
   plan = [{
     material: "200.777.001",
     quantity: 42,
     perPalet: 6,
-    storageBin: "A1",
+    storageBin: "A",
   },{
     material: "200.777.002",
     quantity: 240,
     perPalet: 120,
-    storageBin: "B1",
+    storageBin: "B",
   }];
 
   constructor() {
@@ -28,6 +31,7 @@ class Store {
         title: item.material,
         value: item.quantity,
         info: "Picking not started yet",
+        icon: "plan",
       })));
 
     if (this.step < 0 || this.step === 1) 
@@ -37,6 +41,7 @@ class Store {
         info: `TO: ${item.transferOrder}`,
         leftInfo: item.storageBin,
         intent: "primary",
+        icon: "plan",
       })));
 
     if (this.step < 0 || this.step === 2) 
@@ -46,6 +51,7 @@ class Store {
         value: item.quantity,
         info: i ? item.storageBin : "Something is wrong with this pallet. It's broken or on the way somewhere.",
         intent: i ? "success" : "error",
+        icon: "pick",
       })));
 
     if (this.step < 0 || this.step === 3) 
@@ -56,6 +62,7 @@ class Store {
         info: i ? `Scanned: ${i}/${item.quantity}` : "Ready to scan",
         progress: i === item.quantity ? undefined : i * 100 / item.quantity,
         intent: i === item.quantity ? "success" : undefined,
+        icon: "pick",
       })));
 
     if (this.step < 0 || this.step === 3) 
@@ -66,6 +73,7 @@ class Store {
         info: i ? `Scanned: 360/${item.quantity}` : "Some scanned pallet have a problem",
         progress: i ? undefined : 30,
         intent: "error",
+        icon: "pick",
       })));
 
     if (this.step === 4) 
@@ -75,6 +83,7 @@ class Store {
         value: item.quantity,
         info: `Scanned: ${item.quantity}/${item.quantity}`,
         intent: "success",
+        icon: "pick",
       })));
 
     if (this.step < 0 || this.step === 5) 
@@ -83,9 +92,10 @@ class Store {
         value: item.quantity,
         info: "Everything is done",
         intent: "success",
+        icon: "pick",
       })));
 
-    return tiles;
+    return tiles as TileProps[];
   }
 
   get pallets() {

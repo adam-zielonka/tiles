@@ -1,9 +1,10 @@
 .TilesDemo {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Verdana;
   color: black;
   display: grid;
   grid-template-rows: auto 1fr auto;
   height: 100%;
+  font-size: 14px;
 
   header {
     padding: 10px;
@@ -58,12 +59,16 @@
   gap: 15px;
   padding: 10px;
 
+  cursor: pointer;
+
   header, main, section, h1, h2, p, .left, .right {
     all: unset;
   }
 
-  .Wrapper {
-    background: linear-gradient(to right, yellow var(--tile-progress, 0), var(--tile-color, white) 0);
+  .Tile {
+    background-color: var(--tile-color, white);
+    color: var(--tile-font-color, black);
+
     border-radius: 3px;
     box-shadow: 0 0 0 1px rgba(17,20,24,.1), 0 1px 1px rgba(17,20,24,.2), 0 2px 6px rgba(17,20,24,.2);
     transition: transform .2s cubic-bezier(.4,1,.75,.9),box-shadow .2s cubic-bezier(.4,1,.75,.9),-webkit-transform .2s cubic-bezier(.4,1,.75,.9);
@@ -71,13 +76,6 @@
     &:hover {
       box-shadow: 0 0 0 1px rgba(17,20,24,.1), 0 2px 4px rgba(17,20,24,.2), 0 8px 24px rgba(17,20,24,.2);
     }
-  }
-
-  .Tile {
-    background: linear-gradient(to right, black var(--tile-progress, 0), var(--tile-font-color, black) 0);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
     
     padding: 10px;
     height: 60px;
@@ -106,8 +104,18 @@
     }
 
     main {
-      font-size: x-large;
+      font-size: xx-large;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+
+      svg {
+        height: 30px;
+
+        path {
+          fill: var(--tile-font-color, black);
+        }
+      }
     }
 
     p {
@@ -116,9 +124,20 @@
       text-overflow: ellipsis;
     }
   }
+
+  .tile-progress {
+    --tile-color: yellow;
+    --tile-font-color: black;
+    --tile-highlight-color: black;
+    --tile-highlight-bg-color: white;
+    overflow: hidden;
+    position: relative;
+    top: -80px;
+    pointer-events: none;
+  }
 } 
 
 .Highlight {
   color: var(--tile-highlight-color, black);
-  background-color: yellow;
+  background-color: var(--tile-highlight-bg-color, yellow);
 }
