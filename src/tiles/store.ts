@@ -35,6 +35,15 @@ class Store {
       })));
 
     if (this.step < 0 || this.step === 1) 
+      tiles.push({
+        title: "200.777.042",
+        value: 1,
+        info: "Not available on warehouse",
+        icon: "plan",
+        intent: "warning",
+      });
+
+    if (this.step < 0 || this.step === 1) 
       tiles.push(...this.pallets.map(item => ({
         title: item.material,
         value: item.quantity,

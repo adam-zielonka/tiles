@@ -126,7 +126,7 @@
   }
 
   .tile-progress {
-    --tile-color: yellow;
+    --tile-color: var(--tile-yellow-color, #fff843);
     --tile-font-color: black;
     --tile-highlight-color: black;
     --tile-highlight-bg-color: white;
@@ -139,5 +139,5 @@
 
 .Highlight {
   color: var(--tile-highlight-color, black);
-  background-color: var(--tile-highlight-bg-color, yellow);
+  background-color: var(--tile-highlight-bg-color, #fff843);
 }

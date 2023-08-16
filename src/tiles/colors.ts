@@ -1,4 +1,4 @@
-export type Intent = "default" | "primary" | "success" | "error";
+export type Intent = "default" | "primary" | "success" | "error" | "warning";
 
 type Colors = {
   [key in Intent]: {
@@ -30,5 +30,8 @@ export const COLORS: Colors = {
   error: {
     background: ALV.RED,
     font: "white",
+  },
+  warning: {
+    background: ALV.ORANGE,
   },
 };
