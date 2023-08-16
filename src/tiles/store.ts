@@ -32,8 +32,7 @@ class Store {
 
     if (this.step < 0 || this.step === 1) 
       tiles.push(...this.pallets.map(item => ({
-        title: item.pallet,
-        description: item.material,
+        title: item.material,
         value: item.quantity,
         info: `TO: ${item.transferOrder}`,
         leftInfo: item.storageBin,
