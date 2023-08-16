@@ -7,18 +7,28 @@ type Colors = {
   }
 }
 
+const ALV = {
+  BLUE: "#bdd7ee",
+  GRAY: "#d4dfef",
+  YELLOW: "#fff843",
+  PEAR: "#e5f4a6",
+  GREEN: "#ccffcc",
+  RED: "#e16758",
+  ORANGE: "#f8e5c8",
+};
+
 export const COLORS: Colors = {
   default: {
     background: "white",
   },
   primary: {
-    background: "lightblue",
+    background: ALV.BLUE,
   },
   success: {
-    background: "lightgreen",
+    background: ALV.GREEN,
   },
   error: {
-    background: "red",
+    background: ALV.RED,
     font: "white",
   },
 };
