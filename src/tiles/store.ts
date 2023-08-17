@@ -1,9 +1,11 @@
 import { makeAutoObservable } from "mobx";
 import { TileProps } from "./tile";
 import { Dimensions } from "./dimensions.store";
+import { System } from "./types.store";
 
 class Store {
   dimensions = new Dimensions();
+  system = new System();
 
   highlight = false;
   step = -1;

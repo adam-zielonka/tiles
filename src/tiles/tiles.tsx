@@ -26,6 +26,7 @@ export const Tiles = observer(function Tiles() {
       }>Highlight</button>
     </header>
     <div className="Tiles" style={{"--tile-min-width": "250px"}}>
+      {/* {store.system.tiles.map((tile, i) => <Tile key={i} {...tile}/>)} */}
       {store.tiles.map((tile, i) => <Tile key={i} {...tile}/>)}
     </div>
     <footer>
