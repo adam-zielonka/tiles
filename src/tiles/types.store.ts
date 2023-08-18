@@ -31,6 +31,11 @@ export class System {
   constructor() {
     makeAutoObservable(this);
 
+    this.init();
+    this.createTransferOrder();
+  }
+
+  init = () => {
     this.orders = [{
       material: "200.777.001",
       quantity: 42,
@@ -52,8 +57,8 @@ export class System {
       });
     }
 
-    this.createTransferOrder();
-  }
+    this.transferOrders = [];
+  };
 
   createTransferOrder = () => {
     for (const order of this.orders) {
