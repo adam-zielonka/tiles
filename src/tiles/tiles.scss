@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;500;600;700&display=swap');
+
 .TilesDemo {
-  font-family: Verdana;
+  font-family: 'Signika Negative', Verdana;
+  font-weight: 300;
   color: black;
   display: grid;
   grid-template-rows: auto 1fr auto;
   height: 100%;
-  font-size: 14px;
+  font-size: 16px;
 
   header {
     padding: 10px;
@@ -94,18 +97,14 @@
       flex-direction: column;
 
       h1 {
-        font-weight: bold;
+        font-weight: 600;
         font-size: larger;
-      }
-
-      h2 {
-        font-style: italic;
       }
     }
 
     main {
       font-size: xx-large;
-      font-weight: bold;
+      font-weight: 600;
       display: flex;
       align-items: center;
 
