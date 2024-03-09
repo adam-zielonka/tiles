@@ -23,7 +23,7 @@ Adam Zielonka
 adamzielonka.pro: [Source](https://github.com/adam-zielonka/adamzielonka.pro), [Run](https://adamzielonka.pro/)  
 Questions: [Source](https://github.com/adam-zielonka/questions), [Run](https://questions.adamzielonka.pro/)  
 Server Status: [Source](https://github.com/adam-zielonka/server-status), [Demo](https://fake-status.adamzielonka.pro/)  
-Unit Converter: [Source](https://github.com/adam-zielonka/unit-converter), [Google Play](https://play.google.com/store/apps/details?id=pro.adamzielonka.converter)  
+Unit Converter: [Source](https://github.com/adam-zielonka/unit-converter)
 paintAZ: [Source](https://github.com/adam-zielonka/paintaz)  
 mobx-example: [Source](https://github.com/adam-zielonka/mobx-example), [Demo](https://mobx-example.adamzielonka.pro/)  
 svelte-example: [Source](https://github.com/adam-zielonka/svelte-example), [Demo](https://svelte-example.adamzielonka.pro/)
