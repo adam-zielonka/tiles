@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { store } from "./store";
+import { store } from "../store/store";
 import { Tile } from "./tile";
 
 export const Tiles = observer(function Tiles() {

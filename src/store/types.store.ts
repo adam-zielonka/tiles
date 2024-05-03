@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { TileProps } from "./tile";
+import { TileProps } from "../components/tile";
 
 type Material = string;
 type StorageBin = string

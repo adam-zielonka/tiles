@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
-import { COLORS, Intent } from "./colors";
+import { COLORS, Intent } from "../store/colors";
 import { Highlight } from "./highlight";
-import { store } from "./store";
+import { store } from "../store/store";
 import { observer } from "mobx-react-lite";
 import { CubeIcon, BoxMultipleIcon, CubeOutlineIcon, BoxMultipleOutlineIcon } from "./icons";
 

@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { TileProps } from "./tile";
+import { TileProps } from "../components/tile";
 import { Dimensions } from "./dimensions.store";
 import { System } from "./types.store";
 
