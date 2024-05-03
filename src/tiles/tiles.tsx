@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { store } from "./store";
 import { Tile } from "./tile";
-import "./tiles.scss";
 
 export const Tiles = observer(function Tiles() {
   document.body.style.backgroundColor = "white";
