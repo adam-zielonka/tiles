@@ -69,7 +69,13 @@
   }
 
   .Tile {
-    background-color: var(--tile-color, white);
+    background: linear-gradient(
+      to right,
+      var(--tile-yellow-color, #fff843) 0%,
+      var(--tile-yellow-color, #fff843) var(--tile-progress, 0%),
+      var(--tile-color, white) var(--tile-progress, 0%),
+      var(--tile-color, white) 100%
+    );
     color: var(--tile-font-color, black);
 
     border-radius: 3px;
@@ -124,21 +130,9 @@
       text-overflow: ellipsis;
     }
   }
-
-  .tile-progress {
-    --tile-color: var(--tile-yellow-color, #fff843);
-    --tile-font-color: black;
-    --tile-highlight-color: black;
-    --tile-highlight-bg-color: white;
-    overflow: hidden;
-    position: relative;
-    top: -80px;
-    margin-bottom: -80px;
-    pointer-events: none;
-  }
 } 
 
 .Highlight {
   color: var(--tile-highlight-color, black);
-  background-color: var(--tile-highlight-bg-color, #fff843);
+  background-color: var(--tile-highlight-bg-color, orange);
 }
