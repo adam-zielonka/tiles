@@ -29,7 +29,7 @@ export const Tiles = observer(function Tiles() {
       {store.tiles.map((tile, i) => <Tile key={i} {...tile}/>)}
     </div>
     <footer>
-      Footer
+      Source code: <a href="https://github.com/adam-zielonka/tiles">https://github.com/adam-zielonka/tiles</a>
     </footer>
   </div>;
 });
