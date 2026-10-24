@@ -1,11 +1,9 @@
 export type Intent = "default" | "primary" | "success" | "error" | "warning";
 
-type Colors = {
-  [key in Intent]: {
+type Colors = Record<Intent, {
     background: string
     font?: string
-  }
-}
+}>
 
 const ALV = {
   BLUE: "#bdd7ee",
