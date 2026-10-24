@@ -22,7 +22,7 @@
     "csstype": "^3.2.3",
     "eslint": "^9.39.5",
     "eslint-plugin-react": "^7.37.5",
-    "globals": "^15.15.0",
+    "globals": "^17.13.0",
     "sass": "^1.106.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^7.18.0",
