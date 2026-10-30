@@ -1,0 +1,467 @@
+{
+  "date": "2026-10-30T10:40:50.993Z",
+  "base": "http://127.0.0.1:4198/",
+  "browser": "156.0.8078.4",
+  "fixture": "Only hard-coded demo material/TO/bin identifiers replaced in in-memory JS responses; original assets separately verified. Quantities/state/logic unchanged.",
+  "runs": [
+    {
+      "mobile": false,
+      "states": [
+        {
+          "step": "all",
+          "errorStyles": [
+            {
+              "color": "rgb(0, 0, 0)",
+              "background": "#e16758",
+              "font": "16px",
+              "icon": "rgb(0, 0, 0)",
+              "text": "Something is wrong with this pallet. It's broken or on the way somewhere.",
+              "contrast": 6.282525582392793,
+              "grayContrast": 5.3065809391522665
+            },
+            {
+              "color": "rgb(0, 0, 0)",
+              "background": "#e16758",
+              "font": "16px",
+              "icon": "rgb(0, 0, 0)",
+              "text": "Some scanned pallet have a problem",
+              "contrast": 6.282525582392793,
+              "grayContrast": 5.3065809391522665
+            },
+            {
+              "color": "rgb(0, 0, 0)",
+              "background": "#e16758",
+              "font": "16px",
+              "icon": "rgb(0, 0, 0)",
+              "text": "Scanned: 360/120",
+              "contrast": 6.282525582392793,
+              "grayContrast": 5.3065809391522665
+            }
+          ],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 521,
+              "y": 10,
+              "width": 33,
+              "height": 20,
+              "top": 10,
+              "right": 554,
+              "bottom": 30,
+              "left": 521
+            }
+          },
+          "tileCount": 32
+        },
+        {
+          "step": "0",
+          "errorStyles": [],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 556,
+              "y": 10,
+              "width": 25,
+              "height": 20,
+              "top": 10,
+              "right": 581,
+              "bottom": 30,
+              "left": 556
+            }
+          },
+          "tileCount": 2
+        },
+        {
+          "step": "1",
+          "errorStyles": [],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 583,
+              "y": 10,
+              "width": 25,
+              "height": 20,
+              "top": 10,
+              "right": 608,
+              "bottom": 30,
+              "left": 583
+            }
+          },
+          "tileCount": 10
+        },
+        {
+          "step": "2",
+          "errorStyles": [
+            {
+              "color": "rgb(0, 0, 0)",
+              "background": "#e16758",
+              "font": "16px",
+              "icon": "rgb(0, 0, 0)",
+              "text": "Something is wrong with this pallet. It's broken or on the way somewhere.",
+              "contrast": 6.282525582392793,
+              "grayContrast": 5.3065809391522665
+            }
+          ],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 610,
+              "y": 10,
+              "width": 25,
+              "height": 20,
+              "top": 10,
+              "right": 635,
+              "bottom": 30,
+              "left": 610
+            }
+          },
+          "tileCount": 9
+        },
+        {
+          "step": "3",
+          "errorStyles": [
+            {
+              "color": "rgb(0, 0, 0)",
+              "background": "#e16758",
+              "font": "16px",
+              "icon": "rgb(0, 0, 0)",
+              "text": "Some scanned pallet have a problem",
+              "contrast": 6.282525582392793,
+              "grayContrast": 5.3065809391522665
+            },
+            {
+              "color": "rgb(0, 0, 0)",
+              "background": "#e16758",
+              "font": "16px",
+              "icon": "rgb(0, 0, 0)",
+              "text": "Scanned: 360/120",
+              "contrast": 6.282525582392793,
+              "grayContrast": 5.3065809391522665
+            }
+          ],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 637,
+              "y": 10,
+              "width": 25,
+              "height": 20,
+              "top": 10,
+              "right": 662,
+              "bottom": 30,
+              "left": 637
+            }
+          },
+          "tileCount": 9
+        },
+        {
+          "step": "4",
+          "errorStyles": [],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 664,
+              "y": 10,
+              "width": 25,
+              "height": 20,
+              "top": 10,
+              "right": 689,
+              "bottom": 30,
+              "left": 664
+            }
+          },
+          "tileCount": 9
+        },
+        {
+          "step": "5",
+          "errorStyles": [],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 691,
+              "y": 10,
+              "width": 25,
+              "height": 20,
+              "top": 10,
+              "right": 716,
+              "bottom": 30,
+              "left": 691
+            }
+          },
+          "tileCount": 2
+        }
+      ],
+      "errors": [],
+      "focus": {
+        "text": "0",
+        "outline": "rgb(17, 17, 17) dashed 2px",
+        "offset": "2px",
+        "shadow": "none",
+        "visible": true
+      },
+      "widths": [
+        {
+          "inner": 320,
+          "document": 320
+        },
+        {
+          "inner": 390,
+          "document": 390
+        },
+        {
+          "inner": 600,
+          "document": 600
+        },
+        {
+          "inner": 900,
+          "document": 900
+        },
+        {
+          "inner": 1280,
+          "document": 1280
+        },
+        {
+          "inner": 1440,
+          "document": 1440
+        }
+      ]
+    },
+    {
+      "mobile": true,
+      "states": [
+        {
+          "step": "all",
+          "errorStyles": [
+            {
+              "color": "rgb(0, 0, 0)",
+              "background": "#e16758",
+              "font": "16px",
+              "icon": "rgb(0, 0, 0)",
+              "text": "Something is wrong with this pallet. It's broken or on the way somewhere.",
+              "contrast": 6.282525582392793,
+              "grayContrast": 5.3065809391522665
+            },
+            {
+              "color": "rgb(0, 0, 0)",
+              "background": "#e16758",
+              "font": "16px",
+              "icon": "rgb(0, 0, 0)",
+              "text": "Some scanned pallet have a problem",
+              "contrast": 6.282525582392793,
+              "grayContrast": 5.3065809391522665
+            },
+            {
+              "color": "rgb(0, 0, 0)",
+              "background": "#e16758",
+              "font": "16px",
+              "icon": "rgb(0, 0, 0)",
+              "text": "Scanned: 360/120",
+              "contrast": 6.282525582392793,
+              "grayContrast": 5.3065809391522665
+            }
+          ],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 76,
+              "y": 10,
+              "width": 33,
+              "height": 20,
+              "top": 10,
+              "right": 109,
+              "bottom": 30,
+              "left": 76
+            }
+          },
+          "tileCount": 32
+        },
+        {
+          "step": "0",
+          "errorStyles": [],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 111,
+              "y": 10,
+              "width": 25,
+              "height": 20,
+              "top": 10,
+              "right": 136,
+              "bottom": 30,
+              "left": 111
+            }
+          },
+          "tileCount": 2
+        },
+        {
+          "step": "1",
+          "errorStyles": [],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 138,
+              "y": 10,
+              "width": 25,
+              "height": 20,
+              "top": 10,
+              "right": 163,
+              "bottom": 30,
+              "left": 138
+            }
+          },
+          "tileCount": 10
+        },
+        {
+          "step": "2",
+          "errorStyles": [
+            {
+              "color": "rgb(0, 0, 0)",
+              "background": "#e16758",
+              "font": "16px",
+              "icon": "rgb(0, 0, 0)",
+              "text": "Something is wrong with this pallet. It's broken or on the way somewhere.",
+              "contrast": 6.282525582392793,
+              "grayContrast": 5.3065809391522665
+            }
+          ],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 165,
+              "y": 10,
+              "width": 25,
+              "height": 20,
+              "top": 10,
+              "right": 190,
+              "bottom": 30,
+              "left": 165
+            }
+          },
+          "tileCount": 9
+        },
+        {
+          "step": "3",
+          "errorStyles": [
+            {
+              "color": "rgb(0, 0, 0)",
+              "background": "#e16758",
+              "font": "16px",
+              "icon": "rgb(0, 0, 0)",
+              "text": "Some scanned pallet have a problem",
+              "contrast": 6.282525582392793,
+              "grayContrast": 5.3065809391522665
+            },
+            {
+              "color": "rgb(0, 0, 0)",
+              "background": "#e16758",
+              "font": "16px",
+              "icon": "rgb(0, 0, 0)",
+              "text": "Scanned: 360/120",
+              "contrast": 6.282525582392793,
+              "grayContrast": 5.3065809391522665
+            }
+          ],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 192,
+              "y": 10,
+              "width": 25,
+              "height": 20,
+              "top": 10,
+              "right": 217,
+              "bottom": 30,
+              "left": 192
+            }
+          },
+          "tileCount": 9
+        },
+        {
+          "step": "4",
+          "errorStyles": [],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 219,
+              "y": 10,
+              "width": 25,
+              "height": 20,
+              "top": 10,
+              "right": 244,
+              "bottom": 30,
+              "left": 219
+            }
+          },
+          "tileCount": 9
+        },
+        {
+          "step": "5",
+          "errorStyles": [],
+          "active": {
+            "shadow": "rgb(17, 17, 17) 0px 0px 0px 2px inset",
+            "pressed": "true",
+            "rect": {
+              "x": 246,
+              "y": 10,
+              "width": 25,
+              "height": 20,
+              "top": 10,
+              "right": 271,
+              "bottom": 30,
+              "left": 246
+            }
+          },
+          "tileCount": 2
+        }
+      ],
+      "errors": [],
+      "focus": {
+        "text": "0",
+        "outline": "rgb(17, 17, 17) dashed 2px",
+        "offset": "2px",
+        "shadow": "none",
+        "visible": true
+      },
+      "widths": [
+        {
+          "inner": 320,
+          "document": 320
+        },
+        {
+          "inner": 390,
+          "document": 390
+        },
+        {
+          "inner": 600,
+          "document": 600
+        },
+        {
+          "inner": 900,
+          "document": 900
+        },
+        {
+          "inner": 1280,
+          "document": 1280
+        },
+        {
+          "inner": 1440,
+          "document": 1440
+        }
+      ]
+    }
+  ],
+  "codeCommit": "662ed7130ac394052fd8c5d0f958384ec34d9d04"
+}
