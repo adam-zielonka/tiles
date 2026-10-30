@@ -15,7 +15,7 @@ Grayscale images apply `html.style.filter = "grayscale(1)"`. This is a CSS rende
 
 - `pnpm lint`, `pnpm build`, `pnpm audit --audit-level=high`: PASS.
 - Actual error paragraph: 16px black on `#e16758`, contrast **6.28:1** color and **5.31:1** after CSS grayscale. Text and SVG share the same font-color variable.
-- Selected filter: permanent 2px inset `#111` (17.90:1 against yellow, 18.88:1 against white); keyboard focus: separate 2px dashed `#111` outline with 2px offset. `aria-pressed` matches filter/Highlight state.
+- Selected filter: permanent 2px inset `#111` (17.58:1 against yellow, 18.88:1 against white); keyboard focus: separate 2px dashed `#111` outline with 2px offset. `aria-pressed` matches filter/Highlight state.
 - all/0–5 and all six states, tile counts, original values/text/progress, ++/-- wrap, Highlight on/off, active after blur, Tab/Shift+Tab/Enter/Space and touch: PASS.
 - Document width equals viewport at 320, 390, 600, 900, 1280 and 1440px; no JS errors.
 - No Store, dimensions, System, scanning behavior or data-source changes.
