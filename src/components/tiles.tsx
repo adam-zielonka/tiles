@@ -11,16 +11,16 @@ export const Tiles = observer(function Tiles() {
       Tiles
       <main>
         <button onClick={() => store.back()}>--</button>
-        <button onClick={() => store.filter(-1)} className={
+        <button onClick={() => store.filter(-1)} aria-pressed={store.step === -1} className={
           -1 === store.step ? "active" : ""
         }>all</button>
         {[0,1,2,3,4,5].map(i => 
-          <button key={i} onClick={() => store.filter(i)} className={
+          <button key={i} onClick={() => store.filter(i)} aria-pressed={store.step === i} className={
             i === store.step ? "active" : ""
           }>{i}</button>)}
         <button onClick={() => store.next()}>++</button>
       </main>
-      <button onClick={() => store.toggleHighlight()} className={
+      <button onClick={() => store.toggleHighlight()} aria-pressed={store.highlight} className={
         store.highlight === true ? "active" : ""
       }>Highlight</button>
     </header>

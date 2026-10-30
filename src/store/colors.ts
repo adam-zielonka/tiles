@@ -27,7 +27,7 @@ export const COLORS: Colors = {
   },
   error: {
     background: ALV.RED,
-    font: "white",
+    font: "black",
   },
   warning: {
     background: ALV.ORANGE,
