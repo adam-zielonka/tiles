@@ -22,8 +22,8 @@
     "csstype": "^3.2.3",
     "eslint": "^9.39.5",
     "eslint-plugin-react": "^7.37.5",
-    "globals": "^17.13.0",
-    "sass": "^1.106.1",
+    "globals": "^17.14.0",
+    "sass": "^1.107.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.72.1",
     "vite": "^8.3.5"
